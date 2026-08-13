@@ -15,21 +15,39 @@ async function exportToPdf() {
   console.log('Obteniendo datos de Notion y generando PDF con Puppeteer...');
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-blink-features=AutomationControlled'
+    ]
   });
-  const page = await browser.newPage();
   
+  const page = await browser.newPage();
+
+  // 1. Emular un navegador moderno (Chrome de escritorio)
+  await page.setUserAgent(
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+  );
+
+  // 2. Establecer un tamaño de viewport de escritorio
+  await page.setViewport({ width: 1280, height: 800 });
+
+  // 3. Formatear la URL de la página pública de Notion
   const cleanId = NOTION_PAGE_ID.replace(/-/g, '');
   const pageUrl = `https://www.notion.so/${cleanId}`;
-  
-  await page.goto(pageUrl, { waitUntil: 'networkidle2' });
-  
+
+  // 4. Navegar a la página esperando a que cargue todo el contenido dinámico
+  await page.goto(pageUrl, { waitUntil: 'networkidle0', timeout: 60000 });
+
+  // 5. Esperar un par de segundos extra para asegurar que React termine de renderizar el DOM
+  await new Promise((r) => setTimeout(r, 4000));
+
   const pdfPath = path.join('/tmp', 'output.pdf');
   await page.pdf({
     path: pdfPath,
     format: 'A4',
     printBackground: true,
-    margin: { top: '20mm', right: '20mm', bottom: '20mm', left: '20mm' }
+    margin: { top: '15mm', right: '15mm', bottom: '15mm', left: '15mm' }
   });
 
   await browser.close();
