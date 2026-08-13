@@ -1,0 +1,13 @@
+{
+  "name": "notion-to-drive-sync",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "googleapis": "^126.0.1",
+    "puppeteer": "^22.0.0"
+  }
+}
