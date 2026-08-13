@@ -15,10 +15,10 @@ const GDRIVE_FILE_ID = process.env.GDRIVE_FILE_ID;
 const notion = new Client({ auth: NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-// 1. Configurar soporte de LaTeX / Math
+// Configuración de MarkdownIt con KaTeX (math inline/block)
 const md = new MarkdownIt({ html: true, breaks: true }).use(markdownItKatex);
 
-// 2. Custom Renderers para Notion-to-MD (Garantiza imágenes y ecuaciones de Notion)
+// Transformers personalizados para NotionToMarkdown
 n2m.setCustomTransformer('equation', async (block) => {
   const { equation } = block;
   return `\n$$\n${equation.expression}\n$$\n`;
@@ -36,35 +36,24 @@ n2m.setCustomTransformer('image', async (block) => {
   return `<figure><img src="${imageUrl}" alt="${caption}" /><figcaption>${caption}</figcaption></figure>`;
 });
 
-async function getNotionPageTitle(pageId) {
-  try {
-    const page = await notion.pages.retrieve({ page_id: pageId });
-    if (page.properties && page.properties.title) {
-      return page.properties.title.title[0]?.plain_text || 'Documento Notion';
-    }
-    if (page.properties && page.properties.Name) {
-      return page.properties.Name.title[0]?.plain_text || 'Documento Notion';
-    }
-  } catch (e) {
-    console.log('Usando título genérico...');
-  }
-  return 'Documento Notion';
-}
-
 async function exportToPdf() {
-  console.log('Obteniendo datos de Notion con transformers personalizados...');
+  console.log('Obteniendo datos de Notion...');
   
-  const title = await getNotionPageTitle(NOTION_PAGE_ID);
+  // Asignamos directamente el título requerido
+  const documentTitle = 'Arquitectura de Computadoras';
+
   const mdblocks = await n2m.pageToMarkdown(NOTION_PAGE_ID);
   const mdString = n2m.toMarkdownString(mdblocks);
+  
+  // Renderizar Markdown + Math KaTeX a HTML
   const contentHtml = md.render(mdString.parent);
 
-  // Plantilla HTML estilizada para apuntes académicos / técnicos
   const fullHtml = `
     <!DOCTYPE html>
     <html lang="es">
     <head>
       <meta charset="UTF-8">
+      <!-- Soporte para estilos de fórmulas matemáticas KaTeX -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
       <style>
         @page {
@@ -74,48 +63,44 @@ async function exportToPdf() {
 
         body {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-          line-height: 1.5;
+          line-height: 1.6;
           color: #2f3437;
-          font-size: 11pt;
+          font-size: 10.5pt;
         }
 
-        /* Evitar saltos huérfanos en títulos */
-        h1, h2, h3 {
+        /* Título Principal */
+        .doc-title {
+          font-size: 24pt;
+          font-weight: 700;
+          color: #111;
+          border-bottom: 2px solid #2eaadc;
+          padding-bottom: 8px;
+          margin-top: 0;
+          margin-bottom: 24px;
+        }
+
+        /* Control de saltos de página y títulos */
+        h1, h2, h3, h4 {
           page-break-after: avoid;
           break-after: avoid;
           color: #111;
         }
 
-        h1 {
-          font-size: 22pt;
-          border-bottom: 2px solid #2eaadc;
-          padding-bottom: 6px;
-          margin-top: 0;
-        }
+        h1 { font-size: 18pt; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+        h2 { font-size: 14pt; margin-top: 20px; }
+        h3 { font-size: 11.5pt; margin-top: 16px; }
 
-        h2 {
-          font-size: 15pt;
-          border-bottom: 1px solid #e1e1e1;
-          padding-bottom: 4px;
-          margin-top: 20px;
-        }
-
-        h3 {
-          font-size: 12pt;
-          margin-top: 14px;
-        }
-
-        /* Ecuaciones centradas */
+        /* Estilos de LaTeX / Fórmulas centradas */
         .katex-display {
-          margin: 1.2em 0 !important;
-          padding: 8px;
-          background: #fbfbfb;
+          margin: 1em 0 !important;
+          padding: 10px;
+          background: #fdfdfd;
           border-radius: 4px;
-          border: 1px solid #f0f0f0;
+          border: 1px solid #eaeaea;
           page-break-inside: avoid;
         }
 
-        /* Tablas tipo Notion */
+        /* Tablas */
         table {
           border-collapse: collapse;
           width: 100%;
@@ -125,7 +110,7 @@ async function exportToPdf() {
         }
 
         th, td {
-          border: 1px solid #e9e9e9;
+          border: 1px solid #e1e1e1;
           padding: 6px 10px;
           text-align: left;
         }
@@ -135,33 +120,43 @@ async function exportToPdf() {
           font-weight: 600;
         }
 
-        /* Imágenes ajustadas y centradas */
+        /* Imágenes */
         figure {
-          margin: 16px 0;
+          margin: 18px 0;
           text-align: center;
           page-break-inside: avoid;
         }
 
         img {
-          max-width: 100%;
+          max-width: 90%;
           height: auto;
-          border-radius: 6px;
+          border-radius: 4px;
           border: 1px solid #eaeaea;
         }
 
         figcaption {
           font-size: 8.5pt;
           color: #73726e;
-          margin-top: 4px;
+          margin-top: 6px;
         }
 
-        /* Bloques de código */
+        /* Bloques de código (Ejemplos C / Assembly) */
+        pre {
+          background: #f7f6f3;
+          padding: 12px;
+          border-radius: 5px;
+          border: 1px solid #e8e8e8;
+          overflow-x: auto;
+          font-size: 9pt;
+          page-break-inside: avoid;
+        }
+
         code {
+          font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
           background: #f4f4f4;
           color: #eb5757;
-          padding: 2px 5px;
+          padding: 2px 4px;
           border-radius: 3px;
-          font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
           font-size: 0.9em;
         }
 
@@ -170,43 +165,22 @@ async function exportToPdf() {
           color: inherit;
           padding: 0;
         }
-
-        pre {
-          background: #f7f6f3;
-          padding: 12px;
-          border-radius: 5px;
-          overflow-x: auto;
-          font-size: 9pt;
-          page-break-inside: avoid;
-        }
-
-        blockquote {
-          border-left: 3px solid #2f3437;
-          margin: 12px 0;
-          padding-left: 12px;
-          color: #5a5a5a;
-          background: #fbfbfb;
-          padding-top: 4px;
-          padding-bottom: 4px;
-        }
       </style>
     </head>
     <body>
-      <h1>${title}</h1>
+      <h1 class="doc-title">${documentTitle}</h1>
       ${contentHtml}
     </body>
     </html>
   `;
 
-  console.log('Generando el PDF...');
+  console.log('Generando PDF con Puppeteer...');
   const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   
   const page = await browser.newPage();
-  
-  // Cargar contenido y esperar a que bajen recursos gráficos
   await page.setContent(fullHtml, { waitUntil: 'networkidle0', timeout: 60000 });
 
   const pdfPath = path.join('/tmp', 'output.pdf');
@@ -215,10 +189,9 @@ async function exportToPdf() {
     format: 'A4',
     printBackground: true,
     displayHeaderFooter: true,
-    // Pie de página con numeración "Página X de Y"
     footerTemplate: `
-      <div style="font-size: 8pt; font-family: sans-serif; width: 100%; text-align: right; padding-right: 15mm; color: #888;">
-        Página <span class="pageNumber"></span> de <span class="totalPages"></span>
+      <div style="font-size: 8pt; font-family: sans-serif; width: 100%; text-align: right; padding-right: 15mm; color: #777;">
+        Arquitectura de Computadoras — Página <span class="pageNumber"></span> de <span class="totalPages"></span>
       </div>
     `,
     headerTemplate: `<div></div>`,
@@ -247,7 +220,7 @@ async function updateDriveFile(pdfPath) {
     }
   });
 
-  console.log('¡Sincronización completada!');
+  console.log('¡PDF actualizado con éxito en Google Drive!');
 }
 
 async function main() {
