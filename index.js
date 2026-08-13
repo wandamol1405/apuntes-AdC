@@ -1,97 +1,106 @@
 import { Client } from '@notionhq/client';
-import { google } from 'googleapis';
 import puppeteer from 'puppeteer';
-import Readable from 'stream';
+import { google } from 'googleapis';
+import fs from 'fs';
+import path from 'path';
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+const NOTION_PAGE_ID = process.env.NOTION_PAGE_ID;
+const GDRIVE_CREDENTIALS = process.env.GDRIVE_CREDENTIALS;
+const GDRIVE_FOLDER_ID = process.env.GDRIVE_FILE_ID; // Usamos la variable con el ID de la carpeta
 
-async function getNotionPageAsHtml(pageId) {
-  // Consulta la página de Notion y sus bloques
-  const page = await notion.pages.retrieve({ page_id: pageId });
-  const blocks = await notion.blocks.children.list({ block_id: pageId });
+const notion = new Client({ auth: NOTION_TOKEN });
 
-  // Genera un HTML estructurado simple a partir de los bloques
-  let htmlContent = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; color: #37352f; line-height: 1.5; }
-        h1 { border-bottom: 1px solid #e1e1e1; padding-bottom: 8px; }
-        p { margin-bottom: 12px; }
-        ul { padding-left: 20px; }
-      </style>
-    </head>
-    <body>
-  `;
-
-  for (const block of blocks.results) {
-    if (block.type === 'paragraph' && block.paragraph.rich_text.length > 0) {
-      const text = block.paragraph.rich_text.map(t => t.plain_text).join('');
-      htmlContent += `<p>${text}</p>`;
-    } else if (block.type === 'heading_1' && block.heading_1.rich_text.length > 0) {
-      const text = block.heading_1.rich_text.map(t => t.plain_text).join('');
-      htmlContent += `<h1>${text}</h1>`;
-    } else if (block.type === 'heading_2' && block.heading_2.rich_text.length > 0) {
-      const text = block.heading_2.rich_text.map(t => t.plain_text).join('');
-      htmlContent += `<h2>${text}</h2>`;
-    } else if (block.type === 'bulleted_list_item' && block.bulleted_list_item.rich_text.length > 0) {
-      const text = block.bulleted_list_item.rich_text.map(t => t.plain_text).join('');
-      htmlContent += `<ul><li>${text}</li></ul>`;
+async function getNotionPageTitle(pageId) {
+  try {
+    const page = await notion.pages.retrieve({ page_id: pageId });
+    if (page.properties && page.properties.title) {
+      return page.properties.title.title[0]?.plain_text || 'Notion Export';
     }
+    if (page.properties && page.properties.Name) {
+      return page.properties.Name.title[0]?.plain_text || 'Notion Export';
+    }
+  } catch (e) {
+    console.log('No se pudo obtener el título exacto, usando título por defecto.');
   }
-
-  htmlContent += `</body></html>`;
-  return htmlContent;
+  return 'Notion Export';
 }
 
-async function convertHtmlToPdf(html) {
+async function exportToPdf() {
+  console.log('Obteniendo datos de Notion y generando PDF con Puppeteer...');
   const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   const page = await browser.newPage();
-  await page.setContent(html, { waitUntil: 'networkidle0' });
-  const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
+  
+  // Formatear la URL de la página de Notion
+  const cleanId = NOTION_PAGE_ID.replace(/-/g, '');
+  const pageUrl = `https://www.notion.so/${cleanId}`;
+  
+  await page.goto(pageUrl, { waitUntil: 'networkidle2' });
+  
+  const pdfPath = path.join('/tmp', 'output.pdf');
+  await page.pdf({
+    path: pdfPath,
+    format: 'A4',
+    printBackground: true,
+    margin: { top: '20mm', right: '20mm', bottom: '20mm', left: '20mm' }
+  });
+
   await browser.close();
-  return pdfBuffer;
+  return pdfPath;
 }
 
-async function updateDriveFile(pdfBuffer) {
+async function uploadOrUpdateInFolder(pdfPath) {
+  console.log('Subiendo a Google Drive...');
+  
   const auth = new google.auth.GoogleAuth({
-    credentials: JSON.parse(process.env.GDRIVE_CREDENTIALS),
-    scopes: ['https://www.googleapis.com/auth/drive.file']
+    credentials: JSON.parse(GDRIVE_CREDENTIALS),
+    scopes: ['https://www.googleapis.com/auth/drive']
   });
 
   const drive = google.drive({ version: 'v3', auth });
-  const fileId = process.env.GDRIVE_FILE_ID;
+  const fileName = 'Notion_Export.pdf';
 
-  const stream = new Readable.Readable();
-  stream.push(pdfBuffer);
-  stream.push(null);
-
-  await drive.files.update({
-    fileId: fileId,
-    media: {
-      mimeType: 'application/pdf',
-      body: stream
-    }
+  // Buscar si el archivo ya existe en la carpeta
+  const res = await drive.files.list({
+    q: `'${GDRIVE_FOLDER_ID}' in parents and name = '${fileName}' and trashed = false`,
+    fields: 'files(id, name)'
   });
 
-  console.log('PDF actualizado exitosamente en Google Drive.');
+  const media = {
+    mimeType: 'application/pdf',
+    body: fs.createReadStream(pdfPath)
+  };
+
+  if (res.data.files && res.data.files.length > 0) {
+    // Si existe, lo actualiza
+    const existingFileId = res.data.files[0].id;
+    console.log(`Actualizando archivo existente en Drive (ID: ${existingFileId})...`);
+    await drive.files.update({
+      fileId: existingFileId,
+      media: media
+    });
+    console.log('¡PDF actualizado con éxito en Google Drive!');
+  } else {
+    // Si no existe, lo crea dentro de la carpeta
+    console.log('Creando nuevo archivo PDF en la carpeta de Google Drive...');
+    await drive.files.create({
+      requestBody: {
+        name: fileName,
+        parents: [GDRIVE_FOLDER_ID]
+      },
+      media: media
+    });
+    console.log('¡PDF creado y subido con éxito en Google Drive!');
+  }
 }
 
 async function main() {
   try {
-    console.log('Obteniendo datos de Notion...');
-    const html = await getNotionPageAsHtml(process.env.NOTION_PAGE_ID);
-
-    console.log('Generando PDF con Puppeteer...');
-    const pdfBuffer = await convertHtmlToPdf(html);
-
-    console.log('Subiendo a Google Drive...');
-    await updateDriveFile(pdfBuffer);
+    const pdfPath = await exportToPdf();
+    await uploadOrUpdateInFolder(pdfPath);
   } catch (error) {
     console.error('Error durante la sincronización:', error);
     process.exit(1);
