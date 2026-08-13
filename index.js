@@ -66,7 +66,9 @@ async function uploadOrUpdateInFolder(pdfPath) {
   // Buscar si el archivo ya existe en la carpeta
   const res = await drive.files.list({
     q: `'${GDRIVE_FOLDER_ID}' in parents and name = '${fileName}' and trashed = false`,
-    fields: 'files(id, name)'
+    fields: 'files(id, name)',
+    supportsAllDrives: true,
+    includeItemsFromAllDrives: true
   });
 
   const media = {
@@ -80,18 +82,20 @@ async function uploadOrUpdateInFolder(pdfPath) {
     console.log(`Actualizando archivo existente en Drive (ID: ${existingFileId})...`);
     await drive.files.update({
       fileId: existingFileId,
-      media: media
+      media: media,
+      supportsAllDrives: true
     });
     console.log('¡PDF actualizado con éxito en Google Drive!');
   } else {
-    // Si no existe, lo crea dentro de la carpeta
+    // Si no existe, lo crea dentro de la carpeta asignando la ubicación
     console.log('Creando nuevo archivo PDF en la carpeta de Google Drive...');
     await drive.files.create({
       requestBody: {
         name: fileName,
         parents: [GDRIVE_FOLDER_ID]
       },
-      media: media
+      media: media,
+      supportsAllDrives: true
     });
     console.log('¡PDF creado y subido con éxito en Google Drive!');
   }
