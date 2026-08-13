@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import MarkdownIt from 'markdown-it';
+import markdownItKatex from 'markdown-it-katex';
 import puppeteer from 'puppeteer';
 import { google } from 'googleapis';
 import fs from 'fs';
@@ -13,38 +14,41 @@ const GDRIVE_FILE_ID = process.env.GDRIVE_FILE_ID;
 
 const notion = new Client({ auth: NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
-const md = new MarkdownIt();
+
+// Configurar MarkdownIt con soporte para KaTeX / Math
+const md = new MarkdownIt({ html: true }).use(markdownItKatex);
 
 async function getNotionPageTitle(pageId) {
   try {
     const page = await notion.pages.retrieve({ page_id: pageId });
     if (page.properties && page.properties.title) {
-      return page.properties.title.title[0]?.plain_text || 'Documento Notion';
+      return page.properties.title.title[0]?.plain_text || 'Arquitectura de Computadoras';
     }
     if (page.properties && page.properties.Name) {
-      return page.properties.Name.title[0]?.plain_text || 'Documento Notion';
+      return page.properties.Name.title[0]?.plain_text || 'Arquitectura de Computadoras';
     }
   } catch (e) {
     console.log('Usando título genérico para el PDF...');
   }
-  return 'Documento Notion';
+  return 'Arquitectura de Computadoras';
 }
 
 async function exportToPdf() {
   console.log('Obteniendo bloques de Notion vía API...');
   
-  // 1. Obtener título y bloques de la página mediante el API oficial
   const title = await getNotionPageTitle(NOTION_PAGE_ID);
   const mdblocks = await n2m.pageToMarkdown(NOTION_PAGE_ID);
   const mdString = n2m.toMarkdownString(mdblocks);
   const contentHtml = md.render(mdString.parent);
 
-  // 2. Construir una plantilla HTML limpia e Imprimible
+  // Incluir CSS de KaTeX para que las fórmulas se rendericen de forma estética
   const fullHtml = `
     <!DOCTYPE html>
     <html lang="es">
     <head>
       <meta charset="UTF-8">
+      <!-- Hoja de estilos KaTeX para fórmulas matemáticas -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
       <style>
         body {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -63,6 +67,7 @@ async function exportToPdf() {
         table { border-collapse: collapse; width: 100%; margin: 16px 0; }
         th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
         th { background-color: #f8f9fa; }
+        .katex-display { margin: 1em 0; overflow-x: auto; overflow-y: hidden; }
       </style>
     </head>
     <body>
@@ -72,13 +77,15 @@ async function exportToPdf() {
     </html>
   `;
 
-  console.log('Generando PDF desde HTML con Puppeteer...');
+  console.log('Generando PDF con ecuaciones matemáticas...');
   const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   
   const page = await browser.newPage();
+  
+  // Esperar a que se descarguen las fuentes/CSS de KaTeX desde la CDN
   await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
 
   const pdfPath = path.join('/tmp', 'output.pdf');
