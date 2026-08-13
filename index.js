@@ -1,4 +1,6 @@
 import { Client } from '@notionhq/client';
+import { NotionToMarkdown } from 'notion-to-md';
+import MarkdownIt from 'markdown-it';
 import puppeteer from 'puppeteer';
 import { google } from 'googleapis';
 import fs from 'fs';
@@ -10,37 +12,74 @@ const GDRIVE_CREDENTIALS = process.env.GDRIVE_CREDENTIALS;
 const GDRIVE_FILE_ID = process.env.GDRIVE_FILE_ID;
 
 const notion = new Client({ auth: NOTION_TOKEN });
+const n2m = new NotionToMarkdown({ notionClient: notion });
+const md = new MarkdownIt();
+
+async function getNotionPageTitle(pageId) {
+  try {
+    const page = await notion.pages.retrieve({ page_id: pageId });
+    if (page.properties && page.properties.title) {
+      return page.properties.title.title[0]?.plain_text || 'Documento Notion';
+    }
+    if (page.properties && page.properties.Name) {
+      return page.properties.Name.title[0]?.plain_text || 'Documento Notion';
+    }
+  } catch (e) {
+    console.log('Usando título genérico para el PDF...');
+  }
+  return 'Documento Notion';
+}
 
 async function exportToPdf() {
-  console.log('Obteniendo datos de Notion y generando PDF con Puppeteer...');
+  console.log('Obteniendo bloques de Notion vía API...');
+  
+  // 1. Obtener título y bloques de la página mediante el API oficial
+  const title = await getNotionPageTitle(NOTION_PAGE_ID);
+  const mdblocks = await n2m.pageToMarkdown(NOTION_PAGE_ID);
+  const mdString = n2m.toMarkdownString(mdblocks);
+  const contentHtml = md.render(mdString.parent);
+
+  // 2. Construir una plantilla HTML limpia e Imprimible
+  const fullHtml = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <style>
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          line-height: 1.6;
+          color: #37352f;
+          padding: 40px;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        h1 { border-bottom: 1px solid #e1e1e1; padding-bottom: 8px; margin-top: 0; }
+        h2 { margin-top: 24px; border-bottom: 1px solid #f0f0f0; padding-bottom: 4px; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+        pre { background: #f7f7f7; padding: 12px; border-radius: 6px; overflow-x: auto; }
+        blockquote { border-left: 3px solid #37352f; margin: 0; padding-left: 14px; color: #6a6a6a; }
+        ul, ol { padding-left: 20px; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background-color: #f8f9fa; }
+      </style>
+    </head>
+    <body>
+      <h1>${title}</h1>
+      ${contentHtml}
+    </body>
+    </html>
+  `;
+
+  console.log('Generando PDF desde HTML con Puppeteer...');
   const browser = await puppeteer.launch({
     headless: 'new',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-blink-features=AutomationControlled'
-    ]
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   
   const page = await browser.newPage();
-
-  // 1. Emular un navegador moderno (Chrome de escritorio)
-  await page.setUserAgent(
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-  );
-
-  // 2. Establecer un tamaño de viewport de escritorio
-  await page.setViewport({ width: 1280, height: 800 });
-
-  // 3. Formatear la URL de la página pública de Notion
-  const cleanId = NOTION_PAGE_ID.replace(/-/g, '');
-  const pageUrl = `https://www.notion.so/${cleanId}`;
-
-  // 4. Navegar a la página esperando a que cargue todo el contenido dinámico
-  await page.goto(pageUrl, { waitUntil: 'networkidle0', timeout: 60000 });
-
-  // 5. Esperar un par de segundos extra para asegurar que React termine de renderizar el DOM
-  await new Promise((r) => setTimeout(r, 4000));
+  await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
 
   const pdfPath = path.join('/tmp', 'output.pdf');
   await page.pdf({
