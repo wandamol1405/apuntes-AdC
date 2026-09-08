@@ -15,6 +15,15 @@ const GDRIVE_FILE_ID = process.env.GDRIVE_FILE_ID;
 const notion = new Client({ auth: NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // Configuración de MarkdownIt con KaTeX (math inline/block)
 const md = new MarkdownIt({ html: true, breaks: true }).use(markdownItKatex);
 
@@ -33,7 +42,7 @@ n2m.setCustomTransformer('image', async (block) => {
   const image = block.image;
   const imageUrl = image.type === 'file' ? image.file.url : image.external.url;
   const caption = image.caption ? image.caption.map((c) => c.plain_text).join('') : '';
-  return `<figure><img src="${imageUrl}" alt="${caption}" /><figcaption>${caption}</figcaption></figure>`;
+  return `<figure class="image-figure"><img src="${imageUrl}" alt="${escapeHtml(caption)}" /><figcaption>${escapeHtml(caption)}</figcaption></figure>`;
 });
 
 async function exportToPdf() {
@@ -66,6 +75,37 @@ async function exportToPdf() {
           line-height: 1.6;
           color: #2f3437;
           font-size: 10.5pt;
+          margin: 0;
+        }
+
+        p, ul, ol, blockquote, table, figure, pre {
+          margin: 0 0 12px 0;
+        }
+
+        p:last-child, ul:last-child, ol:last-child, blockquote:last-child, table:last-child, figure:last-child, pre:last-child {
+          margin-bottom: 0;
+        }
+
+        ul, ol {
+          padding-left: 22px;
+        }
+
+        li {
+          margin: 4px 0;
+        }
+
+        blockquote {
+          border-left: 4px solid #d9dde3;
+          padding: 8px 12px;
+          color: #5f6368;
+          background: #fafbfc;
+          page-break-inside: avoid;
+        }
+
+        a {
+          color: #0b57d0;
+          text-decoration: none;
+          word-break: break-word;
         }
 
         /* Título Principal */
@@ -106,13 +146,16 @@ async function exportToPdf() {
           width: 100%;
           margin: 16px 0;
           font-size: 9.5pt;
-          page-break-inside: avoid;
+          table-layout: fixed;
         }
 
         th, td {
           border: 1px solid #e1e1e1;
           padding: 6px 10px;
           text-align: left;
+          vertical-align: top;
+          word-break: break-word;
+          overflow-wrap: anywhere;
         }
 
         th {
@@ -121,17 +164,23 @@ async function exportToPdf() {
         }
 
         /* Imágenes */
-        figure {
+        .image-figure {
           margin: 18px 0;
           text-align: center;
           page-break-inside: avoid;
+          break-inside: avoid;
         }
 
         img {
-          max-width: 90%;
+          display: block;
+          max-width: 160mm;
+          max-height: 95mm;
+          width: auto;
           height: auto;
+          margin: 0 auto;
           border-radius: 4px;
           border: 1px solid #eaeaea;
+          object-fit: contain;
         }
 
         figcaption {
@@ -149,6 +198,7 @@ async function exportToPdf() {
           overflow-x: auto;
           font-size: 9pt;
           page-break-inside: avoid;
+          break-inside: avoid;
         }
 
         code {
