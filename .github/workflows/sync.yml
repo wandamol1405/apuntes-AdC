@@ -1,31 +1,28 @@
-name: Notion PDF Sync Daily
+name: Markdown to Drive Sync
 
 on:
+  push:
+    branches: [ main ]
   schedule:
-    # Corre todos los días a las 23:00 ART (02:00 UTC)
-    - cron: '0 2 * * *'
-  workflow_dispatch: # Permite ejecutarlo manualmente desde el botón de la web
+    - cron: '0 3 * * *' # Todos los días a las 3 AM UTC
 
 jobs:
-  sync:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run Sync Script
+      - name: Run sync script
         env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
           GDRIVE_FILE_ID: ${{ secrets.GDRIVE_FILE_ID }}
         run: node index.js
