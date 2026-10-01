@@ -35,7 +35,7 @@ Personas: MARIA WANDA MOLINA
 
 La arquitectura de Von Neumann es una familia de arquitecturas de computadoras que utilizan el mismo dispositivo de almacenamiento (memoria principal) tanto para las instrucciones como para los datos. La mayoría de computadoras modernas están basadas en esta arquitectura.
 
-![image.png](Arquitectura%20de%20Computadoras/image.png)
+![image.png](images/image.png)
 
 ### IPC
 
@@ -53,7 +53,7 @@ Se mide en flops, que es la cantidad de operaciones de punto flotante que se rea
 
 Moore (1965) anticipó que la complejidad de los circuitos integrados se duplicaría cada año, acompañada de una reducción proporcional de sus costos. En 1975 ajustó su estimación, señalando que el número de transistores integrados en un chip de silicio se duplicaría aproximadamente **cada dos años** (frecuentemente citado también como un periodo de entre 18 y 24 meses). Esto permitio anticipar el diseño de los procesadore, disminuyendo sus costos y aumentando su rendimiento.
 
-![image.png](Arquitectura%20de%20Computadoras/image%201.png)
+![image.png](images/image%201.png)
 
 Los retos de la ley son:
 
@@ -357,7 +357,7 @@ Para que el hardware decodifique las instrucciones de 32 bits de longitud fija a
 
 Se utiliza cuando una operación involucra exclusivamente registros. Se conforma de:
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen.png)
+![imagen.png](images/imagen.png)
 
 - **`func7` (7 bits):** extensión del código de operación
 - **`rs2` (5 bits):** segundo registro fuente
@@ -373,7 +373,7 @@ Se utiliza cuando el segundo operando es una constante inmediata o para instrucc
 - **`inmediate` (12 bits):** almacena el valor de la constante inmediata o para instrucciones de carga.
 - Los demas mantienen la misma estructura que el tipo R
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%201.png)
+![imagen.png](images/imagen%201.png)
 
 #### S-Type
 
@@ -381,7 +381,7 @@ Exclusivo para instrucciones que guardan datos en memoria
 
 - **`inmidiate`** se divide en dos secciones dentro de la instrucción: **`immediate[11:5]`** (7 bits) e **`immediate[4:0]` .** Se hace esto para que los campos de los registros fuente (`rs1` y `rs2`) permanezcan exactamente en las posiciones que en las instrucciones tipo R.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%202.png)
+![imagen.png](images/imagen%202.png)
 
 `opcode` → primer campo a decodificar para saber que operacion es
 
@@ -421,7 +421,7 @@ Describe que las instrucciones y datos se pueden almacernar en la memoria en for
 
 ### Translating and starting a program
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%203.png)
+![imagen.png](images/imagen%203.png)
 
 - **Compiler →** Traduce el programa de un lenguaje de alto nivel a lenguaje ensamblador.
 - **Assembler →** convierte el archivo de ensamblador en isntrucciones binarias de lenguaje maquina → genera el archivo objeto.
@@ -430,7 +430,7 @@ Describe que las instrucciones y datos se pueden almacernar en la memoria en for
 
 ## ALU
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%204.png)
+![imagen.png](images/imagen%204.png)
 
 Representacion binaria → signed y unsigned
 
@@ -488,7 +488,7 @@ Las unidades funcionales constan de dos tipos de elementos lógicos:
 
 **Sincronización por flanco:** cualquier valor almacenado en un elemento logico secuencial se actualiza unicamente en un flanco de reloj.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%205.png)
+![imagen.png](images/imagen%205.png)
 
 Todas las señales deben propagarse desde el elemento de estado 1, a través de la lógica combinacional hasta el elemento de estado 2 en un único ciclo de reloj. El tiempo necesario para que las señales alcancen el elemento de estado 2 define la duración del ciclo de reloj.
 
@@ -496,7 +496,7 @@ Todas las señales deben propagarse desde el elemento de estado 1, a través de 
 
 ## Monociclo
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%206.png)
+![imagen.png](images/imagen%206.png)
 
 - **Unidades de memoria →** almacenan y suministran instrucciones/datos a partir de una dirección.
     
@@ -510,7 +510,7 @@ Todas las señales deben propagarse desde el elemento de estado 1, a través de 
     
     Escribir un registro → se necesitan dos entradas: una para especificar el número de registro donde escribir y otra para suministrar el dato. El banco de registros siempre devuelve en sus salidas los contenidos de los registros cuyos identificadores están en las entradas de los registros a leer.
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%207.png)
+    ![imagen.png](images/imagen%207.png)
     
     3 inputs indicadores → Dos de ellas especifican los registros de origen que se van a leer (**`RA`** y **`RB`** o *Read registers*), y la tercera especifica el registro de destino donde se guardará el resultado (**`RW`** o *Write register*)
     
@@ -537,7 +537,7 @@ De este diagrama simplificado falta considerar:
     → Teniendo como entrada la instrucción (es especial, los campos de las mismas), una nueva unidad de control para todas las demás unidades del datapath
     
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%208.png)
+![imagen.png](images/imagen%208.png)
 
 En este primer diseño, cada instrucción inicia su ejecución en un flanco de reloj y completa la ejecución en el siguiente flanco de reloj.
 
@@ -557,7 +557,7 @@ si la siguiente instrucción a ejecutar es la que sigue secuencialmente o la sit
 
 → salto no tomado → operandos diferentes → PC incrementado +4 
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%209.png)
+![imagen.png](images/imagen%209.png)
 
 ### Unidad de control
 
@@ -582,7 +582,7 @@ Esta tabla muestra los valores de las señales de control para las instrucciones
 | **Branch** | No es un salto condicional. El PC avanza secuencialmente (*PC*+4). | Indica que es una instrucción de salto condicional (se combina con **`Zero`** de la ALU para saltar). |
 | **ALUOp[1:0]** | **`00`**: Suma (para loads/stores), **`01`**: Resta (para saltos), **`10`**: Operación tipo R (según **`funct3`**/**`funct7`**). |  |
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2010.png)
+![imagen.png](images/imagen%2010.png)
 
 #### Deficiencia del monociclo
 
@@ -597,7 +597,7 @@ Esta tabla muestra los valores de las señales de control para las instrucciones
 - Aparecen secuenciales entre combinacionales → guardan el estado entre cada ciclo → registros invisibles
 - Se busca que cada etapa sea pareja con las demas → misma cantidad de combinacionales o path delay
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2011.png)
+![imagen.png](images/imagen%2011.png)
 
 Registros intermedios de almacenamiento cuya carga está sincronizada con el clock:
 
@@ -656,15 +656,15 @@ BR(rd) ← ALUout
 - Para las instrucciones de carga (lw), el valor cargado desde la memoria se escribe en el
 registro de destino: BR(rt) ← MDR
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2012.png)
+![imagen.png](images/imagen%2012.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2013.png)
+![imagen.png](images/imagen%2013.png)
 
 ## Pipelining
 
 Es una técnica de implementación de microprocesadores mediante la cual se solapa la ejecución de múltiples instrucciones. Esta técnica se basa en el hecho de que la ejecución de una instrucción se divide en varias fases o etapas secuenciales, de las que se encargan distintas partes dedicadas del hardware.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2014.png)
+![imagen.png](images/imagen%2014.png)
 
 Esto mejora el throughput → cantidad de instrucciones ejecutadas por ciclo de reloj.
 
@@ -681,7 +681,7 @@ A partir de cierta cantidad de etapas, el rendimiento comienza a decrecer debido
 - A medida que el pipeline se profundiza, cada vez que se produce un problema en el que se debe vaciar el pipeline, como un salto o una excepción, se perderá más cantidad de instrucciones, lo cual afecta negativamente al rendimiento.
 - Los pipelines deben transferir la información desde un latch (circuito en el que la entrada pasa a la salida después de un ciclo de reloj) de una etapa a la siguiente, lo que consume una cantidad de tiempo significativa en relación con el retardo producido por la etapa
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2015.png)
+![imagen.png](images/imagen%2015.png)
 
 Para implementarlo:
 
@@ -694,18 +694,18 @@ Para implementarlo:
 
 → La lectura de registros ID ocurre en un flanco de reloj, mientras la escritura WB ocurre en otro flanco → se desperdicioa medio ciclo ya que ambas oepraciones no pueden superponerse
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2016.png)
+![imagen.png](images/imagen%2016.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2017.png)
+![imagen.png](images/imagen%2017.png)
 
 Se divide el banco de registros en dos partes lógicas: la lectura de registros durante la etapa ID y la escritura en registro durante la etapa WB. Para representar este doble uso, en la etapa ID
 se dibuja la mitad izquierda del banco de registros sin sombrear y con líneas discontinuas, ya que no está siendo escrito, mientras que en la etapa WB es la mitad derecha del banco de registros la que se dibuja sin sombrear y con líneas discontinuas, ya que no está siendo leído.
 
 Para separar fisicamenta estas etapas y asegurar que las instrucciones no interfieran entre si en el mismo ciclo de reloj, se colocan registros de segmentacion en las lineas divisorias. Conservan los datos y las señales de control de una instruccion apra que la siguiente etapa pueda utilizarlos en le proximo ciclo de clock.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2018.png)
+![imagen.png](images/imagen%2018.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2019.png)
+![imagen.png](images/imagen%2019.png)
 
 Las señales de control que se obtienen de la instrucción en la etapa ID pueden ser requeridas
 en etapas posteriores, por lo que se transmiten a través del pipeline mediante registros. De esta
@@ -724,11 +724,11 @@ Ocurre cuando el hardware no puede soportar la combinaciond e isntrucciones que 
 
 Si el procesador utiliza un único banco de memoria unificado para instrucciones y datos, la etapa de búsqueda de instrucción (IF) de una instrucción posterior entrará en conflicto físico con el acceso a datos (MEM) de una instrucción de carga (load) o almacenamiento (store) previa.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2020.png)
+![imagen.png](images/imagen%2020.png)
 
 Se genera si el puerto de escritura en el banco de registros (**`WB`**) es requerido al mismo tiempo por una instrucción, mientras otra instrucción en la etapa de decodificación (**`ID`**) intenta leer los registros de origen
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2021.png)
+![imagen.png](images/imagen%2021.png)
 
 **Solucion de riesgos estructurales**
 
@@ -756,7 +756,7 @@ sw $15,100($2)   # Base ($2) depende de sub
 
 Las últimas cuatro instrucciones dependen todas del resultado de la primera instrucción, guardado en el registro $2.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2022.png)
+![imagen.png](images/imagen%2022.png)
 
 Los valores que se leen del registro $2 no representarían el resultado de la instrucción sub a menos que la lectura del registro se hiciera durante el ciclo 5 o después.
 
@@ -766,9 +766,9 @@ Los valores que se leen del registro $2 no representarían el resultado de la in
     
     Forwarding → Consiste en no esperar a que la instrucción previa escriba físicamente el banco de registros. En cuanto la ALU calcula el resultado en la etapa **`EX`**, este dato es enviado a través de multiplexores y rutas físicas de realimentación directamente a las entradas de la ALU para la instrucción dependiente en el ciclo siguiente.
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2023.png)
+    ![imagen.png](images/imagen%2023.png)
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2024.png)
+    ![imagen.png](images/imagen%2024.png)
     
     Si ocurre un riesgo de lectura después de escritura (LDE), se debe cortocircuitar la salida de la ALU (de la primera instrucción) con la entrada de la ALU (de la segunda instrucción). 
     
@@ -809,11 +809,11 @@ Si la instrucción en WB escribe un registro, no es el registro cero, y su desti
     
     El dato no está disponible físicamente hasta el final de la etapa de acceso a memoria (MEM), que es demasiado tarde para la etapa EX de la instrucción inmediata posterior. Esto no puede resolverse solo con forwarding y requiere que una Unidad de Detección de Riesgos inserte obligatoriamente un ciclo de burbuja (stall) en el pipeline.
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2025.png)
+    ![imagen.png](images/imagen%2025.png)
     
     Un **stall** (también conocido como **burbuja**, **detención** o **bloqueo** del pipeline) es un ciclo de reloj de inactividad que se introduce en la segmentación de un procesador para resolver un riesgo (*hazard*). Una unidad de detección de riesgos congela el avance de las primeras etapas del procesador (impidiendo que cambien el contador de programa **`PC`** y el registro de segmentación **`IF/ID`**), obligando al procesador a esperar. A diferencia de una instrucción **`NOP`** (que viaja de principio a fin por todo el cauce sin hacer nada), un *stall* consiste en congelar una etapa específica mientras se permite que las etapas posteriores sigan avanzando para que produzcan el resultado que destrabará la dependencia.
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2026.png)
+    ![imagen.png](images/imagen%2026.png)
     
     Si se hace calculo adelantado de direccion (ALU para salto) y se utiliza una sireccion que se esta calculando en una etapa anterior, se puede considerar llevar el Forwarding Unit a una etapa antes.
     
@@ -841,7 +841,7 @@ Si un salto es tomado (*taken*), las instrucciones que se buscaron secuencialmen
 
 - **Stall on Branch:** Una opción para manejar los riesgos de control es bloquear o detener el pipeline (stall) hasta que se conozca cuál será la siguiente instrucción que se debe leer en la memoria durante la etapa de IF.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2027.png)
+![imagen.png](images/imagen%2027.png)
 
 - **Assume Branch Not Taken:** Consiste en continuar buscando instrucciones secuencialmente asumiendo que el salto nunca se tomará. Si el salto no se toma, el rendimiento es óptimo (0 ciclos de penalización); si se toma, se descartan las instrucciones cargadas por error rellenando el pipeline con burbujas y reiniciando la búsqueda en la dirección destino.
 - **Delayed Branch:** Otro esquema de manejo de saltos consiste en retardar el salto una instrucción. Esto implica que, después de la instrucción de salto, se genera un ciclo de retardo (delay slot), en el cual generalmente se ejecuta la instrucción siguiente al salto, independientemente de si el salto se realiza o no. De esta manera, se consigue el tiempo necesario para obtener el resultado de la decisión del salto.
@@ -852,7 +852,7 @@ Si un salto es tomado (*taken*), las instrucciones que se buscaron secuencialmen
     - **Estática**: Aplicar una regla fija fijada en tiempo de compilación (por ejemplo, predecir siempre "no tomado", "tomado", o según la dirección hacia adelante/atrás del salto).
     - **Dinámica**: Usar tablas de historial en tiempo de ejecución (como contadores de 2 bits o el *Branch Target Buffer* / BTB) para predecir si el salto se tomará según su comportamiento reciente.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2028.png)
+![imagen.png](images/imagen%2028.png)
 
 ### Excepciones en RISC V
 
@@ -864,7 +864,7 @@ Las excepciones invocan servicios del SO del programa de usuario: Se anulan las 
 
 Las expciones causadas en cada estapa del pipeline son:
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2029.png)
+![imagen.png](images/imagen%2029.png)
 
 #### Flujo de manejo de excepciones en el pipeline
 
@@ -898,7 +898,7 @@ Para implementar excepciones precisas sin perder rendimiento, el hardware utiliz
 
 Las operaciones punto flotante no se pueden completar en un solo ciclo de reloj dentro de la etapa de ejecucion **`EX`** . Por ello, la etapa de ejecucion se divide en multiples subunidades funcionales especializadas que operan en paralelo.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2030.png)
+![imagen.png](images/imagen%2030.png)
 
 Físicamente, el procesador suele contar con una unidad entera, un sumador de FP, un multiplicador de FP y un divisor de FP. Los módulos como el sumador o el multiplicador de FP están divididos internamente en varias etapas de pipeline (por ejemplo, 3 o 4 etapas). Esto les permite tener un intervalo de iniciación de 1 ciclo de reloj; es decir, pueden recibir una instrucción de FP nueva en cada ciclo sin esperar a que la anterior termine. Sin embargo, otros modulos como el divisor no se suelen segmentar. Tienen latencias altísimas (de 24 a 36 ciclos) y bloquean la unidad por completo (su intervalo de iniciación es igual a su latencia), obligando a cualquier otra división de FP a esperar hasta que la actual finalice.
 
@@ -908,7 +908,7 @@ El hecho de tener instrucciones de FP en vuelo con duraciones tan dispares rompe
 - Aparecen los riesgos WAR y WAW: Por ejemplo, una instrucción rápida podría sobrescribir un registro destino antes de que una instrucción lenta previa haya terminado de calcular su valor
 - Varias subunidades de FP pueden finalizar sus cálculos en el mismo ciclo, provocando una contención o colisión física al intentar escribir simultáneamente en el puerto del banco de registros.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2031.png)
+![imagen.png](images/imagen%2031.png)
 
 ## Paralelismo a nivel de instruccion (ILP)
 
@@ -955,13 +955,13 @@ Se aplican en tiempo de compilación (las realiza el compilador).
 
 Ejemplo de for implementado en pipeline FP normal:
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2032.png)
+![imagen.png](images/imagen%2032.png)
 
 1. **Planificación de instrucciones (Compiler/Instruction Scheduling):** El compilador reorganiza el orden físico de las instrucciones del código para ocultar latencias de las operaciones (como las esperas de instrucciones de carga o de la ALU de punto flotante) y así evitar paradas (*stalls* o burbujas) en el pipeline, asegurando que el resultado final sea idéntico.
 
 ***Planificación por el Compilador → máx(Paralelismo en ejecución)***
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2033.png)
+![imagen.png](images/imagen%2033.png)
 
 2. **Desenrollado de bucles (Loop Unrolling):** Consiste en duplicar el cuerpo de un bucle varias veces en una sola iteración física.
     - **Ventajas:** Expone un bloque más grande de instrucciones independientes y elimina la sobrecarga (*overhead*) de control del bucle, reduciendo saltos y decrementos repetitivos.
@@ -969,14 +969,14 @@ Ejemplo de for implementado en pipeline FP normal:
     
     ***Desenrollado de Bucles → mı́n(Paradas por riesgos de control)***
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2034.png)
+    ![imagen.png](images/imagen%2034.png)
     
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2035.png)
+![imagen.png](images/imagen%2035.png)
 
 3. **Software Pipelining (Segmentación por software):** Es un "desenrollamiento simbólico" en el que se reorganiza el bucle de modo que el cuerpo ejecute instrucciones que pertenecen a **diferentes iteraciones** del bucle original al mismo tiempo (por ejemplo, intercalar el almacenamiento de la iteración \(i\), la suma de la iteración \(i-1\) y la carga de la iteración \(i-2\)).
     
-    ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2036.png)
+    ![imagen.png](images/imagen%2036.png)
     
     - **Ventajas:** Elimina las dependencias de datos (*stalls*) en el cuerpo del bucle sin aumentar significativamente el tamaño del código ni la cantidad de registros necesarios.
     - **Desventajas:** Requiere un código adicional (*overhead*) antes de ingresar al bucle para iniciar el flujo (llenar el pipeline o cabecera) y después de este para completarlo (vaciar el pipeline o cola).
@@ -1008,7 +1008,7 @@ que tendría si las instrucciones hubieran sido ejecutadas en orden.
 
 Método para manejar las dependencias de datos y mejorar la ejecución fuera de orden en procesadores. Desarrollado por Robert Tomasulo en 1967 para la unidad de punto flotante del procesador IBM 360/91.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2037.png)
+![imagen.png](images/imagen%2037.png)
 
 Sus componentes fundamentales son:
 
@@ -1072,7 +1072,7 @@ planificacion estatica → se predicen saltos no tomados para abaratar → 1/6 d
 
 La **penalización de saltos** (o *branch penalty*) es la pérdida de rendimiento (medida en ciclos de reloj o paradas) que sufre un procesador segmentado cuando se ejecutan instrucciones de salto, debido a que el flujo de instrucciones no es el que el pipeline esperaba (riesgo de control).
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2038.png)
+![imagen.png](images/imagen%2038.png)
 
 Cada salto genera dos dificultades principales:
 
@@ -1083,15 +1083,15 @@ destino, lo que introduce demoras.
 
 Es fundamental predecir correctamente los saltos, ya que una predicción precisa promete una ejecución continua del programa. Si la predicción falla, se pierden ciclos de reloj, lo que impacta negativamente en el rendimiento.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2039.png)
+![imagen.png](images/imagen%2039.png)
 
 ### Branch Target Address Cache
 
 La BTAC (Branch Target Address Cache) es una memoria caché especial diseñada para acelerar el flujo de instrucciones en procesadores segmentados. Su propósito principal es almacenar la dirección de destino de los últimos saltos tomados, evitando que el procesador tenga que recalcular físicamente dicha dirección en cada instrucción de salto
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2040.png)
+![imagen.png](images/imagen%2040.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2041.png)
+![imagen.png](images/imagen%2041.png)
 
 #### Prediccion fija
 
@@ -1119,7 +1119,7 @@ El salto es tomado para ciertos opcodes
 
 → especificado por el programador → indica si el salto debe ser tomado o no
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2042.png)
+![imagen.png](images/imagen%2042.png)
 
 ### Predictores dinamicos
 
@@ -1127,15 +1127,15 @@ Se realizan observando el coportamiento de las instrucciones de salto en las ult
 
 (predicciones locales → sobre una instruccion → historia de ese salto → loops) ≠ globales (historia de varios saltos → if/else)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2043.png)
+![imagen.png](images/imagen%2043.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2044.png)
+![imagen.png](images/imagen%2044.png)
 
 Estos predictores se pueden implementar de las siguientes maneras:
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2045.png)
+![imagen.png](images/imagen%2045.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2046.png)
+![imagen.png](images/imagen%2046.png)
 
 Otras formas de gestionar la historia:
 
@@ -1143,19 +1143,19 @@ Otras formas de gestionar la historia:
 
 El comportamiento de los ultimos saltos afecta a la prediccion actual. Almacenar el comportamiento de los ultimos n saltos y usarlos en la seleccion de la prediccion.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2047.png)
+![imagen.png](images/imagen%2047.png)
 
 - Saltos recientes (historia global)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2048.png)
+![imagen.png](images/imagen%2048.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2049.png)
+![imagen.png](images/imagen%2049.png)
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2050.png)
+![imagen.png](images/imagen%2050.png)
 
 Cuando llega una instrucción de salto (b1), se debe seleccionar un predictor de los dos para tomar la predicción. Esto se hace en base al último salto: si el mismo no fue tomado, se elige el primer predictor, si lo fue, se elige el segundo. En el caso de que la predicción falle, se debe actualizar el predictor que falló.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2051.png)
+![imagen.png](images/imagen%2051.png)
 
 El **Tournament Predictor** (o Predictor de Torneo / Predictor Competitivo) es una técnica de **predicción dinámica híbrida.**
 
@@ -1163,11 +1163,11 @@ El **Tournament Predictor** (o Predictor de Torneo / Predictor Competitivo) es u
 - **Predictor Global:** Predice el salto basándose en el comportamiento de los últimos M saltos ejecutados en el flujo general del programa (historia global o correlacionada). Es muy eficaz para estructuras condicionales interdependientes como secuencias de `if-then-else`.
 - **El Juez (Selector o Meta-predictor):** Es una tabla de contadores saturados de 2 bits indexada por la dirección de la instrucción de salto (o por historia global). Su función es rastrear qué predictor ha dado los mejores resultados recientemente para cada salto en particular.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2052.png)
+![imagen.png](images/imagen%2052.png)
 
 Los predictores globales son efectivos para las operaciones con enteros, pero no para operaciones de punto flotante, en las que funcionan mejor los predictores locales.
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2053.png)
+![imagen.png](images/imagen%2053.png)
 
 La **recuperación de un fallo de predicción** (*misprediction recovery*) ocurre cuando el procesador ejecuta instrucciones de forma especulativa siguiendo el camino de un salto que predijo, pero al evaluarse la condición real descubre que la predicción fue incorrecta.
 
@@ -1227,7 +1227,7 @@ La **ejecución con predicados** (o **ejecución predicada**) es una técnica pa
 
 Frente a una estructura `if-else` equivalente en código de alto nivel:
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2054.png)
+![imagen.png](images/imagen%2054.png)
 
 En lugar de generar múltiples saltos condicionales (`Blt`, `Bgt`, `jump`), el compilador utiliza instrucciones predicadas:
 
@@ -1253,6 +1253,6 @@ una predicción. Existen entonces dos tipos de instrucciones en el procesador:
 
 ROC → agrega a las etapas de Tomasulo un ¨commit¨ → buffer intermedio que reordena las isntrucciones para la escritura de los datos a memoria ordenada → resuelve la salida fuera de orden
 
-![imagen.png](Arquitectura%20de%20Computadoras/imagen%2055.png)
+![imagen.png](images/imagen%2055.png)
 
 Tiempo
