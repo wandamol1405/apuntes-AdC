@@ -72,8 +72,7 @@ El procesador ingresa energía para transformar información. Sin embargo, no es
 el sentido tradicional, ya que la energía ingresada no realiza un trabajo útil en términos mecánicos,
 sino que se convierte en calor.
 
-- A menor tiempo de operación (mayor frecuencia, lograda mediante la inserción de más transis-
-tores más pequeños en una misma área), mayor será la potencia y, por lo tanto, mayor será la temperatura.
+- A menor tiempo de operación (mayor frecuencia, lograda mediante la inserción de más transistores más pequeños en una misma área), mayor será la potencia y, por lo tanto, mayor será la temperatura.
 - A menor área del transistor, mayor será la densidad de potencia y mayor será la probabilidad
 de fundir el transistor. Para no superar el limite de densidad de potencia (100W por centimetro cuadrado) que terminaria fundiendo el transistor se utilizan metodos de refrigeracion.
 
@@ -83,7 +82,7 @@ de fundir el transistor. Para no superar el limite de densidad de potencia (100W
 
 Es la potencia capacitiva que se consume de manera activa cuando los transistores cambian de estado lógico
 
-$P_{conmutacion} = C . V^2 . f$
+$P_{conmutacion} = C \cdot V^2 \cdot f$
 
 donde *C* es la capacitancia, *V* el voltaje y *f* la frecuencia de reloj.
 
@@ -91,7 +90,7 @@ donde *C* es la capacitancia, *V* el voltaje y *f* la frecuencia de reloj.
 
 Es la potencia que el procesador consume constantemente "sin hacer nada", es decir, de manera pasiva incluso cuando no está conmutando. Se debe a que los transistores actuales no se pueden cerrar por completo y sufren fugas de corriente eléctrica
 
-$P_{fuga} = I_{corte} . V_{corte} + I_{saturacion} . V_{saturacion}$
+$P_{fuga} = I_{corte} \cdot V_{corte} + I_{saturacion} \cdot V_{saturacion}$
 
 En los procesadores modernos de servidores, esta fuga llega a representar aproximadamente el 40% del consumo total
 
@@ -181,7 +180,7 @@ $$
 
 **Tiempo de CPU →** tiempo que tarda el procesador en ejecutar un programa
 
-$Tiempo\ de\ CPU = \frac{Ciclos\ de\ clock\ para\ un\ programa}{Frecuencia de clock}$
+$Tiempo\ de\ CPU = \frac{Ciclos\ de\ clock\ para\ un\ programa}{Frecuencia\ de\ clock}$
 
 $$
 Tiempo\ de\ CPU = \frac{Recuento\ de\ instrucciones * CPI}{Frecuencia\ de\ reloj}
@@ -479,7 +478,7 @@ Luego:
 
 Las unidades funcionales constan de dos tipos de elementos lógicos:
 
-- **combinacionales →**las salidas dependen unicamente de los valores actuales de las entradas → ALU
+- **combinacionales →** las salidas dependen unicamente de los valores actuales de las entradas → ALU
 - **elementos de estado (secuenciales) →** guardan el estado de la maquina cuando se reinician → memorias de instrucciones y datos, registros
     
     → tienen 2 entradas → valor del dato y el clock (determina cuando se almacena el dato)
@@ -615,6 +614,7 @@ Registros intermedios de almacenamiento cuya carga está sincronizada con el clo
 
 El Fan-out of Four (F04) es un concepto utilizado en diseño microelectrónico que se refiere a
 la condición en la que una puerta lógica, típicamente un inversor, tiene su salida conectada a cuatro puertas lógicas idénticas a ella (o a una carga capacitiva equivalente).
+
 Retardo F04: Es el retardo de propagación de una compuerta lógica con una carga que es el
 cuádruple de la suya propia. Se utiliza como una medida del retardo de una etapa en el pipeline y es independiente de la tecnología.
 
@@ -849,8 +849,8 @@ Si un salto es tomado (*taken*), las instrucciones que se buscaron secuencialmen
     2. Rellenar con alguna instrucción ubicada en el destino del salto (suponer salto tomado). Útil en bucles.
     3. Rellenar con alguna instrucción que siga al salto (suponer que el salto no fue tomado). Útil en condiciones IF-ELSE.
 - **Predicción de saltos (** **Branch Prediction** **)**:
-    - **Estática**: Aplicar una regla fija fijada en tiempo de compilación (por ejemplo, predecir siempre "no tomado", "tomado", o según la dirección hacia adelante/atrás del salto)[23].
-    - **Dinámica**: Usar tablas de historial en tiempo de ejecución (como contadores de 2 bits o el *Branch Target Buffer* / BTB) para predecir si el salto se tomará según su comportamiento reciente[27].
+    - **Estática**: Aplicar una regla fija fijada en tiempo de compilación (por ejemplo, predecir siempre "no tomado", "tomado", o según la dirección hacia adelante/atrás del salto).
+    - **Dinámica**: Usar tablas de historial en tiempo de ejecución (como contadores de 2 bits o el *Branch Target Buffer* / BTB) para predecir si el salto se tomará según su comportamiento reciente.
 
 ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2028.png)
 
@@ -881,8 +881,7 @@ En una implementación segmentada, las excepciones se tratan físicamente como u
 3. **Transferencia de control:** Se copia el PC de la instrucción afectada en **`SEPC`**, se registra la causa en **`SCAUSE`** y se salta a la dirección del manejador de excepciones almacenada en **`STVEC`**.
 4. **Retorno:** Tras resolver el inconveniente, la rutina del sistema operativo ejecuta la instrucción especial **sret** (*Supervisor Exception Return*). Esta instrucción restablece el procesador al modo usuario y salta de vuelta a la dirección almacenada en **`SEPC`** para reiniciar la ejecución.
 
-Es importante vaciar el pipeline antes de manejar la interrupción, ya que las instrucciones pos-
-teriores podrían generar excepciones. Si se retoma la ejecución después de la interrupción, estas
+Es importante vaciar el pipeline antes de manejar la interrupción, ya que las instrucciones posteriores podrían generar excepciones. Si se retoma la ejecución después de la interrupción, estas
 excepciones no existirían en el estado recuperado, lo cual podría generar inconsistencias.
 
 #### Excepciones precisas
@@ -927,7 +926,7 @@ Se clasifican en tres tipos fundamentales:
 
 Ocurre cuando una instrucción *j* depende del resultado de una instrucción anterior *i* porque necesita consumir ese dato.
 
-- **Ejemplo:**`LD F0, 0(R1)` *(escribe en F0)*`ADDD F4, F0, F2` *(intenta leer F0)*
+- **Ejemplo:** `LD F0, 0(R1)` *(escribe en F0)* `ADDD F4, F0, F2` *(intenta leer F0)*
 
 #### **2. Dependencias de nombre (Reutilización de almacenamiento)**
 
@@ -938,7 +937,7 @@ Ocurren cuando dos instrucciones utilizan el mismo registro o posición de memor
 - **Dependencia de salida (EDE / WAW - Escritura Después de Escritura):** Ambas instrucciones escriben en el mismo destino. Si se altera el orden, al final quedará almacenado el dato incorrecto.
     - *Ejemplo:* `ADDD F4, F0, F2` seguido de `SUBD F4, F3, F2`.
 
-### **3. Dependencias de control**
+#### **3. Dependencias de control**
 
 Determinan el flujo de ejecución del programa. Ocurren cuando la ejecución de una instrucción depende de la resolución de un salto condicional previo.
 
@@ -964,7 +963,7 @@ Ejemplo de for implementado en pipeline FP normal:
 
 ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2033.png)
 
-1. **Desenrollado de bucles (Loop Unrolling):** Consiste en duplicar el cuerpo de un bucle varias veces en una sola iteración física.
+2. **Desenrollado de bucles (Loop Unrolling):** Consiste en duplicar el cuerpo de un bucle varias veces en una sola iteración física.
     - **Ventajas:** Expone un bloque más grande de instrucciones independientes y elimina la sobrecarga (*overhead*) de control del bucle, reduciendo saltos y decrementos repetitivos.
     - **Desventajas:** Incrementa el tamaño del código binario (pudiendo provocar fallos en la caché de instrucciones) y genera una gran **presión sobre los registros**.
     
@@ -975,7 +974,7 @@ Ejemplo de for implementado en pipeline FP normal:
 
 ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2035.png)
 
-1. **Software Pipelining (Segmentación por software):** Es un "desenrollamiento simbólico" en el que se reorganiza el bucle de modo que el cuerpo ejecute instrucciones que pertenecen a **diferentes iteraciones** del bucle original al mismo tiempo (por ejemplo, intercalar el almacenamiento de la iteración \(i\), la suma de la iteración \(i-1\) y la carga de la iteración \(i-2\)).
+3. **Software Pipelining (Segmentación por software):** Es un "desenrollamiento simbólico" en el que se reorganiza el bucle de modo que el cuerpo ejecute instrucciones que pertenecen a **diferentes iteraciones** del bucle original al mismo tiempo (por ejemplo, intercalar el almacenamiento de la iteración \(i\), la suma de la iteración \(i-1\) y la carga de la iteración \(i-2\)).
     
     ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2036.png)
     
@@ -1002,6 +1001,7 @@ Una excepción es imprecisa si al momento de generarse el estado del procesador 
 que tendría si las instrucciones hubieran sido ejecutadas en orden.
 
 → El pipeline ya ha completado instrucciones que son posteriores en el orden secuencial del programa a la instrucción que genera la excepción.
+
 → El pipeline aún no ha completado instrucciones que son anteriores a la que genera la excepción.
 
 ### Algoritmo de Tomasulo
@@ -1158,9 +1158,10 @@ Cuando llega una instrucción de salto (b1), se debe seleccionar un predictor de
 ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2051.png)
 
 El **Tournament Predictor** (o Predictor de Torneo / Predictor Competitivo) es una técnica de **predicción dinámica híbrida.**
-• **Predictor Local:** Evalúa la probabilidad de un salto basándose en el historial previo de ejecuciones de esa misma instrucción de salto específica. Es muy preciso para bucles (*loops*) y patrones repetitivos locales.
-• **Predictor Global:** Predice el salto basándose en el comportamiento de los últimos M saltos ejecutados en el flujo general del programa (historia global o correlacionada). Es muy eficaz para estructuras condicionales interdependientes como secuencias de `if-then-else`.
-• **El Juez (Selector o Meta-predictor):** Es una tabla de contadores saturados de 2 bits indexada por la dirección de la instrucción de salto (o por historia global). Su función es rastrear qué predictor ha dado los mejores resultados recientemente para cada salto en particular.
+
+- **Predictor Local:** Evalúa la probabilidad de un salto basándose en el historial previo de ejecuciones de esa misma instrucción de salto específica. Es muy preciso para bucles (*loops*) y patrones repetitivos locales.
+- **Predictor Global:** Predice el salto basándose en el comportamiento de los últimos M saltos ejecutados en el flujo general del programa (historia global o correlacionada). Es muy eficaz para estructuras condicionales interdependientes como secuencias de `if-then-else`.
+- **El Juez (Selector o Meta-predictor):** Es una tabla de contadores saturados de 2 bits indexada por la dirección de la instrucción de salto (o por historia global). Su función es rastrear qué predictor ha dado los mejores resultados recientemente para cada salto en particular.
 
 ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2052.png)
 
@@ -1201,6 +1202,7 @@ En lugar de bifurcar el Contador de Programa (`PC`) mediante un salto, una instr
 
 1. **Una condición** (denominada guarda o predicado).
 2. **Una operación**.
+
 - **Si la condición es verdadera:** la instrucción se ejecuta normalmente y confirma su resultado en los registros o memoria.
 - **Si la condición es falsa:** la instrucción se anula internamente y se comporta como una operación nula (`NOP`), sin alterar el estado del procesador.
 
@@ -1234,6 +1236,7 @@ En lugar de generar múltiples saltos condicionales (`Blt`, `Bgt`, `jump`), el c
 3. `pred_gt p3(U), p4(U), b, 20 (p1)` → evalúa si b > 20 condicionado al predicado p1.
 4. `add d, d, 1 (p4)` → suma d + 1 solo si el predicado p4 es verdadero.
 5. `add e, e, 1 (p3)` → suma e + 1 solo si el predicado p3 es verdadero.
+
 - **Ventajas:**
     - Elimina los saltos simples y reduce las paradas (*stalls*) o vaciados del cauce (*flushes*) ocasionados por fallos en la predicción de saltos.
 - **Desventajas:**
@@ -1244,12 +1247,11 @@ En lugar de generar múltiples saltos condicionales (`Blt`, `Bgt`, `jump`), el c
 
 La predicción de saltos introduce especulación: habrá instrucciones cuya ejecución depende de
 una predicción. Existen entonces dos tipos de instrucciones en el procesador:
+
 - Independientes: no dependen del salto y se ejecutan siempre de manera normal.
 - Dependientes: su ejecución depende del acierto o fallo en la predicción del salto.
 
 ROC → agrega a las etapas de Tomasulo un ¨commit¨ → buffer intermedio que reordena las isntrucciones para la escritura de los datos a memoria ordenada → resuelve la salida fuera de orden
-
-## 
 
 ![imagen.png](Arquitectura%20de%20Computadoras/imagen%2055.png)
 
