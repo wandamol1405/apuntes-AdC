@@ -3,6 +3,7 @@
 Fecha de creación: 7 de agosto de 2026 20:18
 Personas: MARIA WANDA MOLINA
 
+# Introduccion
 ## Generaciones del desarrollo de computadoras
 
 ### Primera generacion (1950)
@@ -61,7 +62,7 @@ Los retos de la ley son:
 - Soft errors →  Este error se debe a que partículas ionizadas impactan contra la juntura de los
 transistores; por ejemplo, si una partícula con cierta carga impacta una celda de memoria, esta puede generar un cambio de estado (por ejemplo, puede que haya un 0 donde antes había un 1).
     
-    Al disminuir el tamaño de la juntura por los avances tecnológicos, la carga eléctrica de la juntura y su tamaño en comparación con la partícula ionizada se vuelven críticamente significativos. Por esta razón, a medida que aumenta la densidad de transistores en un chip, la cantidad relativa de *soft errors* se incrementa de manera exponencial.
+Al disminuir el tamaño de la juntura por los avances tecnológicos, la carga eléctrica de la juntura y su tamaño en comparación con la partícula ionizada se vuelven críticamente significativos. Por esta razón, a medida que aumenta la densidad de transistores en un chip, la cantidad relativa de *soft errors* se incrementa de manera exponencial.
     
 - El aumento de la densidad de transistores se freno a partir del 2005 cuando aparecieron los multicores.
 - Wire delay → retrasos para alcanzar un porcentaje del procesador en un ciclo, debidos a interconexiones internas en celdas de una FPGA.
@@ -175,7 +176,10 @@ $Rendimiento = \frac{1}{Tiempo\ de\  ejecucion}$
 $$
 Performace = \frac{Rendimiento_A}{ Rendimiento_B} = \frac{Tiempo\ de\ ejecucion_A}{Tiempo\ de\ ejecucion_B}
 $$
-
+En general, la performance se mide en terminos de throughput y depende de 3 factores principales:
+- La frecuencia del reloj -> aumenta hasta cierto punto -> deja de ser fundamental actualmente
+- Cantidad total de intrucciones a ejecutar -> depende del programa
+- **CPI** (Cycle per Instruction) -> depende de la microarquitectura 
 ### Tiempo de CPU y CPI
 
 **Tiempo de CPU →** tiempo que tarda el procesador en ejecutar un programa
@@ -244,7 +248,7 @@ Para evitar sesgos y asegurar evaluaciones justas entre fabricantes, diversas or
 
 Es una organización financiada por fabricantes de hardware que desarrolla conjuntos de pruebas basados en aplicaciones reales bajo estrictas reglas de ejecución
 
-# Procesadores
+# Procesadores y Segmentacion
 
 Existen dos tipos de microprocesadores:
 
@@ -910,7 +914,7 @@ El hecho de tener instrucciones de FP en vuelo con duraciones tan dispares rompe
 
 ![imagen.png](images/imagen%2031.png)
 
-## Paralelismo a nivel de instruccion (ILP)
+# Paralelismo a nivel de instruccion (ILP)
 
 Tecnica que consiste en explotar paralelismo entre instrucciones proximas en la secuencia. 
 
@@ -1255,4 +1259,108 @@ ROC → agrega a las etapas de Tomasulo un ¨commit¨ → buffer intermedio que 
 
 ![imagen.png](images/imagen%2055.png)
 
-Tiempo
+# Lanzamiento Multiple y Multithreading
+La mejora del performance llego a un limite mediante ILP -> se debe recurrir a otras formas de paralelismo.
+* ILP -> ejecucion en un unico hilo -> CPI minimo de 1
+* TLP, Arquitectura superescalares, Ejec. fuera de orden -> ejecucion paralela -> permite CPI < 1
+
+## Lanzamiento multiple de instrucciones
+Arquitecturas avanzadas para lancar mas instrucciones por ciclo
+
+Estas arquitecturas requieren:
+-> Mas hardware
+-> Mantener coherencia entre las jerarquias de memoria
+### **Procesadores superescalares**
+
+Microarquitecturas escalares que incorporan multiples vias de emision (multipl issue) para sostener la ejecucion paralela de instrucciones independientes. Duplican o multiplican parte de sus unidades funcionales para permitir emitir mas de una instruccion por ciclo.
+Lanza de 1 a 8 instrucciones por ciclo. Existen dos tipos:
+-  **Con planificacion estatica** -> ejecuta instrucciones en orden. Se planifica en tiempo de compilacion.
+-  **Con planificacion dinamica** -> ejecuta instrucciones fuera de orden, aumentando el paralelismo en ejecucion puede ser:
+	-  *Sin especulacion* -> el hardware decide en tiempo de ejecucion que isntrucciones emitir pero sin especular que camino tomar en los saltos.
+	- *Con especulacion* -> agrega tecticas de ejecucion especulatica para aprovechar mas paralelismo. Suele ser mas teorico que real ya que eleva la complejidad del hardware.
+
+-> Grado del procesador -> indica la cantidad de instrucciones ejecutandose al mismo tiempo
+-> Vias -> indica la cantidad de pipelines en paralelo
+
+Si tenemos un procesador superescalar de grado 2 y 2 vias, entonces, en teoria tendremos un CPI = 0.5 (2 instrucciones por ciclo). En la practica no se llega a este valor por las instrucciones de salto, LOADs y dependencias LDE. Ademas, el procesador superescalar genera presion adicional sobre la memoria y un incremento en los riesgos de ejecucion, por los cuales se suele reducir el acceso a la memoria a una sola instruccion LOAS por ciclo.
+
+Se alcanza un CPI de 0.5 solo si el programa contiene un 50 % de instrucciones FP y un 50 % de instrucciones enteras.
+### Superescalar simple (estatico)
+Busca, decodifica y emite varias instrucciones por ciclo de reloj manteniendo el estricto orden original del programa.
+![](images/Pasted%20image%2020261006182245.png)
+
+- Busquedad y decodificacion de instrucciones simultaneamente -> la decodificacion se realiza en secuencia y la segunda instruccion solo se lanza si la primera ya fue lanzada
+- Para evitar colisiones en la ejecución, suele seguir reglas fijas, como permitir lanzar en paralelo una instrucción entera junto con una de punto flotante. Esto requiere multiplicar o duplicar recursos clave como unidades funcionales segmentadas, buses internos y puertos en el banco de registros (para permitir la lectua simultanea de registros)
+- Sin embargo, existen posibles conflictos específicos con instrucciones de carga (load), almacenamiento (store), o movimiento de datos entre registros de punto flotante (FP). 
+- El procesador incluye un detector de azares cuya única función es identificar dependencias de datos o conflictos de recursos y detener (_stall_) la emisión cuando se detecta un problema. Para mitigar los conflictos de Dependencia Verdadera (LDE), se debe asegurar una distancia adecuada entre las instrucciones, de manera que los datos necesarios estén disponibles antes de ser requeridos.
+- Al tener una planificación fija, no puede adaptarse a eventos impredecibles en tiempo de ejecución (como fallos en la memoria caché) y su rendimiento depende de que el código tenga una mezcla equilibrada de instrucciones independientes.
+![](images/Pasted%20image%2020261006175758.png)
+En este loop desenrollado se realizan 5 LOADs consecutivos para la carga de datos a registros de pf; se ejecutan 5 operaciones ADDD en pf (usando un operando comun) y 5 STOREs para escribir el resultado en memoria. Los LOADs son de tipo enteras, permitiendo que se mezclen en el mismo ciclo de operaciones ADDD sin generar conflictos. 
+-> El loop queda estructurado de forma fija; el CPI efectivo resulta de aprox 2.4  y no se modifica el codigo original del programa.
+
+**Ventajas y limitaciones**
+
+- **Ventajas**: Preserva la **compatibilidad binaria**, garantizando que cualquier código ejecute correctamente sin importar la estructura interna del cauce o el ancho de emisión. Además, requiere un hardware sensiblemente menos complejo que los procesadores dinámicos fuera de orden.
+- **Desventajas**: Su rendimiento real depende fuertemente de que el programa tenga una mezcla equilibrada de instrucciones independientes. Al poseer una planificación fija, es incapaz de adaptarse a eventos impredecibles en tiempo de ejecución (como los **fallos en la memoria caché**), y si la primera instrucción de un paquete se bloquea, se detiene el lanzamiento de las instrucciones subsecuentes
+### **Procesadores VLIW (Very Long Instruction Word)**
+Agrupan multiples instrucciones independientes en una sola palabra de instruccion que se ejecutan en paralelo.
+
+![](images/Pasted%20image%2020261006182216.png)
+
+Cada instrucción VLIW se compone de varios campos o _slots_ prefijados, donde cada campo especifica el código de operación y los operandos dirigidos a una unidad funcional concreta (como ALUs enteras, unidades de punto flotante, unidades de carga/almacenamiento y control de saltos). Todas las operaciones contenidas dentro de una misma palabra VLIW se ejecutan simultáneamente en paralelo durante el mismo ciclo de reloj. Cuando el compilador no logra encontrar suficientes operaciones independientes para ocupar todos los campos de la palabra de instrucción, completa los _slots_ vacíos insertando operaciones nulas (`NOP`)
+
+Cada instrucción en un procesador VLIW incluye una operación por ALU, lo cual genera instrucciones de muchos bits. El análisis de dependencias se realiza en tiempo de compilación para determinar cuántas operaciones se pueden incluir en un slot de instrucción sin crear problemas.
+
+***Loop unrolling en VLIW***
+
+![](images/Pasted%20image%2020261006182701.png)
+
+Se realizan 7 iteraciones en 9 ciclos (cada fila corresponde a una instruccion VLIW) -> CPI = 1.3 ciclos por iteracion. Se requiere de una gran cantiada de registros.
+
+**Ventajas y Desventajas**
+
+- **Ventajas**:
+    - **Hardware simplificado**: La lógica de control del procesador es significativamente más simple que la de un superescalar dinámico, ya que el hardware no requiere circuitos complejos para detectar dependencias o reordenar instrucciones en tiempo de ejecución.
+    - **Alto rendimiento en código regular**: Permite explotar de manera muy eficiente el ILP en aplicaciones con abundantes operaciones independientes (como procesamiento de señales o código científico).
+- **Desventajas**:
+    - **Incompatibilidad binaria**: El código generado está fuertemente acoplado a la estructura interna del procesador (número de vías, latencias). Al cambiar de modelo o arquitectura VLIW, es obligatorio **recompilar el programa** para que pueda ejecutarse correctamente o mantener su eficiencia.
+    - **Poca densidad de código**: El exceso de instrucciones `NOP` necesarias para rellenar los _slots_ vacíos provoca un desperdicio significativo de espacio en memoria y en la caché de instrucciones.
+    - **Rigidez ante eventos dinámicos**: Al depender de una planificación estática, el procesador se detiene si ocurren eventos impredecibles durante la ejecución, como los fallos en la memoria caché.
+#### EPIC (_Explicitly Parallel Instruction Computing_)
+Es una filosofía de arquitectura desarrollada conjuntamente por Intel y Hewlett-Packard (HP) como una evolución avanzada del modelo VLIW (_Very Long Instruction Word_)
+
+Su objetivo fundamental es trasladar la responsabilidad de extraer el paralelismo a nivel de instrucción (ILP) y detectar dependencias desde el hardware hacia el **compilador**, pero incorporando mecanismos en el conjunto de instrucciones (ISA) para solucionar los problemas tradicionales de VLIW, como la densidad de código, la proliferación de instrucciones NOP y la rigidez ante eventos dinámicos
+
+En la arquitectura de 64 bits **IA-64** (implementada en los procesadores **Itanium**), las operaciones no se emiten de forma aislada, sino empaquetadas en palabras largas llamadas **haces (** **bundles** **) de 128 bits**. Cada haz contiene 3 instrucciones o "sílabas" estilo RISC de 41 bits cada una. Un campo de 5 bits denominado _template_ especifica explícitamente los tipos de instrucción dentro del haz e indica la presencia de bits de parada (_stop bits_).  Esto informa directamente al hardware qué instrucciones se pueden ejecutar simultáneamente de forma segura sin requerir complejos detectores de azares en tiempo de ejecución
+![](images/Pasted%20image%2020261006192416.png)
+
+Cada operación contiene:
+• Código de operación (Ope).
+• Tres registros de entrada/salida (operaciones de 3 operandos).
+• Un bit de predicado, que determina si la instrucción se ejecuta o no.
+
+Para sostener la ejecución masiva en paralelo y el renombramiento estático, la arquitectura dispone de una gran abundancia de registros:
+
+- **128 registros generales** de 64 bits.
+- **128 registros de punto flotante** de 82 bits.
+- **64 registros de predicado** de 1 bit.
+- **8 registros de salto** (_branch registers_) de 64 bits.
+
+**Ejecución Predicada**: Permite transformar dependencias de control en dependencias de datos. Cada instrucción incluye una guarda o predicado (asociado a uno de los 64 registros de 1 bit); si la condición se evalúa como verdadera, la instrucción completa su resultado, mientras que si es falsa, se comporta como un NOP sin afectar el estado. Esto elimina los saltos condicionales y evita las penalizaciones por fallos en la predicción de saltos.
+
+**Especulación de Control**: El compilador puede mover una instrucción de carga de memoria (_load especulativo_) antes de un salto condicional para ocultar la latencia de acceso a memoria, verificando su validez más adelante con una instrucción de chequeo (`chk.s`).
+
+**Especulación de Datos**: Permite mover una instrucción de carga (_load_) por encima de una instrucción de almacenamiento (_store_) previa, aun cuando exista duda de si apuntan a la misma dirección de memoria (_aliasing_). El hardware registra la dirección cargada y, si se detecta una escritura en esa misma dirección antes del chequeo (`chk.a`), invoca una rutina de corrección.
+
+### Superescalar con planificacion dinamica
+Permite ejecutar instrucciones en paralelo y fuera de orden para mejorar el rendimiento. Junta el procesador superescalar con el algoritmo de Tomasulo modificado para finalizacion en orden.
+
+Se caracteriza por:
+- Tener estaciones de reserva separadas para registros de enteros y registros de PF.
+- Se lanzan en el mismo ciclo dos instrucciones en orden.
+- Solo instrucciones load para PF  causan dependencias entre instrucciones enteras y PF
+- Se utiliza una cola en lugar de un buffer de carga, permitiendo realizar las lecturas de datos de manera ordenada y evita la especuulacion de lectura que podria generar problemas de dependencia de datos.
+## Thread Level Parallelism (TLP)
+Aprovecha multiples hilos de ejecucion en lugar de depender de la independencia entre instrucciones de un programa secuencial, manteniendo sus unidades activas ejecutando instrucciones provenientes de varios hilos distintos. 
+
+
