@@ -3,31 +3,31 @@
 Fecha de creación: 7 de agosto de 2026 20:18
 Personas: MARIA WANDA MOLINA
 
-# Introduccion
+# Introducción
 ## Generaciones del desarrollo de computadoras
 
-### Primera generacion (1950)
+### Primera generación (1950)
 
-- Tecnologia logica → tubos de vacio → las computadoras ocupaban aprox 1 millon de $m^3$
-- Memoria de tambor magnetico y dispositivos de I/O como cintas de papel y magneticas.
+- Tecnología lógica → tubos de vacío → las computadoras ocupaban aprox 1 millón de $m^3$
+- Memoria de tambor magnético y dispositivos de I/O como cintas de papel y magnéticas.
 - ENIAC (1945), EDSAC (1949), serie UNIVAC (1950)
 
-### Segunda generacion (1960)
+### Segunda generación (1960)
 
-- Llegada de los transistores (1957)→ computadoras mas pequeñas, baratas y confiables
-- Memorias de nucleo magnetico, terminales de texto, impresoras y tambores.
-- Nacimiento de los lenguajes de programacion de alto nivel y el software de sistema.
+- Llegada de los transistores (1957)→ computadoras más pequeñas, baratas y confiables
+- Memorias de núcleo magnético, terminales de texto, impresoras y tambores.
+- Nacimiento de los lenguajes de programación de alto nivel y el software de sistema.
 
-### Tercera generacion (1970)
+### Tercera generación (1970)
 
 - Circuitos integrados (1965) de pequeña a media escala (SSI/MSI)
 - Chips de memoria RAM/ROM, monitores de video y teclados integrados
-- Familia IBM System 360 y PDP-11 → minicomputadoras economicas
+- Familia IBM System 360 y PDP-11 → minicomputadoras económicas
 
-### Cuarta generacion (1980)
+### Cuarta generación (1980)
 
-- Integraciónn a gran y muy gran escala (LSI/VLSI) → procesador empaquetado en un solo chip
-- Memorias rapidas integradas como SRAM (cache) y DRAM (memoria principal).
+- Integración a gran y muy gran escala (LSI/VLSI) → procesador empaquetado en un solo chip
+- Memorias rápidas integradas como SRAM (cache) y DRAM (memoria principal).
 - Mouse, sonido, CD y capacidades de red en computadoras de escritorio y portátiles
 - Computadoras personales (PC) → Apple e IBM
 - Paralelismo a nivel de bits → arquitecturas de 4 bits a 8, 16, 32 y 64 bits
@@ -40,11 +40,11 @@ La arquitectura de Von Neumann es una familia de arquitecturas de computadoras q
 
 ### IPC
 
-Instrucciones por ciclo → métrica que representa el numero promedio de instrucciones que un procesador es capaz de ejecutar en unúnicoo ciclo de reloj (busca que sea menor).
+Instrucciones por ciclo → métrica que representa el número promedio de instrucciones que un procesador es capaz de ejecutar en un único ciclo de reloj (se busca que sea mayor).
 
 ### ISA
 
-Instruction Set Architecture describe la sintaxis y la semantica de la interfaz de una computadora: tipo y tamaño de operandos, estado del registro visible del programador, modelo de memoria, manejo de interrupciones y excepciones, instrucciones disponibles, etc.
+Instruction Set Architecture describe la sintaxis y la semántica de la interfaz de una computadora: tipo y tamaño de operandos, estado del registro visible del programador, modelo de memoria, manejo de interrupciones y excepciones, instrucciones disponibles, etc.
 
 ### Performance
 
@@ -52,19 +52,19 @@ Se mide en flops, que es la cantidad de operaciones de punto flotante que se rea
 
 ## Ley de Moore
 
-Moore (1965) anticipó que la complejidad de los circuitos integrados se duplicaría cada año, acompañada de una reducción proporcional de sus costos. En 1975 ajustó su estimación, señalando que el número de transistores integrados en un chip de silicio se duplicaría aproximadamente **cada dos años** (frecuentemente citado también como un periodo de entre 18 y 24 meses). Esto permitio anticipar el diseño de los procesadore, disminuyendo sus costos y aumentando su rendimiento.
+Moore (1965) anticipó que la complejidad de los circuitos integrados se duplicaría cada año, acompañada de una reducción proporcional de sus costos. En 1975 ajustó su estimación, señalando que el número de transistores integrados en un chip de silicio se duplicaría aproximadamente **cada dos años** (frecuentemente citado también como un periodo de entre 18 y 24 meses). Esto permitió anticipar el diseño de los procesadores, disminuyendo sus costos y aumentando su rendimiento.
 
 ![image.png](images/image%201.png)
 
 Los retos de la ley son:
 
-- Frecuencia vs corriente de fuga → el leakege aumente de forma cubica con la frecuencia → aumento de manera cubica de la disipacion
+- Frecuencia vs corriente de fuga → el leakage aumenta de forma cúbica con la frecuencia → aumento de manera cúbica de la disipación
 - Soft errors →  Este error se debe a que partículas ionizadas impactan contra la juntura de los
 transistores; por ejemplo, si una partícula con cierta carga impacta una celda de memoria, esta puede generar un cambio de estado (por ejemplo, puede que haya un 0 donde antes había un 1).
     
 Al disminuir el tamaño de la juntura por los avances tecnológicos, la carga eléctrica de la juntura y su tamaño en comparación con la partícula ionizada se vuelven críticamente significativos. Por esta razón, a medida que aumenta la densidad de transistores en un chip, la cantidad relativa de *soft errors* se incrementa de manera exponencial.
     
-- El aumento de la densidad de transistores se freno a partir del 2005 cuando aparecieron los multicores.
+- El aumento de la densidad de transistores se frenó a partir del 2005 cuando aparecieron los multicores.
 - Wire delay → retrasos para alcanzar un porcentaje del procesador en un ciclo, debidos a interconexiones internas en celdas de una FPGA.
 
 ## Consumo energético de procesadores
@@ -75,11 +75,11 @@ sino que se convierte en calor.
 
 - A menor tiempo de operación (mayor frecuencia, lograda mediante la inserción de más transistores más pequeños en una misma área), mayor será la potencia y, por lo tanto, mayor será la temperatura.
 - A menor área del transistor, mayor será la densidad de potencia y mayor será la probabilidad
-de fundir el transistor. Para no superar el limite de densidad de potencia (100W por centimetro cuadrado) que terminaria fundiendo el transistor se utilizan metodos de refrigeracion.
+de fundir el transistor. Para no superar el límite de densidad de potencia (100W por centímetro cuadrado) que terminaría fundiendo el transistor se utilizan métodos de refrigeración.
 
 #### Componentes de la potencia
 
-- **Potencia de conmutacion (Dinamica)**
+- **Potencia de conmutacion (Dinámica)**
 
 Es la potencia capacitiva que se consume de manera activa cuando los transistores cambian de estado lógico
 
@@ -87,7 +87,7 @@ $P_{conmutacion} = C \cdot V^2 \cdot f$
 
 donde *C* es la capacitancia, *V* el voltaje y *f* la frecuencia de reloj.
 
-- **Potencia de fuga (Estatica)**
+- **Potencia de fuga (Estática)**
 
 Es la potencia que el procesador consume constantemente "sin hacer nada", es decir, de manera pasiva incluso cuando no está conmutando. Se debe a que los transistores actuales no se pueden cerrar por completo y sufren fugas de corriente eléctrica
 
@@ -99,7 +99,7 @@ En los procesadores modernos de servidores, esta fuga llega a representar aproxi
 
 Se produce momentáneamente cuando dos transistores complementarios que están en oposición conmutan. Durante el brevísimo instante de transición (uno pasa de corte a saturación y el otro viceversa), se genera un camino directo de baja resistencia a tierra (un cortocircuito).
 
-La potencian dinámica de un circuito es:
+La potencia dinámica de un circuito es:
 
 $*P_{dinamica}=N⋅V^2⋅C⋅f⋅A*$
 
@@ -115,41 +115,41 @@ Donde:
 
 → Dado que el voltaje se encuentra al cuadrado en la fórmula de la potencia ($*V^2*$), cualquier incremento en la frecuencia que obligue a aumentar el voltaje de forma lineal provoca que **la potencia disipada por el dispositivo aumente de manera cúbica con la frecuencia (**$*P∝f^3*$**)**
 
-Para mejorar el rendimiento teniendo en cuenta la maxima potencia que un dispositivo debe disipar se agregan cores simples y complejos.
+Para mejorar el rendimiento teniendo en cuenta la máxima potencia que un dispositivo debe disipar se agregan cores simples y complejos.
 
-### Tecnicas para manejar la potencia:
+### Técnicas para manejar la potencia:
 
-- **Clock Gating:** deshabilita el reloj en una parte del circuito, de manera que los flip-flops en esa parte no consuman energia.
+- **Clock Gating:** deshabilita el reloj en una parte del circuito, de manera que los flip-flops en esa parte no consuman energía.
 - **Diferentes dominios de reloj para sectores que requieren frecuencias altas**
-- **Cores simples →** consumo de menor energia en comparacion con los nucleos complejos
+- **Cores simples →** consumo de menor energía en comparación con los núcleos complejos
 - **Transistores con distintos Vth →** optimizar el retardo y/o la potencia.
-- **Power Gating →** desconecta de la fuente de alimentacion sectores que no estan en uso.
-- **Ajustes dinamicos de voltaje y frecuencia** → mejorar la compensación potencia/rendimiento
+- **Power Gating →** desconecta de la fuente de alimentación sectores que no están en uso.
+- **Ajustes dinámicos de voltaje y frecuencia** → mejorar la compensación potencia/rendimiento
 
 ### Cores simples vs complejos
 
-**Cores simples →** ejecutan instrucciones en el orden en que se reciben, sin realizar reordenamiento de itnrsucciones, ejecucion especulativa ni prediccion de saltos. Consumo minimalista, menor numero de transistores. Eficientes en entornos de alto paralelismo a nivel de datos.
+**Cores simples →** ejecutan instrucciones en el orden en que se reciben, sin realizar reordenamiento de instrucciones, ejecución especulativa ni predicción de saltos. Consumo minimalista, menor número de transistores. Eficientes en entornos de alto paralelismo a nivel de datos.
 
-**Cores complejos →** maximizan el paralelismo a nivel de intrsuccion usando tecnicas de microarquitectura como ejecucion fuera de orden, ejecucion especulativa y prediccion de daltos, logrando mayor IPC. Mayor consumo energetico y disipacion de calor. Indispensables en tareas secuenciales.
+**Cores complejos →** maximizan el paralelismo a nivel de instrucción usando técnicas de microarquitectura como ejecución fuera de orden, ejecución especulativa y predicción de saltos, logrando mayor IPC. Mayor consumo energético y disipación de calor. Indispensables en tareas secuenciales.
 
 A medida que se agregan más núcleos (cores), el throughput aumenta tanto para núcleos simples
 como para complejos, aunque también lo hace la potencia. Sin embargo, los núcleos simples tienen un límite en cuanto a throughput, ya que no proporcionan un aumento adicional al incrementar la potencia, a diferencia de los núcleos complejos. En estos últimos, el throughput sigue aumentando con la potencia, aunque con un mayor consumo de energía.
 
-→ Para un numero reducido de nucleos, es preferible que sean complejos ya que los simples no ofrecen un aumento significativo del rendimiento al incrementar la potencia.
+→ Para un número reducido de núcleos, es preferible que sean complejos ya que los simples no ofrecen un aumento significativo del rendimiento al incrementar la potencia.
 
-→ En diseños con buen paralelismo y utilizando muchos nucleos, es preferible que sean simples ya que los complejos consumen mucha mas energia.
+→ En diseños con buen paralelismo y utilizando muchos núcleos, es preferible que sean simples ya que los complejos consumen mucha más energía.
 
-### ¿Como bajar el consumo?
+### ¿Cómo bajar el consumo?
 
 $*P_{dinamica}=N⋅V^2⋅C⋅f⋅A*$
 
-→ Reducir la frecuencia →  reduce la cantidad de intrucciones x segundo → menor rendimiento
+→ Reducir la frecuencia →  reduce la cantidad de instrucciones x segundo → menor rendimiento
 
-→ Reducir la V de alimentacion → disminuye la frecuencia de operacion y menos tolerante a ruido
+→ Reducir la V de alimentación → disminuye la frecuencia de operación y menos tolerante a ruido
 
 →Reducir cantidad de transistores → disminuye el rendimiento del sistema
 
-→ Reducir la capacitancia → menor duracion de almacenamiento en la RAM → mayor refresco
+→ Reducir la capacitancia → menor duración de almacenamiento en la RAM → mayor refresco
 
 → Reducir la actividad → menos operaciones → menor rendimiento
 
@@ -171,14 +171,14 @@ Dependiendo del punto de vista del evaluador, el rendimiento se define de dos ma
 
 $Rendimiento = \frac{1}{Tiempo\ de\  ejecucion}$
 
-**Performace:** indica cuantas veces un computador es mas rápido que otro de referencia.
+**Performance:** indica cuantas veces un computador es más rápido que otro de referencia.
 
 $$
-Performace = \frac{Rendimiento_A}{ Rendimiento_B} = \frac{Tiempo\ de\ ejecucion_A}{Tiempo\ de\ ejecucion_B}
+Performance = \frac{Rendimiento_A}{ Rendimiento_B} = \frac{Tiempo\ de\ ejecucion_A}{Tiempo\ de\ ejecucion_B}
 $$
-En general, la performance se mide en terminos de throughput y depende de 3 factores principales:
+En general, la performance se mide en términos de throughput y depende de 3 factores principales:
 - La frecuencia del reloj -> aumenta hasta cierto punto -> deja de ser fundamental actualmente
-- Cantidad total de intrucciones a ejecutar -> depende del programa
+- Cantidad total de instrucciones a ejecutar -> depende del programa
 - **CPI** (Cycle per Instruction) -> depende de la microarquitectura 
 ### Tiempo de CPU y CPI
 
@@ -190,7 +190,7 @@ $$
 Tiempo\ de\ CPU = \frac{Recuento\ de\ instrucciones * CPI}{Frecuencia\ de\ reloj}
 $$
 
-**Tiempo de CPI →** numero medio de ciclos de reloj por instrucción
+**Tiempo de CPI →** número medio de ciclos de reloj por instrucción
 
 $$
 CPI = \frac{Ciclos\ de\ clock\ para\ un\ programa}{Cantidad\ de\ instrucciones}
@@ -210,7 +210,7 @@ $$
 Speed\ up = \frac{1}{(1-F_m)+\frac{F_m}{A_m}}
 $$
 
-$F_m$ es la fracción de tiempo que se puede utilizar la mejora y $A_m$ es la aceleración de esa mejora en especifico
+$F_m$ es la fracción de tiempo que se puede utilizar la mejora y $A_m$ es la aceleración de esa mejora en específico
 
 #### Métricas para medir el rendimiento
 
@@ -235,7 +235,7 @@ De la ejecución de un benchmark se esperan principalmente dos cosas:
 - **Medir y refinar:** Permite analizar y ajustar los componentes o la configuración de una arquitectura de hardware para maximizar su desempeño.
 - **Prever el desempeño:** Ayuda a determinar qué arquitectura disponible es la óptima para ejecutar una aplicación específica con el rendimiento deseado antes de adquirir o construir el hardware
 
-Los programas utilizados para medir el rendimiento se dividen en cuatro categorias:
+Los programas utilizados para medir el rendimiento se dividen en cuatro categorías:
 
 - **Programas de juguete (*Toys*):** Son programas muy pequeños (de 10 a 100 líneas de código) con un resultado previamente conocido.
 - **Benchmarks Sintéticos:** Son programas artificiales diseñados para imitar el perfil de instrucciones y el uso de operandos promedio de una gran base de aplicaciones reales.
@@ -248,13 +248,13 @@ Para evitar sesgos y asegurar evaluaciones justas entre fabricantes, diversas or
 
 Es una organización financiada por fabricantes de hardware que desarrolla conjuntos de pruebas basados en aplicaciones reales bajo estrictas reglas de ejecución
 
-# Procesadores y Segmentacion
+# Procesadores y Segmentación
 
 Existen dos tipos de microprocesadores:
 
-**RISC (Reduce Instruction Set Computer)**
+**RISC (Reduced Instruction Set Computer)**
 
-Instrucciones de tamaño fijo, con un set reducido. Las instrucciones LD y ST son las unicas que pueden acceder a la memoria. 
+Instrucciones de tamaño fijo, con un set reducido. Las instrucciones LD y ST son las únicas que pueden acceder a la memoria. 
 
 **CISC (Complex Instruction Set Computer)**
 
@@ -264,13 +264,13 @@ Set de instrucciones amplio y complejo, muchas de ellas con posibilidad de acced
 
 RISC-V es una arquitectura de conjunto de instrucciones (ISA) de código abierto regulada por la asociación sin fines de lucro RISC-V International. A diferencia de opciones propietarias tradicionales como ARM, MIPS o x86, su naturaleza abierta permite que cualquier entidad diseñe, fabrique y venda chips basados en ella sin pagar regalías. 
 
-32 registros de proposito general (x0 a x31) → donde se realizan las operaciones aritmetico-logicas
+32 registros de propósito general (x0 a x31) → donde se realizan las operaciones aritmético-lógicas
 
 Registro `x0` cableado a cero constante → read-only → simplifica instrucciones comunes
 
 Memoria direccionable por byte → $2^{30}$ palabras de 32 bits → acceso a palabras completas requiere un desplazamiento de a 4 bytes. 
 
-Filosofia Load-Store → operaciones registro a registro → solo operaciones Data Transfer acceden a memoria
+Filosofía Load-Store → operaciones registro a registro → solo operaciones Data Transfer acceden a memoria
 
 ### Repertorio de Instrucciones de RISC-V (Escalar)
 
@@ -368,14 +368,14 @@ Se utiliza cuando una operación involucra exclusivamente registros. Se conforma
 - **`rs1` (5 bits):** primer registro fuente
 - **`funct3` (3 bits):** campo de código de operación adicional.
 - **`rd` (5 bits):** registro destino donde se guarda el resultado.
-- **`opcode` (7 bits):** especifica la operación básica y el formato.
+- **`opcode` (7 bits):** específica la operación básica y el formato.
 
 #### I-Type
 
 Se utiliza cuando el segundo operando es una constante inmediata o para instrucciones de carga a registros.
 
-- **`inmediate` (12 bits):** almacena el valor de la constante inmediata o para instrucciones de carga.
-- Los demas mantienen la misma estructura que el tipo R
+- **`immediate` (12 bits):** almacena el valor de la constante inmediata o para instrucciones de carga.
+- Los demás mantienen la misma estructura que el tipo R
 
 ![imagen.png](images/imagen%201.png)
 
@@ -383,13 +383,13 @@ Se utiliza cuando el segundo operando es una constante inmediata o para instrucc
 
 Exclusivo para instrucciones que guardan datos en memoria
 
-- **`inmidiate`** se divide en dos secciones dentro de la instrucción: **`immediate[11:5]`** (7 bits) e **`immediate[4:0]` .** Se hace esto para que los campos de los registros fuente (`rs1` y `rs2`) permanezcan exactamente en las posiciones que en las instrucciones tipo R.
+- **`immediate`** se divide en dos secciones dentro de la instrucción: **`immediate[11:5]`** (7 bits) e **`immediate[4:0]` .** Se hace esto para que los campos de los registros fuente (`rs1` y `rs2`) permanezcan exactamente en las posiciones que en las instrucciones tipo R.
 
 ![imagen.png](images/imagen%202.png)
 
-`opcode` → primer campo a decodificar para saber que operacion es
+`opcode` → primer campo a decodificar para saber que operación es
 
-### Ejemplo de traducción (C a maquina)
+### Ejemplo de traducción (C a máquina)
 
 ```c
 A[30] = h + A[30] + 1
@@ -418,7 +418,7 @@ Si miramos los valores decimales de los campos de estas instrucciones en el hard
 
 Sentó las bases de la computación moderna
 
-Describe que las instrucciones y datos se pueden almacernar en la memoria en forma de numeros:
+Describe que las instrucciones y datos se pueden almacenar en la memoria en forma de números:
 
 - **Las instrucciones se representan como números:** Los comandos que el hardware entiende son simplemente colecciones de bits (ceros y unos) interpretados numéricamente
 - **Los programas se almacenan en la memoria:** El código de máquina se aloja en el mismo sistema de memoria física para ser leído o escrito, exactamente igual que si fuesen datos
@@ -428,21 +428,21 @@ Describe que las instrucciones y datos se pueden almacernar en la memoria en for
 ![imagen.png](images/imagen%203.png)
 
 - **Compiler →** Traduce el programa de un lenguaje de alto nivel a lenguaje ensamblador.
-- **Assembler →** convierte el archivo de ensamblador en isntrucciones binarias de lenguaje maquina → genera el archivo objeto.
-- **Linker →** junta los modulos objeto ensamblados y los vincula con rutinas de las bibliotecas → genera un archivo ejecutable
+- **Assembler →** convierte el archivo de ensamblador en instrucciones binarias de lenguaje máquina → genera el archivo objeto.
+- **Linker →** junta los módulos objeto ensamblados y los vincula con rutinas de las bibliotecas → genera un archivo ejecutable
 - **Loader →** rutina que lee el archivo ejecutable desde el almacenamiento secundario y lo transfiere a la memoria principal → reserva el espacio de direcciones, copia las instrucciones y datos, inicializa los registros de la CPU (incluyendo el puntero de pila o *stack pointer*) y salta a la rutina de inicio que finalmente llama a la función principal (**`main`**) del programa
 
 ## ALU
 
 ![imagen.png](images/imagen%204.png)
 
-Representacion binaria → signed y unsigned
+Representación binaria → signed y unsigned
 
 ### Signed
 
-→ bit mas significativo para representar el (-) → representacion sign-magnitude → no usada → no se puede representar los $2^n$ numeros si no la mitad, tenemos 2 0 y es un quilombo sumar o restar o numero positivo y negativo
+→ bit más significativo para representar el (-) → representación sign-magnitude → no usada → no se puede representar los $2^n$ números sino la mitad, tenemos 2 0 y es un quilombo sumar o restar un número positivo y uno negativo
 
-→ complemento de todo el numero +1 → complemento a 2 → ~(N) + 1
+→ complemento de todo el número +1 → complemento a 2 → ~(N) + 1
 
 Aunque existen múltiples formas de representar números enteros (como signo-magnitud o complemento a 1), la industria de la computación adoptó universalmente el **Complemento a 2** para procesar enteros con signo.
 
@@ -454,49 +454,49 @@ Este estándar tiene propiedades matemáticas únicas que simplifican enormement
 
 ## Datapath
 
-Capitulo 4 →  [https://drive.google.com/file/d/1xpU6sqb-uW4pz7W-NJWF8rtHRt1SdwSP/view?usp=drive_link](https://drive.google.com/file/d/1xpU6sqb-uW4pz7W-NJWF8rtHRt1SdwSP/view?usp=drive_link)
+Capítulo 4 →  [https://drive.google.com/file/d/1xpU6sqb-uW4pz7W-NJWF8rtHRt1SdwSP/view?usp=drive_link](https://drive.google.com/file/d/1xpU6sqb-uW4pz7W-NJWF8rtHRt1SdwSP/view?usp=drive_link)
 
-Para todos los tipos de instruccion se realizan los mismo 2 primeros pasos:
+Para todos los tipos de instrucción se realizan los mismos 2 primeros pasos:
 
-- Enviar el PC a la memoria que contiene el codigo y cargar la instruccion desde esa memoria.
-- Leer los registros usando los campos especificos de la instruccion.
+- Enviar el PC a la memoria que contiene el código y cargar la instrucción desde esa memoria.
+- Leer los registros usando los campos específicos de la instrucción.
 
 Luego:
 
-- Todas las instrucciones menos las de salto incodicional usan la ALU:
+- Todas las instrucciones menos las de salto incondicional usan la ALU:
     
-    → instrucciones de ref de memoria → calculo de la direccion
+    → instrucciones de ref de memoria → cálculo de la dirección
     
-    → instrucciones aritmetico-logicas → ejecutar operacion
+    → instrucciones aritmético-lógicas → ejecutar operación
     
-    → salto condicional → comparacion
+    → salto condicional → comparación
     
 - Con el resultado de la ALU:
     
-    → instruccion de ref de memoria → acceder a memoria para r/w
+    → instrucción de ref de memoria → acceder a memoria para r/w
     
-    → instruccion aritmetico logica o carga → guardar el resultado o el leido de la memoria a un registro
+    → instrucción aritmético-lógica o carga → guardar el resultado o el leído de la memoria a un registro
     
-    → instruccion de salto condicional → modificar la dirección de la sig instruccion (segun el resultado de la operacion)
+    → instrucción de salto condicional → modificar la dirección de la sig instrucción (según el resultado de la operación)
     
 
 Las unidades funcionales constan de dos tipos de elementos lógicos:
 
-- **combinacionales →** las salidas dependen unicamente de los valores actuales de las entradas → ALU
-- **elementos de estado (secuenciales) →** guardan el estado de la maquina cuando se reinician → memorias de instrucciones y datos, registros
+- **combinacionales →** las salidas dependen únicamente de los valores actuales de las entradas → ALU
+- **elementos de estado (secuenciales) →** guardan el estado de la máquina cuando se reinician → memorias de instrucciones y datos, registros
     
-    → tienen 2 entradas → valor del dato y el clock (determina cuando se almacena el dato)
+    → tienen 2 entradas → valor del dato y el clock (determina cuándo se almacena el dato)
     
     → 1 salida → valor almacenado en un ciclo anterior
     
 
-**Sincronización por flanco:** cualquier valor almacenado en un elemento logico secuencial se actualiza unicamente en un flanco de reloj.
+**Sincronización por flanco:** cualquier valor almacenado en un elemento lógico secuencial se actualiza únicamente en un flanco de reloj.
 
 ![imagen.png](images/imagen%205.png)
 
 Todas las señales deben propagarse desde el elemento de estado 1, a través de la lógica combinacional hasta el elemento de estado 2 en un único ciclo de reloj. El tiempo necesario para que las señales alcancen el elemento de estado 2 define la duración del ciclo de reloj.
 
-→ Si el elemento de estado no se actualiza en cada ciclo de reloj → agrega una señal de control write → junto con el clock determinan cuando se actualiza el elemento.
+→ Si el elemento de estado no se actualiza en cada ciclo de reloj → agrega una señal de control write → junto con el clock determinan cuándo se actualiza el elemento.
 
 ## Monociclo
 
@@ -504,11 +504,11 @@ Todas las señales deben propagarse desde el elemento de estado 1, a través de 
 
 - **Unidades de memoria →** almacenan y suministran instrucciones/datos a partir de una dirección.
     
-    A diferencia de la memoria de instrucciones, la de datos tiene 2 entradas, una para la direccion a obtener y otra para escribir en caso de instruccion store.
+    A diferencia de la memoria de instrucciones, la de datos tiene 2 entradas, una para la dirección a obtener y otra para escribir en caso de instrucción store.
     
 - **Program Counter (PC) →** almacena la dirección de la instrucción actual.
 - **Sumadores** → 1 encargado de incrementar el PC para que apunte a la dirección de la siguiente instrucción y otro para instrucciones de salto.
-- **Banco de registros** → colección de registros donde cualquiera de ellos puede leerse o escribirse especificando su numero → contiene el estado de los registros de la maquina.
+- **Banco de registros** → colección de registros donde cualquiera de ellos puede leerse o escribirse especificando su número → contiene el estado de los registros de la máquina.
     
     Lectura de registro → se necesita una entrada en el banco donde se especifique el número de registro que se quiere leer, así como una salida del banco donde se presentará el valor correspondiente.
     
@@ -516,48 +516,48 @@ Todas las señales deben propagarse desde el elemento de estado 1, a través de 
     
     ![imagen.png](images/imagen%207.png)
     
-    3 inputs indicadores → Dos de ellas especifican los registros de origen que se van a leer (**`RA`** y **`RB`** o *Read registers*), y la tercera especifica el registro de destino donde se guardará el resultado (**`RW`** o *Write register*)
+    3 inputs indicadores → Dos de ellas especifican los registros de origen que se van a leer (**`RA`** y **`RB`** o *Read registers*), y la tercera específica el registro de destino donde se guardará el resultado (**`RW`** o *Write register*)
     
     2 outputs de datos → Permiten leer y extraer simultáneamente los valores de los dos registros de origen (`busA` y /`busB` o *Read data*) para enviarlos directamente a la ALU sin perder ciclos adicionales.
     
     Las entradas de los identificadores de registro son de cinco
     bits para especificar uno de los 32 ($32 = 2^5$) registros, mientras que los buses de la entrada y las dos salidas de datos son de 32 bits.
     
-- **ALU →** Unidad Aritmetica Logica utilizada para el calculo en instrucciones y direcciones → entradas y salida de 32 bits + 1 bit zero
+- **ALU →** Unidad Aritmética Lógica utilizada para el cálculo en instrucciones y direcciones → entradas y salida de 32 bits + 1 bit zero
 
 De este diagrama simplificado falta considerar:
 
 - Ciertos componentes tienen entradas distintas dependiendo de la instrucción en ejecución:
-    - PC: su entrada puede ser del primer sumador (instruccion anterior + 4) o del segundo (instrucción de salto → salida del primero + resultado del comparador)
+    - PC: su entrada puede ser del primer sumador (instrucción anterior + 4) o del segundo (instrucción de salto → salida del primero + resultado del comparador)
     - Dato escrito en el banco de registro: puede venir de la salida de la ALU o de la memoria de datos.
     
-    → Para esto de agregan multiplexores que a partir de señales de control se elige la entrada correcta.
+    → Para esto se agregan multiplexores que a partir de señales de control se elige la entrada correcta.
     
 - Varias unidades se deben controlar dependiendo del tipo de instrucción:
     - La memoria de datos debe leer en un load y escribir en un store.
-    - Se escribe en el banco de registros ante una instrucción load y una aritmetico-logica.
+    - Se escribe en el banco de registros ante una instrucción load y una aritmético-lógica.
     - La ALU debe realizar una de las tantas operaciones que puede hacer.
     
-    → Teniendo como entrada la instrucción (es especial, los campos de las mismas), una nueva unidad de control para todas las demás unidades del datapath
+    → Teniendo como entrada la instrucción (en especial, los campos de las mismas), una nueva unidad de control para todas las demás unidades del datapath
     
 
 ![imagen.png](images/imagen%208.png)
 
 En este primer diseño, cada instrucción inicia su ejecución en un flanco de reloj y completa la ejecución en el siguiente flanco de reloj.
 
-→ Se agrega al diseño una unidad de extension → de 16 bits a un valor signado de 32bits
+→ Se agrega al diseño una unidad de extensión → de 16 bits a un valor signado de 32 bits
 
-### Ejecucion de instrucciones de salto condicional
+### Ejecución de instrucciones de salto condicional
 
 Para instrucciones de salto condicional (branch):
 
-- La direccion de la siguiente instruccion en orden secuencual es la que se utiliza como base de calculo de la direccion de destino → usa la salida del sumador que hace PC + 4
+- La dirección de la siguiente instrucción en orden secuencial es la que se utiliza como base de cálculo de la dirección de destino → usa la salida del sumador que hace PC + 4
 - En RISC-V, el valor inmediato en las instrucciones de salto condicional (formato Tipo B o *Branch*) e incondicional (formato Tipo J como **`jal`**) se desplaza **solo 1 bit a la izquierda** (lo que equivale a multiplicar por 2). RISC-V fue diseñada para ser una arquitectura modular y moderna que soporta la extensión de instrucciones comprimidas de **16 bits (2 bytes)**. Debido a que las instrucciones pueden medir 2 o 4 bytes, el contador de programa (PC) debe ser capaz de saltar a direcciones alineadas a **media palabra** (múltiplos de 2).
 
 Además de calcular la dirección destino del salto, también se debe determinar
 si la siguiente instrucción a ejecutar es la que sigue secuencialmente o la situada en la dirección destino del salto:
 
-→ salto tomado → operandos son iguales, la direccion calculada se carga en el PC
+→ salto tomado → operandos son iguales, la dirección calculada se carga en el PC
 
 → salto no tomado → operandos diferentes → PC incrementado +4 
 
@@ -590,16 +590,16 @@ Esta tabla muestra los valores de las señales de control para las instrucciones
 
 #### Deficiencia del monociclo
 
-→ La instruccion mas lenta (tipicamente la de carga) determina el ciclo del clock → las instrucciones mas cortas desaprovechan una enorme cantidad de tiempo esperando a que termine el ciclo.
+→ La instrucción más lenta (típicamente la de carga) determina el ciclo del clock → las instrucciones más cortas desaprovechan una enorme cantidad de tiempo esperando a que termine el ciclo.
 
-→ Dado a que todo debe resolverse en un ciclo, ningun recurso de hardware (ALU, memoria), puede usarse mas de una vez por instruccion → separa la memoria en dos (instrucciones y datos), duplicar sumadores para el PC → mayor area.
+→ Dado que todo debe resolverse en un ciclo, ningún recurso de hardware (ALU, memoria), puede usarse más de una vez por instrucción → separa la memoria en dos (instrucciones y datos), duplicar sumadores para el PC → mayor area.
 
 ## Multiciclo
 
 - Divide el combinacional en varias etapas → permite aumentar la frecuencia ya que lo que tarda en viajar el dato  por el combinacional (path delay) se acorta
-- Podemos tener una sola ALU y una sola memoria si en cada ciclo se utiliza para algo distinto → en monociclo teniamos  una para las instrucciuones, otra para calcular los saltos condicioneales y la que calculo la siguiente instruccion de PC.
+- Podemos tener una sola ALU y una sola memoria si en cada ciclo se utiliza para algo distinto → en monociclo teníamos  una para las instrucciones, otra para calcular los saltos condicionales y la que calcula la siguiente instrucción de PC.
 - Aparecen secuenciales entre combinacionales → guardan el estado entre cada ciclo → registros invisibles
-- Se busca que cada etapa sea pareja con las demas → misma cantidad de combinacionales o path delay
+- Se busca que cada etapa sea pareja con las demás → misma cantidad de combinacionales o path delay
 
 ![imagen.png](images/imagen%2011.png)
 
@@ -612,7 +612,7 @@ Registros intermedios de almacenamiento cuya carga está sincronizada con el clo
 
 ### Monociclo vs Multiciclo
 
-- La frecuencia del clock en multiciclo es mas alta que en monociclo → el ciclo del clock debe ser lo suficientemente largo para cubrir la etapa mas lenta, no la instruccion completa.
+- La frecuencia del clock en multiciclo es más alta que en monociclo → el ciclo del clock debe ser lo suficientemente largo para cubrir la etapa más lenta, no la instrucción completa.
 - Monociclo tiene un CPI = 1 mientras que el multiciclo tiene un CPI promedio entre 3 y 5 → depende de las instrucciones.
 - El rendimiento global de la máquina multiciclo es superior y mucho más eficiente frente a la inclusión de instrucciones complejas (como la división o multiplicaciones en punto flotante) que arruinarían por completo el período del reloj de una máquina monociclo.
 
@@ -622,9 +622,9 @@ la condición en la que una puerta lógica, típicamente un inversor, tiene su s
 Retardo F04: Es el retardo de propagación de una compuerta lógica con una carga que es el
 cuádruple de la suya propia. Se utiliza como una medida del retardo de una etapa en el pipeline y es independiente de la tecnología.
 
-### Etapas de ejecucion
+### Etapas de ejecución
 
-La ejecucion de una instruccion de divide secuencialmente en etapas que duran 1 ciclo de reloj c/u
+La ejecución de una instrucción se divide secuencialmente en etapas que duran 1 ciclo de reloj c/u
 
 **Búsqueda de instrucción (Instruction Fetch):** En esta etapa, se busca la instrucción en la
 memoria. Esto se representa con la instrucción: IR ← Memoria(PC) donde PC es el contador de
@@ -672,12 +672,12 @@ Es una técnica de implementación de microprocesadores mediante la cual se sola
 
 Esto mejora el throughput → cantidad de instrucciones ejecutadas por ciclo de reloj.
 
-→ Toma ventaja del paralelismo existente entre las acciones necesarias para ejecutar una instruccion.
+→ Toma ventaja del paralelismo existente entre las acciones necesarias para ejecutar una instrucción.
 
-→ El ciclo esta determinado por el tiempo requerido de la etapa mas lenta. El tiempo por instruccion de un procesador pipelineado es;
+→ El ciclo está determinado por el tiempo requerido de la etapa más lenta. El tiempo por instrucción de un procesador pipelineado es:
 
 $$
-\frac{Tiempo\ por\ instruccion}{Numero\ de\ etapas}
+\frac{Tiempo\ por\ instrucción}{Número\ de\ etapas}
 $$
 
 A partir de cierta cantidad de etapas, el rendimiento comienza a decrecer debido a:
@@ -694,9 +694,9 @@ Para implementarlo:
 
 #### Consideraciones
 
-→ Las instrucciones LOAD constan de las 5 fases de ejecución mientras que las tipo R solo de 4 (no requieren acceder a memoria→ MEM) → para evitar inconsistencias, se añade una etapa adicional MEM en la cual no se realiza ninguna operacion pero garantiza que todas las isntrucciones pasen por el mismo numero de etapas.
+→ Las instrucciones LOAD constan de las 5 fases de ejecución mientras que las tipo R solo de 4 (no requieren acceder a memoria→ MEM) → para evitar inconsistencias, se añade una etapa adicional MEM en la cual no se realiza ninguna operación pero garantiza que todas las instrucciones pasen por el mismo número de etapas.
 
-→ La lectura de registros ID ocurre en un flanco de reloj, mientras la escritura WB ocurre en otro flanco → se desperdicioa medio ciclo ya que ambas oepraciones no pueden superponerse
+→ La lectura de registros ID ocurre en un flanco de reloj, mientras la escritura WB ocurre en otro flanco → se desperdicia medio ciclo ya que ambas operaciones no pueden superponerse
 
 ![imagen.png](images/imagen%2016.png)
 
@@ -705,7 +705,7 @@ Para implementarlo:
 Se divide el banco de registros en dos partes lógicas: la lectura de registros durante la etapa ID y la escritura en registro durante la etapa WB. Para representar este doble uso, en la etapa ID
 se dibuja la mitad izquierda del banco de registros sin sombrear y con líneas discontinuas, ya que no está siendo escrito, mientras que en la etapa WB es la mitad derecha del banco de registros la que se dibuja sin sombrear y con líneas discontinuas, ya que no está siendo leído.
 
-Para separar fisicamenta estas etapas y asegurar que las instrucciones no interfieran entre si en el mismo ciclo de reloj, se colocan registros de segmentacion en las lineas divisorias. Conservan los datos y las señales de control de una instruccion apra que la siguiente etapa pueda utilizarlos en le proximo ciclo de clock.
+Para separar físicamente estas etapas y asegurar que las instrucciones no interfieran entre sí en el mismo ciclo de reloj, se colocan registros de segmentación en las líneas divisorias. Conservan los datos y las señales de control de una instrucción para que la siguiente etapa pueda utilizarlos en el próximo ciclo de clock.
 
 ![imagen.png](images/imagen%2018.png)
 
@@ -720,11 +720,11 @@ Realizar el control significa activar las nueve líneas de control a estos valor
 
 ### Pipeline hazards
 
-Situaciones físicas en las que als instrucciones consecuticas en el pipeline no puede ejecutarse en el siguiente ciclo de reloj
+Situaciones físicas en las que las instrucciones consecutivas en el pipeline no pueden ejecutarse en el siguiente ciclo de reloj
 
 #### Structural Hazards
 
-Ocurre cuando el hardware no puede soportar la combinaciond e isntrucciones que se pretende ejecutar simultaneamente en el mismo ciclo de reloj porque compiten por el mismo recurso fisico.
+Ocurre cuando el hardware no puede soportar la combinación de instrucciones que se pretende ejecutar simultáneamente en el mismo ciclo de reloj porque compiten por el mismo recurso físico.
 
 Si el procesador utiliza un único banco de memoria unificado para instrucciones y datos, la etapa de búsqueda de instrucción (IF) de una instrucción posterior entrará en conflicto físico con el acceso a datos (MEM) de una instrucción de carga (load) o almacenamiento (store) previa.
 
@@ -734,13 +734,13 @@ Se genera si el puerto de escritura en el banco de registros (**`WB`**) es reque
 
 ![imagen.png](images/imagen%2021.png)
 
-**Solucion de riesgos estructurales**
+**Solución de riesgos estructurales**
 
 Duplicar físicamente los recursos de hardware:
 
 - Para la memoria → Se utiliza una memoria para las instrucciones y otra para los datos, de manera que se puedan leer datos e instrucciones al mismo tiempo.
 - Para los registros → Se emplean dos puertos de lectura en el banco de registros para poder leer dos registros simultáneamente o se divide el ciclo de reloj en dos: medio ciclo para la escritura y medio ciclo para la lectura, de forma que se pueda leer y escribir un registro en el mismo ciclo.
-- Para la ALU → se agrega sumadores
+- Para la ALU → se agregan sumadores
 
 #### **Data Hazards**
 
@@ -766,7 +766,7 @@ Los valores que se leen del registro $2 no representarían el resultado de la in
 
 **Soluciones para RAW**
 
-- Cuando la primera instruccion es tipo R (ejemplo):
+- Cuando la primera instrucción es tipo R (ejemplo):
     
     Forwarding → Consiste en no esperar a que la instrucción previa escriba físicamente el banco de registros. En cuanto la ALU calcula el resultado en la etapa **`EX`**, este dato es enviado a través de multiplexores y rutas físicas de realimentación directamente a las entradas de la ALU para la instrucción dependiente en el ciclo siguiente.
     
@@ -809,7 +809,7 @@ and (MEM/WB.RegisterRd = ID/EX.RegisterRs2)) ForwardB = 01
 
 Si la instrucción en WB escribe un registro, no es el registro cero, y su destino coincide con el operando que la ALU necesita actualmente (RegisterRs1), se activa ForwardA = 01. **ForwardA = 01** configura el multiplexor de la ALU para tomar el dato desde el registro de acoplamiento **`MEM/WB`** (donde ya se encuentra el dato cargado de memoria o el resultado de una instrucción ALU anterior)
 
-- Cuando la priemra instruccion es de tipo I
+- Cuando la primera instrucción es de tipo I
     
     El dato no está disponible físicamente hasta el final de la etapa de acceso a memoria (MEM), que es demasiado tarde para la etapa EX de la instrucción inmediata posterior. Esto no puede resolverse solo con forwarding y requiere que una Unidad de Detección de Riesgos inserte obligatoriamente un ciclo de burbuja (stall) en el pipeline.
     
@@ -819,7 +819,7 @@ Si la instrucción en WB escribe un registro, no es el registro cero, y su desti
     
     ![imagen.png](images/imagen%2026.png)
     
-    Si se hace calculo adelantado de direccion (ALU para salto) y se utiliza una sireccion que se esta calculando en una etapa anterior, se puede considerar llevar el Forwarding Unit a una etapa antes.
+    Si se hace cálculo adelantado de dirección (ALU para salto) y se utiliza una dirección que se está calculando en una etapa anterior, se puede considerar llevar el Forwarding Unit a una etapa antes.
     
 - **Solución por Software (Reordenación de Código):** El compilador puede reordenar instrucciones independientes situando otras operaciones útiles entre el **`load`** y la instrucción que utiliza su registro, evitando así que el procesador se detenga.
 
@@ -860,13 +860,13 @@ Si un salto es tomado (*taken*), las instrucciones que se buscaron secuencialmen
 
 ### Excepciones en RISC V
 
-**Excepcion:**  cambio inesperado en el flujo normal de ejecucion de las instrucciones, sin importar si la causa es interna o externa. Son sincronas (en sincronia con la ejecucion de instrucciones).
+**Excepción:**  cambio inesperado en el flujo normal de ejecución de las instrucciones, sin importar si la causa es interna o externa. Son síncronas (en sincronía con la ejecución de instrucciones).
 
-**Interrupcion:** es un tipo especifico de excepcion que es de origen externo al procesador. Son asincronas (ocurren independientemente de la ejecucion del programa)
+**Interrupción:** es un tipo específico de excepción que es de origen externo al procesador. Son asíncronas (ocurren independientemente de la ejecución del programa)
 
-Las excepciones invocan servicios del SO del programa de usuario: Se anulan las escrituras de la instruccion que causo la excepcion y se guardan las instrucciones siguientes hasta la etapa MEM. Luego se llama a la rutina de gestion de excepciones. Se requiere que todas las instrucciones anteriores a la excepcion se completen correctamente, la instruccion que produjo la excepcion debe ser tratada y las instrucciones siguientes deben considerarse como si no hubieran comenzado. 
+Las excepciones invocan servicios del SO del programa de usuario: Se anulan las escrituras de la instrucción que causó la excepción y se guardan las instrucciones siguientes hasta la etapa MEM. Luego se llama a la rutina de gestión de excepciones. Se requiere que todas las instrucciones anteriores a la excepción se completen correctamente, la instrucción que produjo la excepción debe ser tratada y las instrucciones siguientes deben considerarse como si no hubieran comenzado. 
 
-Las expciones causadas en cada estapa del pipeline son:
+Las excepciones causadas en cada etapa del pipeline son:
 
 ![imagen.png](images/imagen%2029.png)
 
@@ -890,21 +890,21 @@ excepciones no existirían en el estado recuperado, lo cual podría generar inco
 
 #### Excepciones precisas
 
-Son excepciones que, ante cualquier fallo, el hardware garantiza que **todas las instrucciones previas a la que causo la excepcion se completaron de forma correcta**, mientras que la **instruccion causante y las posteriores se descartan por completo** y se pueden reiniciar desde el principio como si nunca hubieran comenzado.
+Son excepciones que, ante cualquier fallo, el hardware garantiza que **todas las instrucciones previas a la que causó la excepción se completaron de forma correcta**, mientras que la **instrucción causante y las posteriores se descartan por completo** y se pueden reiniciar desde el principio como si nunca hubieran comenzado.
 
 En un pipeline, al estar ejecutándose múltiples instrucciones a la vez, las excepciones pueden ocurrir **fuera del orden del programa**. Por ejemplo, una instrucción muy nueva en la etapa de búsqueda (**`IF`**) puede generar un fallo de página antes de que una instrucción más vieja en la etapa de ejecución (**`EX`**) cause un desbordamiento aritmético.
 
 Si el procesador atendiera la excepción de la instrucción nueva de inmediato, rompería la secuencialidad, creando **excepciones imprecisas.**
 
-Para implementar excepciones precisas sin perder rendimiento, el hardware utiliza un **vector de estado de excepciones** asociado individualmente a cada instrucción: a medida que la isntruccion avanza por las etapas del pipeline, si genera un fallo, el hardware activa un bit especifico en su vector de estado personal. Una vez que se marca un bit de excepcion en el vecto, se apagan todas las señales de control de esa isntruccion que puedan alterar los registros o la memoria fisica. El vector de estado solo se verifica cuando la instruccion llega al final de su camino, especificamente al inicio de la etapa de escritura **`WB`**. Al evaluarse en esta etapa final, las excepciones se atienden exactamente en el mismo orden cronologico en que ocurririan en un procesador no segmentado.
+Para implementar excepciones precisas sin perder rendimiento, el hardware utiliza un **vector de estado de excepciones** asociado individualmente a cada instrucción: a medida que la instrucción avanza por las etapas del pipeline, si genera un fallo, el hardware activa un bit específico en su vector de estado personal. Una vez que se marca un bit de excepción en el vector, se apagan todas las señales de control de esa instrucción que puedan alterar los registros o la memoria física. El vector de estado solo se verifica cuando la instrucción llega al final de su camino, específicamente al inicio de la etapa de escritura **`WB`**. Al evaluarse en esta etapa final, las excepciones se atienden exactamente en el mismo orden cronológico en que ocurrirían en un procesador no segmentado.
 
 #### FP pipeline
 
-Las operaciones punto flotante no se pueden completar en un solo ciclo de reloj dentro de la etapa de ejecucion **`EX`** . Por ello, la etapa de ejecucion se divide en multiples subunidades funcionales especializadas que operan en paralelo.
+Las operaciones punto flotante no se pueden completar en un solo ciclo de reloj dentro de la etapa de ejecución **`EX`** . Por ello, la etapa de ejecución se divide en múltiples subunidades funcionales especializadas que operan en paralelo.
 
 ![imagen.png](images/imagen%2030.png)
 
-Físicamente, el procesador suele contar con una unidad entera, un sumador de FP, un multiplicador de FP y un divisor de FP. Los módulos como el sumador o el multiplicador de FP están divididos internamente en varias etapas de pipeline (por ejemplo, 3 o 4 etapas). Esto les permite tener un intervalo de iniciación de 1 ciclo de reloj; es decir, pueden recibir una instrucción de FP nueva en cada ciclo sin esperar a que la anterior termine. Sin embargo, otros modulos como el divisor no se suelen segmentar. Tienen latencias altísimas (de 24 a 36 ciclos) y bloquean la unidad por completo (su intervalo de iniciación es igual a su latencia), obligando a cualquier otra división de FP a esperar hasta que la actual finalice.
+Físicamente, el procesador suele contar con una unidad entera, un sumador de FP, un multiplicador de FP y un divisor de FP. Los módulos como el sumador o el multiplicador de FP están divididos internamente en varias etapas de pipeline (por ejemplo, 3 o 4 etapas). Esto les permite tener un intervalo de iniciación de 1 ciclo de reloj; es decir, pueden recibir una instrucción de FP nueva en cada ciclo sin esperar a que la anterior termine. Sin embargo, otros módulos como el divisor no se suelen segmentar. Tienen latencias altísimas (de 24 a 36 ciclos) y bloquean la unidad por completo (su intervalo de iniciación es igual a su latencia), obligando a cualquier otra división de FP a esperar hasta que la actual finalice.
 
 El hecho de tener instrucciones de FP en vuelo con duraciones tan dispares rompe la sincronización clásica del pipeline, introduciendo problemas complejos:
 
@@ -914,11 +914,11 @@ El hecho de tener instrucciones de FP en vuelo con duraciones tan dispares rompe
 
 ![imagen.png](images/imagen%2031.png)
 
-# Paralelismo a nivel de instruccion (ILP)
+# Paralelismo a nivel de instrucción (ILP)
 
-Tecnica que consiste en explotar paralelismo entre instrucciones proximas en la secuencia. 
+Técnica que consiste en explotar paralelismo entre instrucciones próximas en la secuencia. 
 
-**Bloque basico:** secuencia de codigo sin saltos → un solo punto de entrada y salida → bloque pequeño → instrucciones con fuerte dependencia.
+**Bloque básico:** secuencia de código sin saltos → un solo punto de entrada y salida → bloque pequeño → instrucciones con fuerte dependencia.
 
 ### Dependencia
 
@@ -947,15 +947,15 @@ Determinan el flujo de ejecución del programa. Ocurren cuando la ejecución de 
 
 - *Ejemplo:* Las instrucciones dentro de un bloque `if` dependen de la condición evaluada en la cabecera del condicional.
 
-Los mecanismos de ejecucion deben presercar el orden del programa → mismo resultado que en la ejecucion secuencial.
+Los mecanismos de ejecución deben preservar el orden del programa → mismo resultado que en la ejecución secuencial.
 
-### Planificacion estatica
+### Planificación estática
 
 Se aplican en tiempo de compilación (las realiza el compilador). 
 
 → Ventaja: no agregan consumo ni complejidad de hardware. 
 
-→ Desventaja: suelen ser menos eficientes porqueno pueden adaptarse a lo que ocurre en runtime (por ejemplo, un fallo de caché en un momento específico).
+→ Desventaja: suelen ser menos eficientes porque no pueden adaptarse a lo que ocurre en runtime (por ejemplo, un fallo de caché en un momento específico).
 
 Ejemplo de for implementado en pipeline FP normal:
 
@@ -987,15 +987,15 @@ Ejemplo de for implementado en pipeline FP normal:
 
 ---
 
-### Planificacion dinamica
+### Planificación dinámica
 
-Son implementadas en hardware → no en tiempo de compilacion.
+Son implementadas en hardware → no en tiempo de compilación.
 
-Consisten en la ejecucion fuera de orden → ejecutar instrucciones independientes apenas estan listas.
+Consisten en la ejecución fuera de orden → ejecutar instrucciones independientes apenas están listas.
 
-→ ejecucion fuera de orden → instrucciones terminan fuera de orden → no tengo excepciones precisas → problema*
+→ ejecución fuera de orden → instrucciones terminan fuera de orden → no tengo excepciones precisas → problema*
 
-Los riesgos estructurales se verifican al decodificar → las instrucciones comienzan cuando sus operandos estan disponibles.
+Los riesgos estructurales se verifican al decodificar → las instrucciones comienzan cuando sus operandos están disponibles.
 
 - A diferencia de la planificación estática (el compilador lanza instrucciones sin poder resolver en ejecución todas las dependencias), en la dinámica el procesador modifica la secuencia en tiempo de ejecución, resolviendo dependencias sin cambiar el resultado final. Las instrucciones se ejecutan según la disponibilidad de datos y recursos, aprovechando el ILP cuando no hay dependencias.
 
@@ -1068,11 +1068,11 @@ Toda instrucción en este esquema se procesa a través de tres fases estrictas:
 - El CDB se convierte en el principal cuello de botella de rendimiento.
 - Provoca **excepciones imprecisas** porque las instrucciones pueden finalizar desordenadamente respecto al programa.
 
-planificacion estatica → se predicen saltos no tomados para abaratar → 1/6 de los saltos no se toman
+planificación estática → se predicen saltos no tomados para abaratar → 1/6 de los saltos no se toman
 
-### Prediccion
+### Predicción
 
-**Penalizacion de saltos**
+**Penalización de saltos**
 
 La **penalización de saltos** (o *branch penalty*) es la pérdida de rendimiento (medida en ciclos de reloj o paradas) que sufre un procesador segmentado cuando se ejecutan instrucciones de salto, debido a que el flujo de instrucciones no es el que el pipeline esperaba (riesgo de control).
 
@@ -1097,39 +1097,39 @@ La BTAC (Branch Target Address Cache) es una memoria caché especial diseñada p
 
 ![imagen.png](images/imagen%2041.png)
 
-#### Prediccion fija
+#### Predicción fija
 
-→ *Always taken:* mayor numero de aciertos de prediccion a mayor costo de hardware (Necesita almacenar la direccion de destino del salto).
+→ *Always taken:* mayor número de aciertos de predicción a mayor costo de hardware (Necesita almacenar la dirección de destino del salto).
 
-→ *Always not taken:* menor numero de acietos a menor costo de hardware.
+→ *Always not taken:* menor número de aciertos a menor costo de hardware.
 
-#### Prediccion basada en la direccion del salto
+#### Predicción basada en la dirección del salto
 
-→ *Saltos hacia atras = taken*: la mayoria de los saltos hacia atras corresponden a bucles.
+→ *Saltos hacia atrás = taken*: la mayoría de los saltos hacia atrás corresponden a bucles.
 
-→ *Saltos hacia adelante = not taken:* la mayoria de los saltos hacia adelante corresponden a IF-THEN-ELSE
+→ *Saltos hacia adelante = not taken:* la mayoría de los saltos hacia adelante corresponden a IF-THEN-ELSE
 
 - Estas predicciones tienen mal comportamiento en programas con pocos bucles y muchos IF-THEN-ELSE
 
-#### Prediccion basada en el OPCODE de la instruccion de salto
+#### Predicción basada en el OPCODE de la instrucción de salto
 
 El salto es tomado para ciertos opcodes 
 
-#### Prediccion dirigida por el compilador
+#### Predicción dirigida por el compilador
 
-→ segun el tipo de construccion de control
+→ según el tipo de construcción de control
 
-→ basada en profiling → predice segun el comportamiento de esa instruccion en ejecuciones previas
+→ basada en profiling → predice según el comportamiento de esa instrucción en ejecuciones previas
 
 → especificado por el programador → indica si el salto debe ser tomado o no
 
 ![imagen.png](images/imagen%2042.png)
 
-### Predictores dinamicos
+### Predictores dinámicos
 
-Se realizan observando el coportamiento de las instrucciones de salto en las ultimas ejecuciones (Historia local). Pueden ser predictores de un bit, 2 o 3.
+Se realizan observando el comportamiento de las instrucciones de salto en las últimas ejecuciones (Historia local). Pueden ser predictores de un bit, 2 o 3.
 
-(predicciones locales → sobre una instruccion → historia de ese salto → loops) ≠ globales (historia de varios saltos → if/else)
+(predicciones locales → sobre una instrucción → historia de ese salto → loops) ≠ globales (historia de varios saltos → if/else)
 
 ![imagen.png](images/imagen%2043.png)
 
@@ -1145,7 +1145,7 @@ Otras formas de gestionar la historia:
 
 - Patrones repetitivos
 
-El comportamiento de los ultimos saltos afecta a la prediccion actual. Almacenar el comportamiento de los ultimos n saltos y usarlos en la seleccion de la prediccion.
+El comportamiento de los últimos saltos afecta a la predicción actual. Almacenar el comportamiento de los últimos n saltos y usarlos en la selección de la predicción.
 
 ![imagen.png](images/imagen%2047.png)
 
@@ -1198,7 +1198,7 @@ Para minimizar la penalización en ciclos de reloj provocada por el fallo:
 
 - **Prebúsqueda (*prefetching*):** Algunos procesadores no solo guardan la dirección del camino alternativo, sino que **prebuscan y almacenan las primeras instrucciones** de ese camino en buffers. De este modo, al detectar el fallo, las instrucciones correctas están inmediatamente disponibles sin esperar a leerlas desde la memoria o caché de instrucciones.
 
-#### Ejecucion condicional de instrucciones
+#### Ejecución condicional de instrucciones
 
 La **ejecución condicional** (o **ejecución predicada**) es una alternativa de diseño orientada a eliminar o reducir la cantidad de saltos condicionales (*branches*) en el flujo de un programa, convirtiendo dependencias de control en dependencias de datos.
 
@@ -1219,7 +1219,7 @@ En lugar de bifurcar el Contador de Programa (`PC`) mediante un salto, una instr
     - **Consumo de ciclos en vano:** Las instrucciones cuya condición resulta ser falsa deben ser leídas y evaluadas igualmente en el cauce antes de descartarse, consumiendo ciclos de reloj y recursos de procesamiento.
     - **Mayor complejidad en el formato de instrucción:** Se requieren bits adicionales en la codificación de la instrucción para especificar el registro de predicado o la condición a probar.
 
-#### Ejecucion con predicados
+#### Ejecución con predicados
 
 La **ejecución con predicados** (o **ejecución predicada**) es una técnica para reducir o eliminar las instrucciones de salto condicional en un programa, convirtiendo dependencias de control en dependencias de datos.
 
@@ -1247,7 +1247,7 @@ En lugar de generar múltiples saltos condicionales (`Blt`, `Bgt`, `jump`), el c
     - **Consumo de tiempo y recursos:** Las instrucciones cuyo predicado resulta ser falso se leen y procesan en el cauce de todos modos antes de anularse.
     - **Complejidad:** La instrucción es más compleja al tener que incluir el predicado además de los operandos y el opcode.
 
-### Especulacion
+### Especulación
 
 La predicción de saltos introduce especulación: habrá instrucciones cuya ejecución depende de
 una predicción. Existen entonces dos tipos de instrucciones en el procesador:
@@ -1255,59 +1255,59 @@ una predicción. Existen entonces dos tipos de instrucciones en el procesador:
 - Independientes: no dependen del salto y se ejecutan siempre de manera normal.
 - Dependientes: su ejecución depende del acierto o fallo en la predicción del salto.
 
-ROC → agrega a las etapas de Tomasulo un ¨commit¨ → buffer intermedio que reordena las isntrucciones para la escritura de los datos a memoria ordenada → resuelve la salida fuera de orden
+ROB → agrega a las etapas de Tomasulo un "commit" → buffer intermedio que reordena las instrucciones para la escritura de los datos a memoria ordenada → resuelve la salida fuera de orden
 
 ![imagen.png](images/imagen%2055.png)
 
-# Lanzamiento Multiple y Multithreading
-La mejora del performance llego a un limite mediante ILP -> se debe recurrir a otras formas de paralelismo.
-* ILP -> ejecucion en un unico hilo -> CPI minimo de 1
-* TLP, Arquitectura superescalares, Ejec. fuera de orden -> ejecucion paralela -> permite CPI < 1
+# Lanzamiento Múltiple y Multithreading
+La mejora de la performance llegó a un límite mediante ILP -> se debe recurrir a otras formas de paralelismo.
+* ILP -> ejecución en un único hilo -> CPI mínimo de 1
+* TLP, Arquitectura superescalares, Ejec. fuera de orden -> ejecución paralela -> permite CPI < 1
 
-## Lanzamiento multiple de instrucciones
-Arquitecturas avanzadas para lancar mas instrucciones por ciclo
+## Lanzamiento múltiple de instrucciones
+Arquitecturas avanzadas para lanzar más instrucciones por ciclo
 
 Estas arquitecturas requieren:
--> Mas hardware
--> Mantener coherencia entre las jerarquias de memoria
+-> Más hardware
+-> Mantener coherencia entre las jerarquías de memoria
 ### **Procesadores superescalares**
 
-Microarquitecturas escalares que incorporan multiples vias de emision (multipl issue) para sostener la ejecucion paralela de instrucciones independientes. Duplican o multiplican parte de sus unidades funcionales para permitir emitir mas de una instruccion por ciclo.
+Microarquitecturas escalares que incorporan múltiples vías de emisión (múltiple issue) para sostener la ejecución paralela de instrucciones independientes. Duplican o multiplican parte de sus unidades funcionales para permitir emitir más de una instrucción por ciclo.
 Lanza de 1 a 8 instrucciones por ciclo. Existen dos tipos:
--  **Con planificacion estatica** -> ejecuta instrucciones en orden. Se planifica en tiempo de compilacion.
--  **Con planificacion dinamica** -> ejecuta instrucciones fuera de orden, aumentando el paralelismo en ejecucion puede ser:
-	-  *Sin especulacion* -> el hardware decide en tiempo de ejecucion que isntrucciones emitir pero sin especular que camino tomar en los saltos.
-	- *Con especulacion* -> agrega tecticas de ejecucion especulatica para aprovechar mas paralelismo. Suele ser mas teorico que real ya que eleva la complejidad del hardware.
+-  **Con planificación estática** -> ejecuta instrucciones en orden. Se planifica en tiempo de compilación.
+-  **Con planificación dinámica** -> ejecuta instrucciones fuera de orden, aumentando el paralelismo en ejecución puede ser:
+	-  *Sin especulación* -> el hardware decide en tiempo de ejecución que instrucciones emitir pero sin especular que camino tomar en los saltos.
+	- *Con especulación* -> agrega técnicas de ejecución especulativa para aprovechar más paralelismo. Suele ser más teórico que real ya que eleva la complejidad del hardware.
 
--> Grado del procesador -> indica la cantidad de instrucciones ejecutandose al mismo tiempo
--> Vias -> indica la cantidad de pipelines en paralelo
+-> Grado del procesador -> indica la cantidad de instrucciones ejecutándose al mismo tiempo
+-> Vías -> indica la cantidad de pipelines en paralelo
 
-Si tenemos un procesador superescalar de grado 2 y 2 vias, entonces, en teoria tendremos un CPI = 0.5 (2 instrucciones por ciclo). En la practica no se llega a este valor por las instrucciones de salto, LOADs y dependencias LDE. Ademas, el procesador superescalar genera presion adicional sobre la memoria y un incremento en los riesgos de ejecucion, por los cuales se suele reducir el acceso a la memoria a una sola instruccion LOAS por ciclo.
+Si tenemos un procesador superescalar de grado 2 y 2 vías, entonces, en teoría tendremos un CPI = 0.5 (2 instrucciones por ciclo). En la práctica no se llega a este valor por las instrucciones de salto, LOADs y dependencias LDE. Además, el procesador superescalar genera presión adicional sobre la memoria y un incremento en los riesgos de ejecución, por los cuales se suele reducir el acceso a la memoria a una sola instrucción LOAD por ciclo.
 
 Se alcanza un CPI de 0.5 solo si el programa contiene un 50 % de instrucciones FP y un 50 % de instrucciones enteras.
-### Superescalar simple (estatico)
+### Superescalar simple (estático)
 Busca, decodifica y emite varias instrucciones por ciclo de reloj manteniendo el estricto orden original del programa.
 ![](images/Pasted%20image%2020261006182245.png)
 
-- Busquedad y decodificacion de instrucciones simultaneamente -> la decodificacion se realiza en secuencia y la segunda instruccion solo se lanza si la primera ya fue lanzada
-- Para evitar colisiones en la ejecución, suele seguir reglas fijas, como permitir lanzar en paralelo una instrucción entera junto con una de punto flotante. Esto requiere multiplicar o duplicar recursos clave como unidades funcionales segmentadas, buses internos y puertos en el banco de registros (para permitir la lectua simultanea de registros)
+- Búsqueda y decodificación de instrucciones simultáneamente -> la decodificación se realiza en secuencia y la segunda instrucción solo se lanza si la primera ya fue lanzada
+- Para evitar colisiones en la ejecución, suele seguir reglas fijas, como permitir lanzar en paralelo una instrucción entera junto con una de punto flotante. Esto requiere multiplicar o duplicar recursos clave como unidades funcionales segmentadas, buses internos y puertos en el banco de registros (para permitir la lectura simultánea de registros)
 - Sin embargo, existen posibles conflictos específicos con instrucciones de carga (load), almacenamiento (store), o movimiento de datos entre registros de punto flotante (FP). 
 - El procesador incluye un detector de azares cuya única función es identificar dependencias de datos o conflictos de recursos y detener (_stall_) la emisión cuando se detecta un problema. Para mitigar los conflictos de Dependencia Verdadera (LDE), se debe asegurar una distancia adecuada entre las instrucciones, de manera que los datos necesarios estén disponibles antes de ser requeridos.
 - Al tener una planificación fija, no puede adaptarse a eventos impredecibles en tiempo de ejecución (como fallos en la memoria caché) y su rendimiento depende de que el código tenga una mezcla equilibrada de instrucciones independientes.
 ![](images/Pasted%20image%2020261006175758.png)
-En este loop desenrollado se realizan 5 LOADs consecutivos para la carga de datos a registros de pf; se ejecutan 5 operaciones ADDD en pf (usando un operando comun) y 5 STOREs para escribir el resultado en memoria. Los LOADs son de tipo enteras, permitiendo que se mezclen en el mismo ciclo de operaciones ADDD sin generar conflictos. 
--> El loop queda estructurado de forma fija; el CPI efectivo resulta de aprox 2.4  y no se modifica el codigo original del programa.
+En este loop desenrollado se realizan 5 LOADs consecutivos para la carga de datos a registros de pf; se ejecutan 5 operaciones ADDD en pf (usando un operando común) y 5 STOREs para escribir el resultado en memoria. Los LOADs son de tipo enteras, permitiendo que se mezclen en el mismo ciclo de operaciones ADDD sin generar conflictos. 
+-> El loop queda estructurado de forma fija; el CPI efectivo resulta de aprox 2.4  y no se modifica el código original del programa.
 
 **Ventajas y limitaciones**
 
 - **Ventajas**: Preserva la **compatibilidad binaria**, garantizando que cualquier código ejecute correctamente sin importar la estructura interna del cauce o el ancho de emisión. Además, requiere un hardware sensiblemente menos complejo que los procesadores dinámicos fuera de orden.
 - **Desventajas**: Su rendimiento real depende fuertemente de que el programa tenga una mezcla equilibrada de instrucciones independientes. Al poseer una planificación fija, es incapaz de adaptarse a eventos impredecibles en tiempo de ejecución (como los **fallos en la memoria caché**), y si la primera instrucción de un paquete se bloquea, se detiene el lanzamiento de las instrucciones subsecuentes
 ### **Procesadores VLIW (Very Long Instruction Word)**
-Agrupan multiples instrucciones independientes en una sola palabra de instruccion que se ejecutan en paralelo.
+Agrupan múltiples instrucciones independientes en una sola palabra de instrucción que se ejecutan en paralelo.
 
 ![](images/Pasted%20image%2020261006182216.png)
 
-Cada instrucción VLIW se compone de varios campos o _slots_ prefijados, donde cada campo especifica el código de operación y los operandos dirigidos a una unidad funcional concreta (como ALUs enteras, unidades de punto flotante, unidades de carga/almacenamiento y control de saltos). Todas las operaciones contenidas dentro de una misma palabra VLIW se ejecutan simultáneamente en paralelo durante el mismo ciclo de reloj. Cuando el compilador no logra encontrar suficientes operaciones independientes para ocupar todos los campos de la palabra de instrucción, completa los _slots_ vacíos insertando operaciones nulas (`NOP`)
+Cada instrucción VLIW se compone de varios campos o _slots_ prefijados, donde cada campo específica el código de operación y los operandos dirigidos a una unidad funcional concreta (como ALUs enteras, unidades de punto flotante, unidades de carga/almacenamiento y control de saltos). Todas las operaciones contenidas dentro de una misma palabra VLIW se ejecutan simultáneamente en paralelo durante el mismo ciclo de reloj. Cuando el compilador no logra encontrar suficientes operaciones independientes para ocupar todos los campos de la palabra de instrucción, completa los _slots_ vacíos insertando operaciones nulas (`NOP`)
 
 Cada instrucción en un procesador VLIW incluye una operación por ALU, lo cual genera instrucciones de muchos bits. El análisis de dependencias se realiza en tiempo de compilación para determinar cuántas operaciones se pueden incluir en un slot de instrucción sin crear problemas.
 
@@ -1315,7 +1315,7 @@ Cada instrucción en un procesador VLIW incluye una operación por ALU, lo cual 
 
 ![](images/Pasted%20image%2020261006182701.png)
 
-Se realizan 7 iteraciones en 9 ciclos (cada fila corresponde a una instruccion VLIW) -> CPI = 1.3 ciclos por iteracion. Se requiere de una gran cantiada de registros.
+Se realizan 7 iteraciones en 9 ciclos (cada fila corresponde a una instrucción VLIW) -> CPI = 1.3 ciclos por iteración. Se requiere de una gran cantidad de registros.
 
 **Ventajas y Desventajas**
 
@@ -1326,41 +1326,459 @@ Se realizan 7 iteraciones en 9 ciclos (cada fila corresponde a una instruccion V
     - **Incompatibilidad binaria**: El código generado está fuertemente acoplado a la estructura interna del procesador (número de vías, latencias). Al cambiar de modelo o arquitectura VLIW, es obligatorio **recompilar el programa** para que pueda ejecutarse correctamente o mantener su eficiencia.
     - **Poca densidad de código**: El exceso de instrucciones `NOP` necesarias para rellenar los _slots_ vacíos provoca un desperdicio significativo de espacio en memoria y en la caché de instrucciones.
     - **Rigidez ante eventos dinámicos**: Al depender de una planificación estática, el procesador se detiene si ocurren eventos impredecibles durante la ejecución, como los fallos en la memoria caché.
-#### EPIC (_Explicitly Parallel Instruction Computing_)
-Es una filosofía de arquitectura desarrollada conjuntamente por Intel y Hewlett-Packard (HP) como una evolución avanzada del modelo VLIW (_Very Long Instruction Word_)
 
-Su objetivo fundamental es trasladar la responsabilidad de extraer el paralelismo a nivel de instrucción (ILP) y detectar dependencias desde el hardware hacia el **compilador**, pero incorporando mecanismos en el conjunto de instrucciones (ISA) para solucionar los problemas tradicionales de VLIW, como la densidad de código, la proliferación de instrucciones NOP y la rigidez ante eventos dinámicos
+##### Superescalar vs. VLIW es “quién decide”
 
-En la arquitectura de 64 bits **IA-64** (implementada en los procesadores **Itanium**), las operaciones no se emiten de forma aislada, sino empaquetadas en palabras largas llamadas **haces (** **bundles** **) de 128 bits**. Cada haz contiene 3 instrucciones o "sílabas" estilo RISC de 41 bits cada una. Un campo de 5 bits denominado _template_ especifica explícitamente los tipos de instrucción dentro del haz e indica la presencia de bits de parada (_stop bits_).  Esto informa directamente al hardware qué instrucciones se pueden ejecutar simultáneamente de forma segura sin requerir complejos detectores de azares en tiempo de ejecución
-![](images/Pasted%20image%2020261006192416.png)
+Las dos arquitecturas buscan lo mismo (varias instrucciones por ciclo); cambia quién arma los grupos de instrucciones independientes.
 
-Cada operación contiene:
-• Código de operación (Ope).
-• Tres registros de entrada/salida (operaciones de 3 operandos).
-• Un bit de predicado, que determina si la instrucción se ejecuta o no.
+- **Superescalar:** el **hardware** mira las próximas instrucciones en cada ciclo y decide cuántas puede lanzar juntas. Si hay un fallo de caché, un dinámico sigue con otras: se adapta a lo que pasa en ejecución. Precio: mucho hardware de detección y consumo.
+- **VLIW:** el **compilador** arma de antemano cada instrucción larga con operaciones que sabe independientes. El hardware no chequea nada: ejecuta el paquete entero. Precio: el compilador no sabe si un load va a fallar en caché, así que planifica suponiendo que acierta; si falla, el paquete entero espera. Y como el paquete depende de cuántas unidades tiene el procesador, un binario no corre bien (o no corre) en otro modelo.
+### Superescalar con planificación dinámica
+Permite ejecutar instrucciones en paralelo y fuera de orden para mejorar el rendimiento. Junta el procesador superescalar con el algoritmo de Tomasulo modificado para finalización en orden.
 
-Para sostener la ejecución masiva en paralelo y el renombramiento estático, la arquitectura dispone de una gran abundancia de registros:
+![](images/Pasted%20image%2020261102195759.png)
 
-- **128 registros generales** de 64 bits.
-- **128 registros de punto flotante** de 82 bits.
-- **64 registros de predicado** de 1 bit.
-- **8 registros de salto** (_branch registers_) de 64 bits.
+Para mantener la corrección del programa mientras las instrucciones se ejecutan fuera de orden, la microarquitectura divide el flujo de procesamiento en tres etapas principales:
+- Frontend en orden (In-Order fetch and Issue): Las instrucciones se capturan de la memoria de instrucciones y se decodifican estrictamente en el orden del programa. Se efectúa el renombrado de registros para eliminar falsas dependencias de datos y se asignan las instrucciones a las Estaciones de Reserva y al Buffer de Reordenamiento.
+- Núcleo dinámico fuera de orden (Out-of-order Execution Core): Las instrucciones aguardan en las estaciones de reserva mientras monitorean el CDB a la espera de los valores faltantes. En cuanto los operandos de una instrucción están listos y la unidad funcional correspondiente esta disponible, la instrucción se lanza a ejecución, al margen de su posición original en el código.
+- Backend en orden (In-Order Commit / Retire): Los resultados calculados no modifican inmediatamente ni los registros reales ni la memoria principal. La información se guarda de forma provisional en el ROB. Las instrucciones confirman o escriben sus resultados en el banco de registros real en el estricto orden del programa original, lo que garantiza excepciones precisas y permite deshacer los cambios si falla una predicción especulativa de salto.
 
-**Ejecución Predicada**: Permite transformar dependencias de control en dependencias de datos. Cada instrucción incluye una guarda o predicado (asociado a uno de los 64 registros de 1 bit); si la condición se evalúa como verdadera, la instrucción completa su resultado, mientras que si es falsa, se comporta como un NOP sin afectar el estado. Esto elimina los saltos condicionales y evita las penalizaciones por fallos en la predicción de saltos.
+**Ventajas:**
+- **Ocultamiento de latencias impredecibles:** A diferencia del compilador, el hardware dinámico puede reordenar instrucciones frente a eventos no predecibles en tiempo de compilación, como un fallo de caché de memoria.
+- **Compatibilidad binaria:** Un mismo binario de programa puede ejecutarse eficientemente en distintas versiones del procesador con diferentes latencias o cantidad de unidades funcionales sin necesidad de recompilar.
+- **Maximización del ILP:** Al combinar la planificación dinámica con una predicción de saltos agresiva y especulación, se llenan de forma óptima las múltiples vías superescalares.
 
-**Especulación de Control**: El compilador puede mover una instrucción de carga de memoria (_load especulativo_) antes de un salto condicional para ocultar la latencia de acceso a memoria, verificando su validez más adelante con una instrucción de chequeo (`chk.s`).
+**Desafíos:**
+- **Gran complejidad y consumo de hardware:** Requiere una elevada cantidad de lógica combinacional y estructuras asociativas (tablas de renombramiento, bus CDB asociativo, colas de ROB), lo que incrementa sustancialmente el área de silicio y el consumo de energía.
 
-**Especulación de Datos**: Permite mover una instrucción de carga (_load_) por encima de una instrucción de almacenamiento (_store_) previa, aun cuando exista duda de si apuntan a la misma dirección de memoria (_aliasing_). El hardware registra la dirección cargada y, si se detecta una escritura en esa misma dirección antes del chequeo (`chk.a`), invoca una rutina de corrección.
+#### Límites del ILP
+- **Dependencias de datos verdaderas:** Si una instrucción necesita el resultado calculado por una instrucción anterior, deben ejecutarse secuencialmente
+- **Dependencias de control y tamaño del bloque básico:** Un _bloque básico_ (secuencia de código sin saltos) suele tener solo entre 4 y 7 instrucciones fuertemente dependientes. Históricamente, estudios como el de Tjaden y Flynn (_Flynn's Bottleneck_) demostraron que si el ILP se limita al ámbito de un bloque básico, el paralelismo promedio no supera las 2 instrucciones por ciclo.
+- **Aliasing y accesos de memoria:** Cuando el código utiliza punteros o direccionamiento indirecto, el hardware/compilador no puede garantizar si dos accesos leen/escriben en la misma dirección de memoria, forzando un comportamiento conservador que reduce el reordenamiento
+- **Tamaño de la Ventana de Instrucciones (** **Instruction Window** **):** Para encontrar suficiente ILP, el procesador debe inspeccionar ventanas de cientos o miles de instrucciones. Sin embargo, la lógica asociativa necesaria para gestionar ventanas tan grandes (estaciones de reserva, registros de renombrado, colas de emisión) crece drásticamente en complejidad, área y retardo de propagación
+- **La Pared de la Memoria (** **Memory Wall** **):** Los fallos en la memoria caché (_cache misses_) generan retardos de decenas o cientos de ciclos. Cuando el pipeline se detiene esperando datos de la memoria principal, las ventajas del lanzamiento múltiple de instrucciones se pierden.
+- **Penalizaciones por Fallo de Especulación:** Para superar las dependencias de control se requiere especular sobre el resultado de los saltos. Cuando ocurre un error de predicción (_misprediction_), es necesario vaciar el cauce y descartar decenas de instrucciones ejecutadas especulativamente, lo que penaliza el rendimiento y desperdicia energía
+- **Desperdicio Energético:** Las arquitecturas superescalares muy anchas (capaces de emitir más de 4 a 6 instrucciones por ciclo) consumen un volumen desproporcionado de energía para obtener ganancias de IPC (_instrucciones por ciclo_) cada vez menores.
 
-### Superescalar con planificacion dinamica
-Permite ejecutar instrucciones en paralelo y fuera de orden para mejorar el rendimiento. Junta el procesador superescalar con el algoritmo de Tomasulo modificado para finalizacion en orden.
+Dado que el ILP monohilo alcanzó un techo de rendimiento práctico (sosteniendo rara vez más de 2 a 3 instrucciones por ciclo en aplicaciones reales), la industria microelectrónica cambió de paradigma hacia otras formas de paralelismo:
 
-Se caracteriza por:
-- Tener estaciones de reserva separadas para registros de enteros y registros de PF.
-- Se lanzan en el mismo ciclo dos instrucciones en orden.
-- Solo instrucciones load para PF  causan dependencias entre instrucciones enteras y PF
-- Se utiliza una cola en lugar de un buffer de carga, permitiendo realizar las lecturas de datos de manera ordenada y evita la especuulacion de lectura que podria generar problemas de dependencia de datos.
+- **Paralelismo a Nivel de Hilos (TLP - Thread-Level Parallelism):** Procesadores multihilo (_Simultaneous Multithreading_ / SMT) y arquitecturas multinúcleo (_Multicore_) que ejecutan varios hilos en paralelo.
+- **Paralelismo a Nivel de Datos (DLP - Data-Level Parallelism):** Uso de unidades vectoriales y SIMD (AVX, NEON, GPUs) para procesar arreglos masivos de datos con una sola instrucción.
 ## Thread Level Parallelism (TLP)
-Aprovecha multiples hilos de ejecucion en lugar de depender de la independencia entre instrucciones de un programa secuencial, manteniendo sus unidades activas ejecutando instrucciones provenientes de varios hilos distintos. 
+Aprovecha múltiples hilos de ejecución en lugar de depender de la independencia entre instrucciones de un programa secuencial, manteniendo sus unidades activas ejecutando instrucciones provenientes de varios hilos distintos. 
 
+> **Thread:** comparte código, globales y heap con su proceso; tiene su propio PC, registros y stack. Conmutar threads es más barato que procesos.
 
+Mientras que el paralelismo a nivel de instrucciones (ILP) intenta extraer instrucciones independientes dentro de un único programa secuencial, el TLP utiliza múltiples flujos de instrucciones que son inherentemente independientes entre sí. En los procesadores superescalares monohilo, el ILP explotable tiene un límite práctico y genera frecuentes ciclos inactivos (_idle slots_) debido a dependencias de datos y eventos de alta latencia, como los fallos de memoria caché. El TLP permite que, cuando un hilo se detiene a la espera de datos de memoria, el procesador aproveche ese tiempo ejecutando instrucciones de otros hilos disponibles
+
+> **Multithreading:** varios hilos comparten las unidades funcionales de un procesador; se replican banco de registros y PC. Aumenta el throughput, pero un hilo individual puede tardar más. Ejecuta hilos en paralelo sobre procesadores multinúcleo (_multicore_) o sistemas multiprocesador.
+![](images/Pasted%20image%2020261102222658.png)
+
+| Tipo         | Cuándo conmuta                                                                                                                | Ventaja                                         | Desventaja                                                         | Ejemplo              |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------ | -------------------- |
+| Grano fino   | Cada ciclo del reloj (round-robin, salta los bloqueados)                                                                      | Oculta stalls cortos y largos                   | Retrasa a cada hilo individual                                     | Sun Niagara          |
+| Grano grueso | Solo en stalls largos (fallo de cache). Ejecuta un hilo de manera continua y solo conmuta con eventos de larga distancia      | No necesita conmutación rápida ni retrasa hilos | No oculta stalls cortos; vaciar y llenar el pipeline cuesta ciclos | Itanium Montecito    |
+| SMT          | Varios hilos lanzan **en el mismo ciclo** -> procesadores superescalares fuera de orden con hilos con distintas instrucciones | Usa ILP y TLP a la vez: menos slots vacíos      | Presión sobre registros, caché y ancho de banda                    | Pentium 4 HT, Power5 |
+##### SMT sale casi gratis
+Un superescalar de 4 vías puede lanzar 4 instrucciones por ciclo, pero un solo hilo rara vez tiene 4 instrucciones independientes listas: en promedio llena 1 o 2 vías y el resto queda vacío (_idle slots_). Con un fallo de caché quedan vacías las 4 durante muchos ciclos. Grano fino y grueso solo llenan ciclos _enteros_ que quedarían vacíos (paralelismo vertical). SMT además llena las vías sobrantes _dentro_ de un ciclo (paralelismo horizontal).
+![](images/Pasted%20image%2020261102222732.png)
+
+| Esquema              | Qué lanza en ese ciclo                                           | Vías usadas |
+| -------------------- | ---------------------------------------------------------------- | ----------- |
+| Superescalar, 1 hilo | 2 de A                                                           | 2 de 4      |
+| Grano fino           | Solo las de A (al ciclo siguiente, solo las de B)                | 2 de 4      |
+| Grano grueso         | Las de A hasta que A tenga un fallo largo; recién ahí cambia a B | 2 de 4      |
+| SMT                  | 2 de A + 2 de B                                                  | 4 de 4      |
+Por qué un procesador fuera de orden ya casi lo tiene:
+
+- Las instrucciones ya no usan nombres de registro sino etiquetas de registros físicos (renombrado). Si cada hilo tiene su propia tabla de renombrado, la f0 de A y la f0 de B van a registros físicos distintos y no se confunden.
+- Las estaciones de reserva y las unidades funcionales no saben de qué hilo viene una instrucción: ejecutan lo que esté listo.
+- Lo que hay que agregar: un PC por hilo, una tabla de renombrado por hilo y un commit separado por hilo (un ROB por hilo, lógico o físico), para que una excepción en A no descarte trabajo de B.
+
+El costo está en lo compartido: las cachés, el TLB y los registros físicos se reparten entre hilos, y un hilo individual puede ir más lento que si corriera solo.
+
+# Paralelismo a nivel de datos (DLP)
+**Idea central:** cuando hay muchos datos homogéneos, una sola instrucción puede operar sobre todos a la vez (SIMD). Complementa al ILP (limitado por dependencias) y al TLP (limitado por la cantidad de hilos).
+
+**Taxonomía de Flynn**
+![](images/Pasted%20image%2020261102225302.png)
+
+| Clase | Significado                        | Ejemplo                       |
+| ----- | ---------------------------------- | ----------------------------- |
+| SISD  | Una instrucción, un dato           | Procesador escalar clásico    |
+| SIMD  | Una instrucción, muchos datos      | Vectoriales, SSE/AVX, GPU     |
+| MISD  | Muchas instrucciones, un dato      | Casi teórico                  |
+| MIMD  | Muchas instrucciones, muchos datos | Multiprocesadores y multicore |
+### Arquitecturas vectoriales
+
+- Cargan conjuntos de datos (aunque estén dispersos en memoria) en **registros vectoriales** grandes, operan con una sola instrucción y devuelven los resultados a memoria.
+- Una instrucción vectorial = decenas de operaciones independientes; menos instrucciones buscadas y menos control por operación.
+- Tienen load/store vectoriales, registro de longitud de vector, accesos con stride y gather/scatter, y registros de máscara.
+- Ejemplo Y = a·X + Y: en RISC-V escalar es un loop de 8 instrucciones por elemento (fld, fmul.d, fld, fadd.d, fsd, 2 addi, bne); en **RV64V** son 8 instrucciones en total, sin loop: `vld`, `vmul` (vector × escalar), `vld`, `vadd`, `vst`.
+-![](images/Pasted%20image%2020261102225901.png)
+
+### Extensiones SIMD multimedia
+
+- Muchos datos multimedia son de 8 o 16 bits: se parte un registro ancho en subcampos y se opera sobre todos a la vez.
+- **x86:** MMX (registros de 64 bits: 8 × 8 bits o 4 × 16), SSE (XMM de 128 bits: 16 × 8, 8 × 16, 4 × 32), AVX (YMM de 256 bits: 32 × 8, 16 × 16, 8 × 32). En ARM: NEON.
+- Frente a un vectorial **les faltan tres cosas:** registro de longitud de vector, accesos con stride / gather-scatter y registros de máscara.
+- Ejemplo con 4 carriles: `splat.4D` copia el escalar a 4 posiciones, `fld.4D`/`fmul.4D`/`fadd.4D`/`fsd.4D` procesan 4 elementos por iteración y los punteros avanzan de a 32 bytes.
+
+#### Explicado: el mismo cálculo con escalar, SIMD y vectorial
+
+Y = a·X + Y con vectores de 32 elementos en doble precisión (por eso el loop termina en la dirección inicial + 256 = 32 × 8 bytes).
+
+| Versión            | Elementos por iteración | Iteraciones | Instrucciones ejecutadas (aprox.) |
+| ------------------ | ----------------------- | ----------- | --------------------------------- |
+| RISC-V escalar     | 1                       | 32          | 2 + 32 × 8 ≈ 258                  |
+| SIMD de 4 carriles | 4                       | 8           | 3 + 8 × 8 ≈ 67                    |
+| RV64V vectorial    | 32                      | sin loop    | 8                                 |
+La ganancia viene de no buscar, decodificar ni controlar una instrucción por dato: la operación se decide una vez y se aplica a muchos datos. El SIMD multimedia gana 4× porque el ancho está fijo en el registro; el vectorial gana más porque la longitud del vector es un parámetro (registro de longitud de vector) y además puede cargar datos con stride, gather/scatter y aplicar máscaras, que es justo lo que le falta a SSE/AVX.
+
+### GPU
+Una **Unidad de Procesamiento Gráfico (GPU)** es una arquitectura de cómputo masivamente paralela concebida originalmente para acelerar la renderización de imágenes y gráficos 2D y 3D en tiempo real. Con el paso del tiempo, la lógica fija de los aceleradores gráficos evolucionó hacia procesadores unificados y totalmente programables.
+![](images/Pasted%20image%2020261102225946.png)
+
+| Aspecto      | CPU                                        | GPU                                       |
+| ------------ | ------------------------------------------ | ----------------------------------------- |
+| Objetivo     | Baja latencia, máximo rendimiento por hilo | Máximo throughput, miles de hilos         |
+| Núcleos      | Pocos y complejos                          | Cientos o miles de ALUs simples           |
+| Control      | Complejo (fuera de orden, especulación)    | Mínimo                                    |
+| Memoria      | Jerarquía profunda L1/L2/L3                | Oculta la latencia con paralelismo masivo |
+| Transistores | Control y cachés                           | ALUs                                      |
+Esta transformación dio lugar al **GPU Computing** (o computación de propósito general en GPU, GPGPU), permitiendo aprovechar la enorme potencia de cálculo de las GPUs en aplicaciones no gráficas, como inteligencia artificial, simulación científica y procesamiento de datos a través de plataformas como **CUDA** u OpenCL
+
+Las GPUs procesan los hilos mediante el modelo **SIMT** (_Single-Instruction, Múltiple-Thread_):
+- **Jerarquía de hilos:** En modelos de programación como CUDA, el trabajo se organiza en una **grilla** (_grid_) subdividida en **bloques de hilos**.
+- **Multiprocesadores de Streaming (SM):** Los bloques de hilos se asignan a unidades de hardware físico denominadas **Streaming Multiprocessors (SM)**.
+- **Planificación en** **Warps** **:** Dentro de cada SM, los hilos se agrupan en **warps** (típicamente de 32 hilos). Una misma instrucción se emite síncronamente para todos los hilos activos del warp.
+- **Divergencia de control:** Si los hilos de un mismo warp toman caminos condicionales distintos (`if-else`), la GPU ejecuta secuencialmente cada rama, lo que reduce temporalmente la eficiencia hasta que los hilos vuelven a converger.
+![](images/Pasted%20image%2020261102230032.png)
+
+##### Gestión de memoria y latencia
+- **Ocultamiento de latencia:** Mientras que la CPU intenta evitar ir a memoria mediante grandes cachés, la GPU oculta las latencias de lectura mediante **multihilo masivo en hardware**: si un warp se detiene esperando datos de la DRAM, el planificador cambia instantáneamente a otro warp listo para ejecutar sin sobrecoste de ciclos.
+- **Jerarquía de memoria:** Emplean memorias DRAM de gran ancho de banda (como GDDR), combinadas con una memoria local/compartida (_Shared Memory_) de muy baja latencia integrada en el propio SM para la comunicación entre hilos de un mismo bloque.
+#### CUDA
+
+- Plataforma y modelo de programación de NVIDIA para cómputo general en GPU.
+- El host (CPU) reserva memoria en la GPU (`cudaMalloc`), copia datos (`cudaMemcpy`, host → device), lanza el **kernel** y copia el resultado de vuelta.
+- **Kernel:** función declarada `__global__`, que ejecutan muchos threads; se lanza con `kernel<<<bloques, threadsPorBloque>>>(...)`. Cada thread tiene un ID propio (variables como `threadIdx`, `blockIdx`) para saber qué dato procesa.
+- **Jerarquía:** grid → bloques → threads. La GPU tiene decenas de **SM** (streaming multiprocessors), cada uno con decenas de cores (por ejemplo 64), memoria y planificador propios.
+
+- El planificador global (Gigathread Engine) asigna bloques enteros a los SM; dentro del SM los threads corren en **warps de 32**.
+- **¿Por qué dos niveles?** Un grid de bloques es más fácil de manejar que un bloque gigante: cada SM solo administra unos miles de threads, los recursos (registros, memoria compartida) se reservan al asignar el bloque y el cambio entre threads es casi gratis (el SM tiene ~64K registros, no hace falta volcarlos).
+
+#### Explicado: el mismo cálculo en CUDA
+
+```
+__global__ void daxpy(int n, double a, double *x, double *y) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;  // índice global del thread
+    if (i < n) y[i] = a * x[i] + y[i];              // cada thread hace UN elemento
+}
+
+// en el host: bloques de 256 threads, los bloques que hagan falta
+int nbloques = (n + 255) / 256;
+daxpy<<<nbloques, 256>>>(n, 2.0, d_x, d_y);
+```
+
+Cómo leerlo:
+
+- No hay loop: el loop “se reparte” en n threads. Cada uno calcula su índice con el número de bloque y su posición dentro del bloque.
+- El `if (i < n)` está porque el último bloque puede tener threads de más.
+- Antes hay que copiar x e y a la GPU con `cudaMalloc` y `cudaMemcpy` (host → device), y después traer y de vuelta.
+- La GPU reparte los bloques entre los SM; dentro de cada SM, los threads se ejecutan de a 32 (un warp), todos con la misma instrucción. Si un warp espera a memoria, el SM pasa a otro warp listo: así oculta la latencia, con miles de threads en vez de con cachés grandes.
+
+# Jerarquía de memoria
+La **jerarquía de memoria** es la organización piramidal de los distintos niveles de almacenamiento de una computadora. Su objetivo principal es ofrecer al usuario la **capacidad de almacenamiento de la tecnología más económica** (como discos) a la **velocidad de la tecnología más rápida** (como los registros y cachés).
+
+Esta estructura aprovecha la premisa física de que las memorias más pequeñas y cercanas al procesador son más rápidas pero más costosas, mientras que las más alejadas son más grandes y económicas.
+
+La jerarquía de memoria funciona con éxito gracias al **principio de localidad de referencia**, que establece que los programas acceden solo a una pequeña parte de su espacio de direcciones en un intervalo de tiempo determinado:
+
+- **Localidad Temporal:** Si un dato o instrucción es accedido en un momento dado, es muy probable que se vuelva a consultar en el futuro cercano (por ejemplo, dentro de un bucle).
+- **Localidad Espacial:** Si se accede a una posición de memoria concreta, es probable que pronto se acceda a posiciones contiguas o cercanas (por ejemplo, la ejecución secuencial de instrucciones o el recorrido de un arreglo).
+
+De mayor a menor velocidad (y de menor a mayor capacidad/economía):
+
+1. **Registros del Procesador (Nivel 0):** Integrados en la propia CPU, son extremadamente rápidos (sub-nanosegundos), pero de capacidad reducida (cientos de bytes a pocos KB) y gestionados explícitamente por el compilador.
+2. **Memoria Caché (L1, L2, L3) (Nivel 1):** Construida con tecnología **SRAM** (estática), es rápida y volátil. Guarda copias de las instrucciones y datos más utilizados.
+3. **Memoria Principal / RAM (Nivel 2):** Construida con tecnología **DRAM** (dinámica), posee mayor capacidad y menor costo por bit que la SRAM, pero requiere más ciclos de acceso.
+4. **Almacenamiento Secundario y Terciario (Niveles 3 y 4):** Discos de estado sólido (SSD), discos magnéticos y cintas. Son no volátiles, masivos y lentos, gestionados dinámicamente mediante el sistema operativo a través de la **memoria virtual**.
+![](images/Pasted%20image%2020261102230814.png)
+
+#### Conceptos y métricas clave
+- **Bloque (o Línea):** Es la unidad mínima de información que se transfiere entre dos niveles adyacentes de la jerarquía.
+- **Acierto (** **Hit** **):** Ocurre cuando el dato solicitado por el procesador se encuentra en el nivel superior consultado.
+	- **Tiempo de acierto (** **Hit Time** **):** Tiempo necesario para acceder al dato en ese nivel.
+- **Fallo (** **Miss** **):** Ocurre cuando el dato no está en el nivel consultado y se debe buscar en un nivel inferior.
+	- **Tasa de fallos (** **Miss Rate** **):** Porcentaje de accesos a memoria que resultan en un fallo.
+	- **Penalización por fallo (** **Miss Penalty** **):** El tiempo adicional requerido para traer el bloque desde el nivel inferior y entregarlo al procesador.
+##### Propiedades Fundamentales
+
+- **Inclusión:** Todo dato que se encuentra en un nivel superior $M_i$ debe estar presente también en los niveles inferiores $M_{i+1}$.
+- **Coherencia:** Garantiza que si existen múltiples copias de una misma información en distintos niveles o cachés privadas, todas mantengan el valor actualizado.
+
+### Las 4 preguntas de diseño
+
+1. **Emplazamiento (¿dónde va el bloque?):**
+    - _Directa:_ un solo marco posible; dirección = tag | índice | offset; 1 comparador, el dato está disponible antes de saber si es acierto.
+    ![](images/Pasted%20image%2020261102231737.png)
+    - _Asociativa por conjuntos (N vías):_ el índice elige un conjunto y se comparan N tags en paralelo; N comparadores + multiplexor (más lenta).
+    ![](images/Pasted%20image%2020261102231807.png)
+    - _Totalmente asociativa:_ cualquier marco; se comparan todos los tags.
+2. **Identificación:** tag + bit de validez.
+3. **Reemplazo:** aleatorio, FIFO, LRU (caro con más de 4 vías → pseudo-LRU), LFU. La diferencia LRU vs. aleatorio baja al crecer la caché.
+4. **Escritura:**
+    - _Write-through:_ se escribe en caché y memoria; memoria siempre al día, control simple; suele usar buffer de escritura.
+    - _Write-back:_ solo en caché; bit de sucio; al reemplazar se escribe el bloque. Mucho menos ancho de banda.
+    - En fallo de escritura: _write allocate_ (se trae el bloque, típico con write-back) o _no write allocate_ (se escribe directo abajo, típico con write-through).
+
+#### Explicado: partir una dirección y ver un fallo de conflicto
+
+Caché de 8 KB, bloques de 32 B, direcciones de 32 bits. Hay 8192 / 32 = 256 bloques en la caché.
+
+| Organización          | Conjuntos | Offset             | Índice            | Tag                  |
+| --------------------- | --------- | ------------------ | ----------------- | -------------------- |
+| Directa (1 vía)       | 256       | 5 bits (2⁵ = 32 B) | 8 bits (2⁸ = 256) | 32 − 8 − 5 = 19 bits |
+| 2 vías                | 128       | 5 bits             | 7 bits            | 20 bits              |
+| Totalmente asociativa | 1         | 5 bits             | 0 bits            | 27 bits              |
+Cada vez que se duplica la asociatividad, el índice pierde un bit y el tag gana uno: hay menos conjuntos y más bloques compiten por cada uno.
+
+Cómo se busca: el **offset** dice qué byte del bloque; el **índice** elige el conjunto; el **tag** se compara con los tags guardados en ese conjunto (1 comparación en la directa, 2 en paralelo en la de 2 vías). Acierto = algún tag coincide y su bit de validez está en 1.
+
+Mini-traza para ver un **fallo de conflicto**. Caché chiquita de 4 bloques; se accede a los bloques de memoria 0, 4, 0, 4:
+
+| Acceso | Directa (bloque mod 4)                          | 2 vías, 2 conjuntos (bloque mod 2)     |
+| ------ | ----------------------------------------------- | -------------------------------------- |
+| 0      | Fallo (compulsorio), va al marco 0              | Fallo (compulsorio), conjunto 0, vía A |
+| 4      | Fallo (compulsorio), también marco 0: echa al 0 | Fallo (compulsorio), conjunto 0, vía B |
+| 0      | Fallo de **conflicto**: lo había echado el 4    | Acierto                                |
+| 4      | Fallo de **conflicto**                          | Acierto                                |
+La caché directa tenía 3 marcos libres y aun así falló: eso es conflicto, no capacidad. La asociatividad lo resuelve.
+
+### Rendimiento
+
+- Tiempo de CPU = IC × (CPI de ejecución + accesos/instrucción × tasa de fallos × penalización) × T.
+- Se mejora por tres vías: **bajar la tasa de fallos, bajar la penalización, bajar el tiempo de acierto.**
+- **Las 3C:** _compulsorios/iniciales_ (primer acceso; ocurren incluso con caché infinita), _capacidad_ (la caché no alcanza), _conflicto_ (varios bloques al mismo conjunto).
+
+#### Explicado: cuánto pesa un fallo (números)
+
+**Impacto en el CPI.** CPI de ejecución = 1; cada instrucción hace 1,3 accesos a memoria (1 búsqueda + 0,3 de datos); tasa de fallos 2 %; penalización 100 ciclos:
+
+- CPI real = 1 + 1,3 × 0,02 × 100 = 1 + 2,6 = **3,6**.
+- Un 2 % de fallos hace al programa 3,6 veces más lento que con caché perfecta. Por eso hay tantas técnicas para bajar fallos y penalización.
+
+**TAMA con dos niveles.** Acierto en L1: 1 ciclo; tasa de fallos L1: 5 %; acierto en L2: 10 ciclos; tasa de fallos **local** L2: 20 %; memoria principal: 100 ciclos.
+
+- Penalización de L1 = 10 + 0,20 × 100 = 30 ciclos.
+- TAMA = 1 + 0,05 × 30 = **2,5 ciclos**. Sin L2 sería 1 + 0,05 × 100 = 6.
+- Tasa **global** de L2 = 0,05 × 0,20 = **1 %**: solo el 1 % de los accesos de la CPU llega a memoria.
+- Ojo: un 20 % de fallos local en L2 parece malo, pero L2 solo ve lo que ya falló en L1 (lo difícil). Por eso se mira la global.
+
+#### 1) Reducir la tasa de fallos
+
+| Técnica                | Qué hace                                                                                                                                   | Efecto                                                                                                                        |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| Bloque más grande      | Aprovecha localidad espacial                                                                                                               | Baja compulsorios; si es excesivo sube capacidad/conflicto y la penalización                                                  |
+| Más asociatividad      | Más marcos posibles por bloque                                                                                                             | Baja conflicto; sube tiempo de acceso y costo. Regla 2:1: directa de tamaño N ≈ 2 vías de N/2; 8 vías ≈ totalmente asociativa |
+| Algoritmo de reemplazo | LRU en vez de aleatorio                                                                                                                    | Mejora poco y cada vez menos con cachés grandes                                                                               |
+| Caché víctima          | Pequeña, totalmente asociativa, guarda los últimos bloques expulsados                                                                      | Baja conflicto en cachés directas (4 bloques eliminan 20–95 % de fallos en una de 4 KB)                                       |
+| Pseudoasociativa       | Directa; si falla prueba el marco con el bit más significativo del índice invertido                                                        | Dos tiempos de acierto; útil en L2                                                                                            |
+| Prebúsqueda HW         | Trae b+1 en fallo, marcada, adaptativa, por stride; a un stream buffer                                                                     | Oculta latencia; puede traer bloques inútiles                                                                                 |
+| Prebúsqueda SW         | El compilador inserta instrucciones _prefetch_ que no generan excepciones                                                                  | Bien con arrays y loops; agrega instrucciones                                                                                 |
+| Compilador             | Fusión de arrays, alargamiento de arrays, intercambio de bucles (conflicto/espacial); fusión de bucles y **blocking** (capacidad/temporal) | Sin costo de hardware                                                                                                         |
+##### Explicado: para cada técnica, preguntá “¿qué C ataca?”
+
+- **Compulsorios** (primer acceso a un bloque): solo bajan si cada fallo trae más datos útiles (bloque más grande) o si se trae antes de pedirlo (prebúsqueda).
+- **Capacidad** (los datos activos no entran): más caché, o hacer que el programa use menos datos a la vez (blocking, fusión de bucles).
+- **Conflicto** (había lugar, pero no en ese conjunto): más asociatividad, caché víctima, pseudoasociativa, o reacomodar los datos en memoria (fusión o alargamiento de arrays).
+
+Por qué un bloque demasiado grande empeora: con la caché de tamaño fijo, bloques el doble de grandes = la mitad de bloques. Se aprovecha mejor la localidad espacial, pero entran menos zonas distintas de memoria a la vez (más capacidad y conflicto) y cada fallo tarda más en traer el bloque.
+
+Blocking, en una frase: en vez de recorrer matrices enteras (que no entran en la caché), se trabaja por submatrices de B × B que sí entran, y se las usa todo lo posible antes de pasar a la siguiente.
+
+#### 2) Reducir la penalización de fallo
+
+- **Prioridad a lecturas sobre escrituras:** el fallo de lectura no espera al buffer de escritura (se chequea si hay conflicto).
+- **Subbloques:** no traer el bloque entero; un bit de validez por subbloque.
+- **Early restart / critical word first:** se manda al procesador la palabra pedida apenas llega (o primero). Sirve con bloques grandes.
+- **Caché sin bloqueo (lockup-free):** la CPU sigue ejecutando durante un fallo (hit under miss, varios fallos pendientes). Cada fallo pendiente se registra en un **MSHR** (dirección del bloque, palabra, registro destino).
+- **Caché multinivel:** L1 pequeña y rápida (ajusta al ciclo); L2 grande que reduce la penalización de L1.
+    - Tasa de fallos **local** = fallos de esa caché / accesos a esa caché; **global** = fallos de esa caché / accesos totales de la CPU. La que importa es la global.
+
+#### 3) Reducir el tiempo de acierto
+
+- **Cachés pequeñas y simples** (poca asociatividad): caben junto al procesador.
+- **Caché de direcciones virtuales:** evita esperar al TLB. Problemas: al cambiar de contexto hay que vaciarla (o agregar ID de proceso) y los **sinónimos** (dos virtuales → una física).
+- **Virtualmente indexada, físicamente etiquetada:** el índice sale del offset de página, que no se traduce, así se lee el conjunto mientras el TLB traduce. Limita el tamaño de caché al tamaño de página × vías.
+- **Segmentar escrituras:** primero se chequea el tag y en el siguiente ciclo se escribe el dato (buffer de escritura retrasada).
+
+##### Explicado: por qué la L1 suele ser “virtualmente indexada, físicamente etiquetada”
+
+Para acceder a la caché con la dirección física hay que traducir primero en el TLB: dos pasos en serie. El truco: el **offset de página** es igual en la dirección virtual y en la física (no se traduce). Si índice + offset de bloque caben dentro del offset de página, se puede leer el conjunto de la caché **mientras** el TLB traduce, y al final comparar con el tag físico.
+
+Eso pone un límite: tamaño de caché ≤ tamaño de página × número de vías. Con páginas de 4 KB y 8 vías, la L1 puede tener hasta 32 KB. Para crecer sin romper el truco, se agregan vías: es una de las razones por las que las L1 son asociativas.
+
+### Memoria principal
+
+Mientras que las memorias caché utilizan tecnología SRAM (_Static RAM_), la memoria principal se implementa mediante **DRAM**:
+
+- **Estructura de celda simple:** Cada bit se almacena mediante la carga eléctrica de un pequeño **capacitor** y un solo **transistor de paso**. Esto la hace mucho más densa y económica de fabricar por bit que la SRAM (la cual requiere de 4 a 6 transistores por bit).
+- **Ciclos de refresco:** Debido a que la carga del capacitor se fuga gradualmente, la memoria debe refrescar periódicamente todas sus celdas para evitar la pérdida de datos.
+- **Lectura destructiva:** Al leer una celda DRAM, el capacitor se descarga, por lo que el hardware debe reescribir inmediatamente el valor original.
+
+Para optimizar el uso de los pines físicos en el circuito integrado y aumentar el ancho de banda, la memoria principal utiliza diversos mecanismos:
+
+- **Direccionamiento multiplexado (RAS / CAS):** Las celdas se organizan en una matriz de filas y columnas. Para ahorrar pines de dirección, la dirección se envía en dos pasos mediante la señal **RAS** (_Row Access Strobe_) para la fila y **CAS** (_Column Access Strobe_) para la columna.
+- **SDRAM (** **Synchronous DRAM** **):** Sincroniza la interfaz de la memoria con el reloj del procesador, permitiendo transferencias continuas en ráfagas (_burst mode_) sin necesidad de enviar direcciones adicionales por cada palabra.
+- **DDR (** **Double Data Rate** **):** Transfiere datos tanto en el flanco de subida como en el de bajada de la señal de reloj, duplicando el ancho de banda efectivo.
+
+| Organización                            | Ciclos por bloque | Bytes/ciclo |
+| --------------------------------------- | ----------------- | ----------- |
+| Bus y memoria de 1 palabra              | 1 + 4×(10+1) = 45 | 0,35        |
+| Bus y memoria de 4 palabras             | 1 + 1×(10+1) = 12 | 1,33        |
+| Bus de 1 palabra, 4 bancos entrelazados | 1 + 10 + 4×1 = 15 | 1,07        |
+- **Entrelazamiento de memoria (** **Memory Interleaving** **):** Divide la memoria en varios bancos independientes que pueden ser accedidos en paralelo o de forma solapada, reduciendo la penalización por tiempo de acceso cuando la caché solicita un bloque completo de palabras contiguas.
+- **La Pared de la Memoria (** **Memory Wall** **):** La velocidad de los procesadores ha crecido a un ritmo mucho más acelerado que el tiempo de acceso de la DRAM. Esta brecha hace que la latencia de la memoria principal sea uno de los principales cuellos de botella para el rendimiento general del procesador.
+
+# Multiprocesadores
+Un **sistema multiprocesador** es un computador que integra dos o más unidades de procesamiento (CPUs o núcleos) capaces de ejecutar simultáneamente múltiples flujos de instrucciones o hilos pertenecientes a un mismo programa o a procesos independientes
+
+El cambio de paradigma desde procesadores individuales (_uniprocessors_) hacia arquitecturas multiprocesador y multinúcleo se debió a las limitaciones físicas del consumo energético (**muro de potencia**) y al techo en la extracción de paralelismo a nivel de instrucción (ILP). Incorporar múltiples núcleos más eficientes permite incrementar el rendimiento global (_throughput_) y la eficiencia por vatio.
+
+Los multiprocesadores se clasifican principalmente según cómo acceden a la memoria principal:
+
+- **SMP / UMA (** **Symmetric Multiprocessors / Uniform Memory Access** **):** Todos los procesadores comparten un **único espacio de direcciones físicas** y tienen exactamente la misma latencia y tiempo de acceso a cualquier posición de la memoria principal. Suelen interconectarse mediante un bus compartido o una red de conmutación.
+- **NUMA (** **Non-Uniform Memory Access** **):** Comparten un único espacio de direcciones lógicas, pero la memoria física se encuentra **distribuida entre los nodos** del sistema. El acceso a la memoria local de un nodo es considerablemente más rápido que el acceso a un módulo de memoria remota en otro nodo. Ofrece mayor escalabilidad para un gran número de procesadores.
+- **Clústeres / Multicomputadores (Memoria Distribuida):** Cada nodo cuenta con su propio espacio de direcciones privadas y su propio sistema operativo. La comunicación y transferencia de datos no se realiza de forma implícita en memoria, sino mediante el **paso explícito de mensajes** a través de la red.
+
+Dado que cada procesador cuenta con sus propias memorias caché privadas (L1, L2), surge el problema de la **incoherencia de caché**: si múltiples procesadores almacenan en sus cachés copias de una misma dirección de memoria y uno de ellos la modifica, las copias de los demás quedan obsoletas.
+
+### Coherencia
+Un sistema es coherente si: (1) P lee X después de escribir X y obtiene su valor; (2) una lectura de X tras la escritura de otro procesador, suficientemente separada, devuelve el valor nuevo; (3) las escrituras a una misma posición se ven en el mismo orden por todos (**serialización**).
+
+> Coherencia = _qué_ valor devuelve una lectura. Consistencia = _cuándo_ se hace visible una escritura.
+
+**Políticas:** _invalidación en escritura_ (un escritor, muchos lectores; escrituras repetidas son locales; la más usada) o _actualización en escritura_ (se actualizan todas las copias; mucho tráfico).
+
+Para garantizar que cualquier lectura devuelva siempre el valor más actualizado, el hardware emplea **protocolos de coherencia**:
+
+- **Protocolos Snoopy (Espionaje de Bus):** Cada controlador de caché observa (_snoops_) continuamente las transacciones transmitidas en un bus compartido. Si detecta una escritura a un bloque que posee localmente, invalida o actualiza su copia (ej. protocolos **MSI** o **MESI**). Se aplica principalmente en arquitecturas UMA/SMP.
+- **Protocolos Basados en Directorio:** En sistemas escalables como NUMA donde no hay un bus central para difundir mensajes (_broadcast_), se utiliza una estructura denominada **directorio**. El directorio mantiene registros de qué cachés tienen copias de cada bloque de memoria y gestiona los permisos de lectura/escritura mediante mensajes punto a punto a través de la red.
+
+### Protocolos snoopy
+
+- **2 estados (V, I), write-through, no write allocate:** cada escritura va al bus (BusWr) e invalida las otras copias. Es coherente, pero consume mucho ancho de banda (ejemplo: 4 procesadores ya saturan un bus de 10 GB/s). Solución: write-back.
+- **MSI (write-back, invalidación):**
+    - **M** (modificado): única copia válida, la memoria está vieja; puede escribir sin avisar.
+    - **S** (compartido): copia limpia; puede haber otras; memoria al día.
+    - **I** (inválido).
+    - Transacciones: BusRd (fallo de lectura), **BusRdX** (lectura con exclusividad, para escribir: invalida a los demás), **Flush** (la caché con el bloque en M lo vuelca al bus).
+    - Transiciones clave: I → S con PrRd/BusRd; I o S → M con PrWr/BusRdX; M → S al ver BusRd (Flush); M o S → I al ver BusRdX.
+- **Problema de MSI:** un programa secuencial que lee y luego modifica un dato genera 2 transacciones (I → S → M) aunque nadie más lo comparta.
+- **MESI:** agrega **E** (exclusivo limpio): única copia y sin modificar. Pasar de E a M no genera tráfico. Al leer, la señal **S** (OR cableada) indica si otra caché tiene el bloque: si nadie lo tiene, I → E; si alguien lo tiene, I → S. En S → M se usa BusUpgr.
+- **Carreras entre escrituras:** no se modifica la caché hasta tener el bus; el bus serializa. Los tags se duplican para que el espionaje no frene a la CPU.
+
+#### Explicado: la misma traza en MSI y en MESI
+
+Es el ejemplo de las diapositivas: tres procesadores, la variable U vale 5 en memoria. Columnas: estado de U en la caché de P1, P2 y P3.
+##### MSI
+
+| Operación        | P1  | P2  | P3  | Bus                | Quién da el dato                                 |
+| ---------------- | --- | --- | --- | ------------------ | ------------------------------------------------ |
+| P1 lee U         | S   | —   | —   | BusRd              | Memoria                                          |
+| P3 lee U         | S   | —   | S   | BusRd              | Memoria                                          |
+| P3 escribe U = 7 | I   | —   | M   | BusRdX (o BusUpgr) | — (P1 se invalida)                               |
+| P1 lee U         | S   | —   | S   | BusRd              | Caché de P3 (Flush); la memoria se actualiza a 7 |
+| P2 lee U         | S   | S   | S   | BusRd              | Memoria                                          |
+Cómo leerla: al escribir, P3 necesita ser el único con copia, así que pide exclusividad (BusRdX) y P1 invalida la suya. Cuando P1 vuelve a leer, la memoria tiene un 5 viejo: P3, que espió el BusRd y tiene el bloque en M, lo vuelca (Flush) y baja a S.
+
+**MESI, misma traza:** la única diferencia está en la primera fila. Cuando P1 lee U nadie más lo tiene (la señal S queda en 0), así que P1 lo guarda en **E**, no en S. Cuando lee P3, P1 baja de E a S.
+
+**Dónde gana MESI:** un programa secuencial que lee y después escribe un dato que nadie comparte.
+
+| Paso          | MSI                                      | MESI                              |
+| ------------- | ---------------------------------------- | --------------------------------- |
+| Lee X         | I → S (BusRd)                            | I → E (BusRd, nadie más lo tiene) |
+| Escribe X     | S → M (BusRdX/BusUpgr: otra transacción) | E → M sin usar el bus             |
+| Transacciones | 2                                        | 1                                 |
+El estado E significa “soy el único y la memoria está al día”: puede pasar a M sin avisar (como M) pero no tiene que responder con el dato si otro lo pide (la memoria está actualizada).
+
+### Consistencia de memoria
+
+- La coherencia no dice en qué orden se ven escrituras a **distintas** posiciones. Ejemplo: P1 hace `A = 1; flag = 1`; P2 espera `flag == 1` e imprime A. Solo con coherencia podría imprimir 0.
+- **Modelo de consistencia:** contrato entre programador y diseñador sobre el orden en que se ven las operaciones; la consistencia incluye a la coherencia.
+- **Consistencia secuencial (Lamport, 1979):** el resultado es el de _algún_ entrelazado de todas las operaciones (orden total) en el que las de cada procesador respetan el orden del programa.
+- Requiere **orden del programa** y **atomicidad de escrituras** (todas las escrituras, a cualquier posición, se ven en el mismo orden por todos).
+- Condiciones suficientes (Dubois y Scheurich): emitir en orden del programa; tras una escritura esperar a que se complete; tras una lectura esperar a que se complete ella y la escritura que generó su valor.
+
+#### Explicado: coherencia no alcanza
+
+Inicialmente A = B = 0. P1 hace (1a) A = 1 y después (1b) B = 2. P2 hace (2a) print B y después (2b) print A.
+
+Bajo consistencia secuencial vale cualquier entrelazado que respete el orden de cada procesador:
+
+| Orden          | Imprime (B, A) |
+| -------------- | -------------- |
+| 2a, 2b, 1a, 1b | (0, 0)         |
+| 1a, 2a, 1b, 2b | (0, 1)         |
+| 1a, 1b, 2a, 2b | (2, 1)         |
+
+Lo que **no** puede salir es B = 2 con A = 0: si P2 ya vio B = 2, entonces 1b pasó antes de 2a; como 1a va antes que 1b y 2a antes que 2b, A ya vale 1 cuando se ejecuta 2b.
+
+¿Por qué la coherencia sola no lo garantiza? La coherencia habla de **una** posición: todos ven las escrituras a A en el mismo orden, y lo mismo para B. Pero no dice nada sobre el orden entre una escritura a A y otra a B. Si P1 tiene un buffer de escrituras y la de B se hace visible antes que la de A, P2 puede imprimir (2, 0). Para que eso no pase hace falta un **modelo de consistencia**.
+
+Nota RISC-V: su modelo de memoria es débil (RVWMO) y no garantiza consistencia secuencial por defecto; el programador pone una instrucción `fence` entre 1a y 1b cuando necesita ese orden.
+
+### Coherencia basada en directorio (NUMA)
+
+- Un directorio guarda, por cada bloque de memoria, quién tiene copia y si está sucio. Implementación natural: **vector de bits de presencia** (1 por nodo) + bit de modificado.
+- Nodos: **local** (pide), **home** (tiene el bloque en su memoria y el directorio), **remoto/owner** (tiene copia; si está en M, uno solo).
+- **Lectura, bit sucio OFF:** local pide al home, el home responde. 2 mensajes.
+- **Lectura, bit sucio ON:** el home responde con la identidad del owner; el local le pide; el owner manda el dato y hace write-back al home.
+- **Escritura con copias limpias:** el home devuelve la lista de sharers; el local les manda invalidaciones y recibe los ack.
+- **Escritura con bit sucio ON:** el home indica el owner, se transfiere la propiedad.
+- **Sobrecarga:** con líneas de 4 bytes es 12,5 % con 4 nodos y 200 % con 1024. Soluciones: nodos multiprocesador (1 bit por nodo), punteros limitados en vez de vector completo, directorio organizado como caché.
+- **Directorio basado en caché (SCI):** el home apunta al nodo cabecera y los demás forman una lista doblemente enlazada. Menos sobrecarga y trabajo distribuido, pero las invalidaciones se serializan (más latencia).
+
+#### Explicado: por qué hace falta el directorio
+
+Snoopy funciona porque todas las cachés ven todo lo que pasa por el bus. Con decenas o cientos de nodos no hay un bus: hay una red punto a punto, y mandar cada invalidación a todos los nodos satura la red. El directorio es la “agenda” que evita el broadcast: para cada bloque anota quién tiene copia, así los mensajes van solo a esos nodos.
+
+Ejemplo de fallo de lectura sobre un bloque sucio, con 3 nodos (A pide, H es el home, B es el owner):
+
+1. A pide el bloque a H (RdRequest).
+2. H mira el directorio: bit sucio en 1, owner = B. Le responde a A con la identidad de B.
+3. A le pide el bloque a B.
+4. B le manda el dato a A y hace write-back a H. Ahora la memoria está al día y el directorio anota: bloque limpio, presente en A y en B (los dos en S).
+
+Son unos 5 mensajes (la respuesta de B va a A y a H) en vez de 2: los fallos sobre datos sucios son caros. Es el precio de no tener un bus que todos escuchan.
+
+### Sincronización
+
+- Hace falta una **primitiva atómica** que lea y modifique una posición sin interrupción; sobre ella se arman locks, barreras, etc.
+- **Atomic exchange** (EXCH; en RISC-V `amoswap.w`): intercambia registro y memoria. 0 = libre, 1 = ocupado. **Test-and-set**, **fetch-and-increment**.
+- **LL/SC** (en RISC-V `lr.w` / `sc.w`): LL lee y guarda la dirección en un _link register_; SC escribe solo si nadie tocó esa dirección (una interrupción o una invalidación borran el link). Evita una instrucción de lectura-modificación-escritura indivisible. Ojo: en MIPS SC deja 1 si tuvo éxito; en RISC-V `sc.w` deja 0.
+- **Spin lock:** bucle hasta conseguir el cerrojo. Con EXCH directo, cada intento es una escritura que invalida a todos. Mejor **test-and-exchange**: leer la copia local mientras esté ocupado (sin tráfico) y solo hacer EXCH cuando se ve libre.
+
+```
+# spin lock con lr/sc en RISC-V (x10 = dirección del cerrojo)
+lockit: lr.w  x5, (x10)      # leo el cerrojo
+        bnez  x5, lockit     # ocupado: sigo esperando
+        li    x5, 1
+        sc.w  x6, x5, (x10)  # intento escribir 1
+        bnez  x6, lockit     # x6 != 0: falló, reintento
+```
+
+#### Explicado: por qué test-and-exchange genera menos tráfico
+
+Con un EXCH directo, cada vuelta del bucle es una **escritura** al cerrojo. Cada escritura necesita exclusividad (BusRdX): invalida las copias de los demás, que fallan, lo piden, lo invalidan… El bloque del cerrojo “rebota” entre cachés todo el tiempo que el cerrojo está ocupado, aunque nadie lo esté consiguiendo.
+
+Con test-and-exchange, mientras el cerrojo está ocupado cada procesador solo **lee**:
+
+1. Todos los que esperan tienen el bloque del cerrojo en **S** y leen su copia local: aciertos, sin tráfico.
+2. El dueño libera el cerrojo escribiendo 0: una sola invalidación.
+3. Los que esperaban fallan, leen el 0 e intentan el EXCH. Solo uno lo gana (el bus serializa las escrituras); los demás ven 1 y vuelven a leer en local.
+
+El tráfico queda concentrado en el momento de liberar, no en todo el tiempo de espera. LL/SC logra lo mismo: el `lr.w` lee sin escribir y el `sc.w` solo escribe si nadie tocó el cerrojo en el medio.
