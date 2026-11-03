@@ -852,7 +852,7 @@ Si un salto es tomado (*taken*), las instrucciones que se buscaron secuencialmen
     1. Rellenar con alguna instrucción independiente anterior al salto. Esta es la mejor opción.
     2. Rellenar con alguna instrucción ubicada en el destino del salto (suponer salto tomado). Útil en bucles.
     3. Rellenar con alguna instrucción que siga al salto (suponer que el salto no fue tomado). Útil en condiciones IF-ELSE.
-- **Predicción de saltos (** **Branch Prediction** **)**:
+- **Predicción de saltos (_Branch Prediction_)**:
     - **Estática**: Aplicar una regla fija fijada en tiempo de compilación (por ejemplo, predecir siempre "no tomado", "tomado", o según la dirección hacia adelante/atrás del salto).
     - **Dinámica**: Usar tablas de historial en tiempo de ejecución (como contadores de 2 bits o el *Branch Target Buffer* / BTB) para predecir si el salto se tomará según su comportamiento reciente.
 
@@ -1355,8 +1355,8 @@ Para mantener la corrección del programa mientras las instrucciones se ejecutan
 - **Dependencias de datos verdaderas:** Si una instrucción necesita el resultado calculado por una instrucción anterior, deben ejecutarse secuencialmente
 - **Dependencias de control y tamaño del bloque básico:** Un _bloque básico_ (secuencia de código sin saltos) suele tener solo entre 4 y 7 instrucciones fuertemente dependientes. Históricamente, estudios como el de Tjaden y Flynn (_Flynn's Bottleneck_) demostraron que si el ILP se limita al ámbito de un bloque básico, el paralelismo promedio no supera las 2 instrucciones por ciclo.
 - **Aliasing y accesos de memoria:** Cuando el código utiliza punteros o direccionamiento indirecto, el hardware/compilador no puede garantizar si dos accesos leen/escriben en la misma dirección de memoria, forzando un comportamiento conservador que reduce el reordenamiento
-- **Tamaño de la Ventana de Instrucciones (** **Instruction Window** **):** Para encontrar suficiente ILP, el procesador debe inspeccionar ventanas de cientos o miles de instrucciones. Sin embargo, la lógica asociativa necesaria para gestionar ventanas tan grandes (estaciones de reserva, registros de renombrado, colas de emisión) crece drásticamente en complejidad, área y retardo de propagación
-- **La Pared de la Memoria (** **Memory Wall** **):** Los fallos en la memoria caché (_cache misses_) generan retardos de decenas o cientos de ciclos. Cuando el pipeline se detiene esperando datos de la memoria principal, las ventajas del lanzamiento múltiple de instrucciones se pierden.
+- **Tamaño de la Ventana de Instrucciones (_Instruction Window_):** Para encontrar suficiente ILP, el procesador debe inspeccionar ventanas de cientos o miles de instrucciones. Sin embargo, la lógica asociativa necesaria para gestionar ventanas tan grandes (estaciones de reserva, registros de renombrado, colas de emisión) crece drásticamente en complejidad, área y retardo de propagación
+- **La Pared de la Memoria (_Memory Wall_):** Los fallos en la memoria caché (_cache misses_) generan retardos de decenas o cientos de ciclos. Cuando el pipeline se detiene esperando datos de la memoria principal, las ventajas del lanzamiento múltiple de instrucciones se pierden.
 - **Penalizaciones por Fallo de Especulación:** Para superar las dependencias de control se requiere especular sobre el resultado de los saltos. Cuando ocurre un error de predicción (_misprediction_), es necesario vaciar el cauce y descartar decenas de instrucciones ejecutadas especulativamente, lo que penaliza el rendimiento y desperdicia energía
 - **Desperdicio Energético:** Las arquitecturas superescalares muy anchas (capaces de emitir más de 4 a 6 instrucciones por ciclo) consumen un volumen desproporcionado de energía para obtener ganancias de IPC (_instrucciones por ciclo_) cada vez menores.
 
@@ -1409,22 +1409,39 @@ El costo está en lo compartido: las cachés, el TLB y los registros físicos se
 | SIMD  | Una instrucción, muchos datos      | Vectoriales, SSE/AVX, GPU     |
 | MISD  | Muchas instrucciones, un dato      | Casi teórico                  |
 | MIMD  | Muchas instrucciones, muchos datos | Multiprocesadores y multicore |
-### Arquitecturas vectoriales
+## Arquitecturas vectoriales
 
-- Cargan conjuntos de datos (aunque estén dispersos en memoria) en **registros vectoriales** grandes, operan con una sola instrucción y devuelven los resultados a memoria.
-- Una instrucción vectorial = decenas de operaciones independientes; menos instrucciones buscadas y menos control por operación.
-- Tienen load/store vectoriales, registro de longitud de vector, accesos con stride y gather/scatter, y registros de máscara.
-- Ejemplo Y = a·X + Y: en RISC-V escalar es un loop de 8 instrucciones por elemento (fld, fmul.d, fld, fadd.d, fsd, 2 addi, bne); en **RV64V** son 8 instrucciones en total, sin loop: `vld`, `vmul` (vector × escalar), `vld`, `vadd`, `vst`.
--![](images/Pasted%20image%2020261102225901.png)
+Cargan conjuntos de datos (aunque estén dispersos en memoria) en **registros vectoriales** grandes, operan con una sola instrucción y devuelven los resultados a memoria.
 
-### Extensiones SIMD multimedia
+Una instrucción vectorial = decenas de operaciones independientes; menos instrucciones buscadas y menos control por operación.
+### Componentes clave del hardware
 
-- Muchos datos multimedia son de 8 o 16 bits: se parte un registro ancho en subcampos y se opera sobre todos a la vez.
-- **x86:** MMX (registros de 64 bits: 8 × 8 bits o 4 × 16), SSE (XMM de 128 bits: 16 × 8, 8 × 16, 4 × 32), AVX (YMM de 256 bits: 32 × 8, 16 × 16, 8 × 32). En ARM: NEON.
-- Frente a un vectorial **les faltan tres cosas:** registro de longitud de vector, accesos con stride / gather-scatter y registros de máscara.
-- Ejemplo con 4 carriles: `splat.4D` copia el escalar a 4 posiciones, `fld.4D`/`fmul.4D`/`fadd.4D`/`fsd.4D` procesan 4 elementos por iteración y los punteros avanzan de a 32 bytes.
+- **Registros vectoriales:** Conjuntos de registros de gran capacidad diseñados para almacenar vectores completos de datos (por ejemplo, 32 registros vectoriales con 64 elementos cada uno).
+- **Unidades funcionales encauzadas (_pipelined_):** ALUs de punto flotante, enteros y lógica profundamente segmentadas que reciben y procesan un elemento por ciclo de reloj.
+- **Unidades de Carga/Almacenamiento vectorial (_Vector Load/Store_):** Transfieren bloques enteros de datos entre la memoria principal y los registros vectoriales. Soportan accesos contiguos, accesos con paso (_stride_) y accesos indexados (_gather/scatter_).
+- **Registros de control especiales:**
+    - **Registro de Longitud Vectorial (VLR):** Ajusta dinámicamente la cantidad de elementos a procesar cuando la longitud de la aplicación difiere de la capacidad máxima de los registros físicos (mecanismo conocido como _strip mining_).
+    - **Registro de Máscara Vectorial (VM):** Permite habilitar o deshabilitar la ejecución sobre elementos específicos del vector para evaluar condicionales (`if-else`) sin necesidad de saltos.
+    
+Ejemplo Y = a·X + Y: en RISC-V escalar es un loop de 8 instrucciones por elemento (fld, fmul.d, fld, fadd.d, fsd, 2 addi, bne); en **RV64V** son 8 instrucciones en total, sin loop: `vld`, `vmul` (vector × escalar), `vld`, `vadd`, `vst`.
+![](images/Pasted%20image%2020261102225901.png)
 
-#### Explicado: el mismo cálculo con escalar, SIMD y vectorial
+#### Ventajas
+- **Reducción del ancho de banda de instrucciones:** Una sola instrucción vectorial realiza el trabajo de un bucle entero, reduciendo drásticamente las instrucciones de sobrecarga (incrementos de puntero, comparaciones y saltos).
+- **Eliminación de riesgos de control y de datos:** Dado que los elementos dentro de un vector son matemáticamente independientes entre sí, el hardware no necesita verificar dependencias de datos entre elementos de la misma instrucción. Al sustituir el bucle, tampoco se generan riesgos de control por saltos.
+- **Uso eficiente de la memoria:** Se paga la latencia de acceso a la memoria principal una sola vez para todo el vector en lugar de pagarla individualmente por cada palabra.
+## Extensiones SIMD multimedia
+Las **extensiones SIMD multimedia** son una adaptación del modelo _Single Instruction, Multiple Data_ (SIMD) en procesadores escalares de propósito general para acelerar aplicaciones de audio, video, gráficos e imágenes.
+
+Se fundamentan en el concepto de **paralelismo a nivel de subpalabra** (_subword parallelism_): al procesar datos multimedia de menor precisión (como píxeles de 8 bits o muestras de audio de 16 bits), la ALU o un registro ancho (de 64, 128 o 256 bits) se divide internamente en varios subcampos más pequeños para realizar la misma operación aritmética o lógica sobre múltiples datos en un solo ciclo.
+
+**x86:** MMX (registros de 64 bits: 8 × 8 bits o 4 × 16), SSE (XMM de 128 bits: 16 × 8, 8 × 16, 4 × 32), AVX (YMM de 256 bits: 32 × 8, 16 × 16, 8 × 32). En ARM: NEON.
+
+Frente a un vectorial **les faltan tres cosas:** registro de longitud de vector, accesos con stride / gather-scatter y registros de máscara.
+
+Ejemplo con 4 carriles: `splat.4D` copia el escalar a 4 posiciones, `fld.4D`/`fmul.4D`/`fadd.4D`/`fsd.4D` procesan 4 elementos por iteración y los punteros avanzan de a 32 bytes.
+![](images/Pasted%20image%2020261103122055.png)
+#### El mismo cálculo con escalar, SIMD y vectorial
 
 Y = a·X + Y con vectores de 32 elementos en doble precisión (por eso el loop termina en la dirección inicial + 256 = 32 × 8 bytes).
 
@@ -1446,12 +1463,12 @@ Una **Unidad de Procesamiento Gráfico (GPU)** es una arquitectura de cómputo m
 | Control      | Complejo (fuera de orden, especulación)    | Mínimo                                    |
 | Memoria      | Jerarquía profunda L1/L2/L3                | Oculta la latencia con paralelismo masivo |
 | Transistores | Control y cachés                           | ALUs                                      |
-Esta transformación dio lugar al **GPU Computing** (o computación de propósito general en GPU, GPGPU), permitiendo aprovechar la enorme potencia de cálculo de las GPUs en aplicaciones no gráficas, como inteligencia artificial, simulación científica y procesamiento de datos a través de plataformas como **CUDA** u OpenCL
+Esta transformación dio lugar al **GPU Computing** (o computación de propósito general en GPU, GPGPU), permitiendo aprovechar la enorme potencia de cálculo de las GPUs en aplicaciones no gráficas, como inteligencia artificial, simulación científica y procesamiento de datos a través de plataformas como **CUDA** u OpenCL.
 
-Las GPUs procesan los hilos mediante el modelo **SIMT** (_Single-Instruction, Múltiple-Thread_):
+Las GPUs procesan los hilos mediante el modelo **SIMT** (_Single-Instruction, Multiple-Thread_):
 - **Jerarquía de hilos:** En modelos de programación como CUDA, el trabajo se organiza en una **grilla** (_grid_) subdividida en **bloques de hilos**.
 - **Multiprocesadores de Streaming (SM):** Los bloques de hilos se asignan a unidades de hardware físico denominadas **Streaming Multiprocessors (SM)**.
-- **Planificación en** **Warps** **:** Dentro de cada SM, los hilos se agrupan en **warps** (típicamente de 32 hilos). Una misma instrucción se emite síncronamente para todos los hilos activos del warp.
+- **Planificación en _Warps_:** Dentro de cada SM, los hilos se agrupan en **warps** (típicamente de 32 hilos). Una misma instrucción se emite síncronamente para todos los hilos activos del warp.
 - **Divergencia de control:** Si los hilos de un mismo warp toman caminos condicionales distintos (`if-else`), la GPU ejecuta secuencialmente cada rama, lo que reduce temporalmente la eficiencia hasta que los hilos vuelven a converger.
 ![](images/Pasted%20image%2020261102230032.png)
 
@@ -1460,13 +1477,16 @@ Las GPUs procesan los hilos mediante el modelo **SIMT** (_Single-Instruction, M�
 - **Jerarquía de memoria:** Emplean memorias DRAM de gran ancho de banda (como GDDR), combinadas con una memoria local/compartida (_Shared Memory_) de muy baja latencia integrada en el propio SM para la comunicación entre hilos de un mismo bloque.
 #### CUDA
 
-- Plataforma y modelo de programación de NVIDIA para cómputo general en GPU.
-- El host (CPU) reserva memoria en la GPU (`cudaMalloc`), copia datos (`cudaMemcpy`, host → device), lanza el **kernel** y copia el resultado de vuelta.
-- **Kernel:** función declarada `__global__`, que ejecutan muchos threads; se lanza con `kernel<<<bloques, threadsPorBloque>>>(...)`. Cada thread tiene un ID propio (variables como `threadIdx`, `blockIdx`) para saber qué dato procesa.
-- **Jerarquía:** grid → bloques → threads. La GPU tiene decenas de **SM** (streaming multiprocessors), cada uno con decenas de cores (por ejemplo 64), memoria y planificador propios.
+Plataforma y modelo de programación de NVIDIA para cómputo general en GPU.
+El host (CPU) reserva memoria en la GPU (`cudaMalloc`), copia datos (`cudaMemcpy`, host → device), lanza el **kernel** y copia el resultado de vuelta.
 
-- El planificador global (Gigathread Engine) asigna bloques enteros a los SM; dentro del SM los threads corren en **warps de 32**.
-- **¿Por qué dos niveles?** Un grid de bloques es más fácil de manejar que un bloque gigante: cada SM solo administra unos miles de threads, los recursos (registros, memoria compartida) se reservan al asignar el bloque y el cambio entre threads es casi gratis (el SM tiene ~64K registros, no hace falta volcarlos).
+**Kernel:** función declarada `__global__`, que ejecutan muchos threads; se lanza con `kernel<<<bloques, threadsPorBloque>>>(...)`. Cada thread tiene un ID propio (variables como `threadIdx`, `blockIdx`) para saber qué dato procesa.
+
+**Jerarquía:** grid → bloques → threads. La GPU tiene decenas de **SM** (streaming multiprocessors), cada uno con decenas de cores (por ejemplo 64), memoria y planificador propios.
+
+El planificador global (Gigathread Engine) asigna bloques enteros a los SM; dentro del SM los threads corren en **warps de 32**.
+
+**¿Por qué dos niveles?** Un grid de bloques es más fácil de manejar que un bloque gigante: cada SM solo administra unos miles de threads, los recursos (registros, memoria compartida) se reservan al asignar el bloque y el cambio entre threads es casi gratis (el SM tiene ~64K registros, no hace falta volcarlos).
 
 #### Explicado: el mismo cálculo en CUDA
 
@@ -1508,30 +1528,51 @@ De mayor a menor velocidad (y de menor a mayor capacidad/economía):
 
 #### Conceptos y métricas clave
 - **Bloque (o Línea):** Es la unidad mínima de información que se transfiere entre dos niveles adyacentes de la jerarquía.
-- **Acierto (** **Hit** **):** Ocurre cuando el dato solicitado por el procesador se encuentra en el nivel superior consultado.
-	- **Tiempo de acierto (** **Hit Time** **):** Tiempo necesario para acceder al dato en ese nivel.
-- **Fallo (** **Miss** **):** Ocurre cuando el dato no está en el nivel consultado y se debe buscar en un nivel inferior.
-	- **Tasa de fallos (** **Miss Rate** **):** Porcentaje de accesos a memoria que resultan en un fallo.
-	- **Penalización por fallo (** **Miss Penalty** **):** El tiempo adicional requerido para traer el bloque desde el nivel inferior y entregarlo al procesador.
+- **Acierto (_Hit_):** Ocurre cuando el dato solicitado por el procesador se encuentra en el nivel superior consultado.
+	- **Tiempo de acierto (_Hit Time_):** Tiempo necesario para acceder al dato en ese nivel.
+- **Fallo (_Miss_):** Ocurre cuando el dato no está en el nivel consultado y se debe buscar en un nivel inferior.
+	- **Tasa de fallos (_Miss Rate_):** Porcentaje de accesos a memoria que resultan en un fallo.
+	- **Penalización por fallo (_Miss Penalty_):** El tiempo adicional requerido para traer el bloque desde el nivel inferior y entregarlo al procesador.
 ##### Propiedades Fundamentales
 
 - **Inclusión:** Todo dato que se encuentra en un nivel superior $M_i$ debe estar presente también en los niveles inferiores $M_{i+1}$.
 - **Coherencia:** Garantiza que si existen múltiples copias de una misma información en distintos niveles o cachés privadas, todas mantengan el valor actualizado.
 
-### Las 4 preguntas de diseño
+## Las 4 preguntas de diseño
+- ¿Dónde se puede situar un bloque dentro del nivel superior de la jerarquía?
+- ¿Cómo se busca o encuentra un bloque si está presente en ese nivel?
+- ¿Qué bloque debe descartarse cuando ocurre un fallo (_miss_) y es necesario liberar espacio para traer un bloque nuevo?
+- ¿Cómo se gestionan las modificaciones o escrituras de datos entre los niveles?
 
 1. **Emplazamiento (¿dónde va el bloque?):**
-    - _Directa:_ un solo marco posible; dirección = tag | índice | offset; 1 comparador, el dato está disponible antes de saber si es acierto.
+    - _Directa:_ Cada bloque de memoria tiene **una única posición asignada** en la caché, calculada como `(Dirección del bloque) mod (Número de bloques en caché)`.
     ![](images/Pasted%20image%2020261102231737.png)
-    - _Asociativa por conjuntos (N vías):_ el índice elige un conjunto y se comparan N tags en paralelo; N comparadores + multiplexor (más lenta).
+    - _Asociativa por conjuntos (N vías):_ La caché se divide en conjuntos de $N$ bloques ($N$_-way_). El bloque se asigna a un conjunto mediante `(Dirección del bloque) mod (Número de conjuntos)` y puede colocarse en **cualquiera de las** $N$ **posiciones** de ese conjunto.
     ![](images/Pasted%20image%2020261102231807.png)
-    - _Totalmente asociativa:_ cualquier marco; se comparan todos los tags.
-2. **Identificación:** tag + bit de validez.
-3. **Reemplazo:** aleatorio, FIFO, LRU (caro con más de 4 vías → pseudo-LRU), LFU. La diferencia LRU vs. aleatorio baja al crecer la caché.
-4. **Escritura:**
-    - _Write-through:_ se escribe en caché y memoria; memoria siempre al día, control simple; suele usar buffer de escritura.
-    - _Write-back:_ solo en caché; bit de sucio; al reemplazar se escribe el bloque. Mucho menos ancho de banda.
-    - En fallo de escritura: _write allocate_ (se trae el bloque, típico con write-back) o _no write allocate_ (se escribe directo abajo, típico con write-through).
+    - _Totalmente asociativa:_ El bloque se puede alojar en **cualquier posición libre** de la caché, reduciendo al mínimo los fallos por conflicto.
+    
+2. **Identificación:** Define cómo el hardware comprueba si el dato solicitado está presente (_hit_) o si se ha producido un fallo (_miss_):
+
+	- **Indexación directa:** En mapeo directo, el campo _Índice_ de la dirección selecciona la línea y se compara el campo _Etiqueta (Tag)_.
+	- **Búsqueda limitada por conjunto:** En asociatividad por conjuntos, el _Índice_ selecciona el conjunto y el hardware compara en paralelo la _Etiqueta_ contra las $N$ entradas del conjunto mediante $N$ comparadores.
+	- **Búsqueda asociativa completa:** En asociatividad total, se comparan en paralelo las etiquetas de todas las entradas de la caché mediante comparadores o memorias asociativas (CAM).
+	- **Tabla de consulta separada:** En memoria virtual, la dirección virtual se busca a través de una **Tabla de Páginas** o un **TLB** (_Translation Lookaside Buffer_).
+	
+3. **Reemplazo:** Cuando ocurre un fallo y el espacio asignado o conjunto está lleno, se debe elegir qué bloque descartar:
+
+	- **Menos Recientemente Usado (LRU - _Least Recently Used_):** Descarta el bloque que no ha sido consultado durante más tiempo, aprovechando el principio de localidad temporal. Es complejo de implementar para alta asociatividad, por lo que suele aproximarse mediante hardware (_Pseudo-LRU_).
+	- **Aleatorio (_Random_):** Elige de forma pseudoaleatoria el bloque a reemplazar. Es sencillo de construir en hardware y en cachés grandes ofrece un rendimiento muy cercano a LRU.
+	- **FIFO (_First-In, First-Out_):** Reemplaza el bloque que lleva más tiempo dentro de la caché, independientemente de sus accesos recientes.
+	- **Gestión por software:** En memoria virtual, el sistema operativo emplea algoritmos más sofisticados (como el algoritmo del reloj o bits de referencia) debido al elevado costo de un fallo de página.
+	
+4. **Escritura:** Define cómo se gestionan las modificaciones de datos entre niveles para mantener la consistencia:
+
+	- **Frente a aciertos de escritura (_Write Hit_):**
+	    - **Escritura Directa (_Write-Through_):** La modificación se realiza **simultáneamente en la caché y en la memoria principal**. Garantiza que la memoria siempre esté actualizada y simplifica la coherencia, aunque suele requerir un _buffer de escritura_ para evitar detener al procesador.
+	    - **Escritura Retardada / Postescritura (_Write-Back_):** La modificación se hace **solo en la caché**. El bloque modificado se marca con un bit de sucio (_dirty bit_) y solo se escribe en la memoria principal cuando es reemplazado, ahorrando ancho de banda.
+	- **Frente a fallos de escritura (_Write Miss_):**
+	    - **Asignación en escritura (_Write Allocate_):** Trae el bloque completo desde la memoria principal a la caché antes de realizar la escritura. Típicamente se combina con _Write-Back_.
+	    - **Sin asignación en escritura (_No-Write Allocate / Write-Around_):** La escritura se realiza directamente en la memoria principal sin traer el bloque a la caché. Se combina habitualmente con _Write-Through_.
 
 #### Explicado: partir una dirección y ver un fallo de conflicto
 
@@ -1556,7 +1597,7 @@ Mini-traza para ver un **fallo de conflicto**. Caché chiquita de 4 bloques; se 
 | 4      | Fallo de **conflicto**                          | Acierto                                |
 La caché directa tenía 3 marcos libres y aun así falló: eso es conflicto, no capacidad. La asociatividad lo resuelve.
 
-### Rendimiento
+## Rendimiento
 
 - Tiempo de CPU = IC × (CPI de ejecución + accesos/instrucción × tasa de fallos × penalización) × T.
 - Se mejora por tres vías: **bajar la tasa de fallos, bajar la penalización, bajar el tiempo de acierto.**
@@ -1620,7 +1661,7 @@ Para acceder a la caché con la dirección física hay que traducir primero en e
 
 Eso pone un límite: tamaño de caché ≤ tamaño de página × número de vías. Con páginas de 4 KB y 8 vías, la L1 puede tener hasta 32 KB. Para crecer sin romper el truco, se agregan vías: es una de las razones por las que las L1 son asociativas.
 
-### Memoria principal
+## Memoria principal
 
 Mientras que las memorias caché utilizan tecnología SRAM (_Static RAM_), la memoria principal se implementa mediante **DRAM**:
 
@@ -1631,16 +1672,16 @@ Mientras que las memorias caché utilizan tecnología SRAM (_Static RAM_), la me
 Para optimizar el uso de los pines físicos en el circuito integrado y aumentar el ancho de banda, la memoria principal utiliza diversos mecanismos:
 
 - **Direccionamiento multiplexado (RAS / CAS):** Las celdas se organizan en una matriz de filas y columnas. Para ahorrar pines de dirección, la dirección se envía en dos pasos mediante la señal **RAS** (_Row Access Strobe_) para la fila y **CAS** (_Column Access Strobe_) para la columna.
-- **SDRAM (** **Synchronous DRAM** **):** Sincroniza la interfaz de la memoria con el reloj del procesador, permitiendo transferencias continuas en ráfagas (_burst mode_) sin necesidad de enviar direcciones adicionales por cada palabra.
-- **DDR (** **Double Data Rate** **):** Transfiere datos tanto en el flanco de subida como en el de bajada de la señal de reloj, duplicando el ancho de banda efectivo.
+- **SDRAM (_Synchronous DRAM_):** Sincroniza la interfaz de la memoria con el reloj del procesador, permitiendo transferencias continuas en ráfagas (_burst mode_) sin necesidad de enviar direcciones adicionales por cada palabra.
+- **DDR (_Double Data Rate_):** Transfiere datos tanto en el flanco de subida como en el de bajada de la señal de reloj, duplicando el ancho de banda efectivo.
 
 | Organización                            | Ciclos por bloque | Bytes/ciclo |
 | --------------------------------------- | ----------------- | ----------- |
 | Bus y memoria de 1 palabra              | 1 + 4×(10+1) = 45 | 0,35        |
 | Bus y memoria de 4 palabras             | 1 + 1×(10+1) = 12 | 1,33        |
 | Bus de 1 palabra, 4 bancos entrelazados | 1 + 10 + 4×1 = 15 | 1,07        |
-- **Entrelazamiento de memoria (** **Memory Interleaving** **):** Divide la memoria en varios bancos independientes que pueden ser accedidos en paralelo o de forma solapada, reduciendo la penalización por tiempo de acceso cuando la caché solicita un bloque completo de palabras contiguas.
-- **La Pared de la Memoria (** **Memory Wall** **):** La velocidad de los procesadores ha crecido a un ritmo mucho más acelerado que el tiempo de acceso de la DRAM. Esta brecha hace que la latencia de la memoria principal sea uno de los principales cuellos de botella para el rendimiento general del procesador.
+- **Entrelazamiento de memoria (_Memory Interleaving_):** Divide la memoria en varios bancos independientes que pueden ser accedidos en paralelo o de forma solapada, reduciendo la penalización por tiempo de acceso cuando la caché solicita un bloque completo de palabras contiguas.
+- **La Pared de la Memoria (_Memory Wall_):** La velocidad de los procesadores ha crecido a un ritmo mucho más acelerado que el tiempo de acceso de la DRAM. Esta brecha hace que la latencia de la memoria principal sea uno de los principales cuellos de botella para el rendimiento general del procesador.
 
 # Multiprocesadores
 Un **sistema multiprocesador** es un computador que integra dos o más unidades de procesamiento (CPUs o núcleos) capaces de ejecutar simultáneamente múltiples flujos de instrucciones o hilos pertenecientes a un mismo programa o a procesos independientes
@@ -1649,13 +1690,13 @@ El cambio de paradigma desde procesadores individuales (_uniprocessors_) hacia a
 
 Los multiprocesadores se clasifican principalmente según cómo acceden a la memoria principal:
 
-- **SMP / UMA (** **Symmetric Multiprocessors / Uniform Memory Access** **):** Todos los procesadores comparten un **único espacio de direcciones físicas** y tienen exactamente la misma latencia y tiempo de acceso a cualquier posición de la memoria principal. Suelen interconectarse mediante un bus compartido o una red de conmutación.
-- **NUMA (** **Non-Uniform Memory Access** **):** Comparten un único espacio de direcciones lógicas, pero la memoria física se encuentra **distribuida entre los nodos** del sistema. El acceso a la memoria local de un nodo es considerablemente más rápido que el acceso a un módulo de memoria remota en otro nodo. Ofrece mayor escalabilidad para un gran número de procesadores.
+- **SMP / UMA (_Symmetric Multiprocessors / Uniform Memory Access_):** Todos los procesadores comparten un **único espacio de direcciones físicas** y tienen exactamente la misma latencia y tiempo de acceso a cualquier posición de la memoria principal. Suelen interconectarse mediante un bus compartido o una red de conmutación.
+- **NUMA (_Non-Uniform Memory Access_):** Comparten un único espacio de direcciones lógicas, pero la memoria física se encuentra **distribuida entre los nodos** del sistema. El acceso a la memoria local de un nodo es considerablemente más rápido que el acceso a un módulo de memoria remota en otro nodo. Ofrece mayor escalabilidad para un gran número de procesadores.
 - **Clústeres / Multicomputadores (Memoria Distribuida):** Cada nodo cuenta con su propio espacio de direcciones privadas y su propio sistema operativo. La comunicación y transferencia de datos no se realiza de forma implícita en memoria, sino mediante el **paso explícito de mensajes** a través de la red.
 
 Dado que cada procesador cuenta con sus propias memorias caché privadas (L1, L2), surge el problema de la **incoherencia de caché**: si múltiples procesadores almacenan en sus cachés copias de una misma dirección de memoria y uno de ellos la modifica, las copias de los demás quedan obsoletas.
 
-### Coherencia
+## Coherencia
 Un sistema es coherente si: (1) P lee X después de escribir X y obtiene su valor; (2) una lectura de X tras la escritura de otro procesador, suficientemente separada, devuelve el valor nuevo; (3) las escrituras a una misma posición se ven en el mismo orden por todos (**serialización**).
 
 > Coherencia = _qué_ valor devuelve una lectura. Consistencia = _cuándo_ se hace visible una escritura.
@@ -1705,7 +1746,7 @@ Cómo leerla: al escribir, P3 necesita ser el único con copia, así que pide ex
 | Transacciones | 2                                        | 1                                 |
 El estado E significa “soy el único y la memoria está al día”: puede pasar a M sin avisar (como M) pero no tiene que responder con el dato si otro lo pide (la memoria está actualizada).
 
-### Consistencia de memoria
+## Consistencia de memoria
 
 - La coherencia no dice en qué orden se ven escrituras a **distintas** posiciones. Ejemplo: P1 hace `A = 1; flag = 1`; P2 espera `flag == 1` e imprime A. Solo con coherencia podría imprimir 0.
 - **Modelo de consistencia:** contrato entre programador y diseñador sobre el orden en que se ven las operaciones; la consistencia incluye a la coherencia.
