@@ -1,3 +1,4 @@
+# Plan de estudio — Coloquio Arquitectura de Computadoras (16/12)
 
 30 oct 2026 · @Wanda Molina
 
@@ -307,6 +308,52 @@ Respondelas en voz alta y sin mirar. Si una te lleva más de 2 minutos de silenc
 3. Un fallo de caché L2: ¿qué hacen ante él un pipeline simple, un fuera de orden, una caché sin bloqueo y un multithreading de grano grueso?
 4. ¿Por qué la coherencia de caché es necesaria en multicore pero no en un uniprocesador multiprogramado (salvo DMA)?
 5. Tu TP final: ¿qué riesgos resuelve tu pipeline, cómo, y qué le agregarías para hacerlo superescalar?
+
+## Lo que tomaron los parciales
+
+Los dos parciales piden lo mismo que va a pedir el oral: **explicar cómo funciona algo, sus ventajas y desventajas, y por qué**. No hubo cálculos. U1 (rendimiento, potencia, Amdahl) no apareció en ninguno: es probable que en el coloquio sí, porque no fue evaluada todavía.
+
+La columna de la derecha es lo que yo le sumaría a tu respuesta para el oral, donde el profe repregunta: no es la corrección oficial (las notas aún no estaban).
+
+**Primer parcial (22/09)**
+
+|   |   |   |
+|---|---|---|
+|Pregunta|Unidad|Para el oral: corregir o agregar|
+|Software pipelining: beneficios y limitaciones|U3|Bien. Agregá la comparación con loop unrolling: unrolling multiplica el código y los registros; software pipelining no, pero necesita prólogo y epílogo.|
+|Ventajas y desventajas de la planificación estática|U3|**Error:** escribiste “al aplicarse en tiempo de ejecución”; la estática la hace el **compilador** (tiempo de compilación). Lo demás está bien; sumá que depende del modelo concreto de procesador.|
+|Predicción dinámica global|U3|Bien. Nombrá la notación del apunte (m,n), el ejemplo (2,2), y por qué la historia global capta correlación entre saltos distintos.|
+|Predictor híbrido|U3|Bien (torneo). Agregá por qué sirve: unos saltos se predicen mejor con historia local y otros con global.|
+|ROB en Tomasulo|U3|Muy completa. Sumá que también da **excepciones precisas** y elimina EDL/EDE.|
+|Excepciones precisas|U2|Bien. Prepará la repregunta: ¿qué pasa si dos instrucciones generan excepciones fuera de orden (una en MEM, otra en IF)? Se marcan y se atienden en orden en WB/commit.|
+|Riesgos estructurales|U2|Bien. Agregá la otra solución: frenar (stall/burbuja), y el truco del banco de registros (escribir en la 1.ª mitad del ciclo, leer en la 2.ª).|
+|Monociclo, multiciclo, segmentado|U2|Precisá: en **monociclo** el período lo fija la instrucción más lenta (el load). En **multiciclo** el período lo fija la etapa más lenta y cada instrucción usa los ciclos que necesita (el load 5, una R 4, un salto 3): no todas duran lo mismo. En **segmentado**, CPI ideal 1 con el pipeline lleno.|
+|Arquitectura load-store|ISA|Bien. Sumá consecuencias: instrucciones de largo fijo y formato simple, pipeline más fácil, más instrucciones por programa. RISC-V es un ejemplo.|
+|Síntesis de dos `case` en Verilog|HDL|El caso 1 está bien (latch por caso incompleto). En el **caso 2** falta `c` en la lista de sensibilidad: el sintetizador genera igual el mux, pero la **simulación** no reacciona a cambios de `c` (no coinciden). Usar `always @(*)`.|
+|Asignaciones bloqueantes y no bloqueantes|HDL|Bien.|
+|Módulo repetidor de bits|HDL|La lógica está bien. El enunciado pedía el nombre `repetidor_de_datos` y usaste `repetidor`.|
+
+**Segundo parcial (03/11)**
+
+|   |   |   |
+|---|---|---|
+|Pregunta|Unidad|Para el oral: corregir o agregar|
+|Por qué no más de 8 vías en un superescalar|U4|Bien. Sumá los números del estudio de límites del ILP y que doblar el ancho exige más puertos de caché y registros, predecir varios saltos por ciclo y mucho más consumo.|
+|Tipos de conmutación en multithreading|U4|Muy completa. Tené a mano el diagrama de slots para dibujarlo.|
+|Procesador vectorial|Anexo|Bien. Agregá lo que lo distingue de SIMD multimedia: registro de longitud de vector, accesos con stride y gather/scatter, registros de máscara. Y que puede traer datos dispersos, no solo bloques contiguos.|
+|Organización de la grilla de threads en GPU|Anexo|Bien (ojo: son _warps_, no _wraps_). Sumá los SM y por qué hay dos niveles.|
+|Propiedad de inclusión|U5|Bien. Matiz para el oral: no todas las cachés reales son inclusivas; las diapositivas muestran la L1 del Opteron como “no inclusiva”.|
+|Caché totalmente asociativa|U5|Precisá: el tag es la dirección **menos el offset** (no toda la dirección). Sumá que necesita política de reemplazo (LRU) y dónde se usa: TLB, caché víctima.|
+|Técnicas para reducir la penalización de fallo|U5|Bien. Faltó el reemplazo de subbloques.|
+|Snoopy de 3 estados (MSI)|U6|Es la más floja: describís los estados pero no cómo se pasa de uno a otro. En el oral “explique el protocolo” = **transiciones**: BusRd, BusRdX, Flush, quién da el dato. Practicá la traza del resumen (bloque “Explicado” de U6).|
+|Spin lock con coherencia|U6|Muy bien. Podés sumar la versión con LL/SC.|
+|Directorio basado en memoria|U6|Bien la lectura. Faltó la **escritura** (lista de sharers, invalidaciones, acks) y cómo es la entrada: un bit de presencia por nodo + bit de sucio, y su sobrecarga.|
+
+Qué sacar de esto para el plan:
+
+- **Reforzar:** las transiciones de MSI/MESI, el caso de escritura en directorios, y el período de reloj en monociclo y multiciclo.
+- **U1 entera** está sin evaluar: no la saltees en la semana 1.
+- **Si entra la parte práctica** (Verilog), preguntá si se toma en el coloquio: el primer parcial la incluyó.
 
 ## Estrategia para el coloquio
 
