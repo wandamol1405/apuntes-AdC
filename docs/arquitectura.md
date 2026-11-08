@@ -3,7 +3,52 @@
 Fecha de creación: 7 de agosto de 2026 20:18
 Personas: MARIA WANDA MOLINA
 
-# Introducción
+# U1: Introducción - Tendencias tecnológicas
+## **Arquitectura** 
+Descripción de atributos de un sistema -> estructura conceptual y el comportamiento funcional. 
+El programador ve el ISA, no el flujo de datos.
+
+### **ISA (Instruction Set Architecture)** 
+Interfaz abstracta fundamental entre el hardware del procesador y el software de bajo nivel. Define todas las especificaciones necesarias para que un programa escrito en código máquina se ejecute de manera correcta.
+Los aspectos que definen un ISA:
+- **Repertorio de instrucciones**: Las operaciones aritméticas, lógicas, de transferencia de datos y de control disponibles.
+- **Estado visible del programador**: La cantidad, función y tamaño de los registros arquitectónicos.
+- **Tipos y formatos de datos**: La codificación binaria y el tamaño de los operandos.
+- **Modos de direccionamiento**: Las formas en que las instrucciones especifican las direcciones de memoria.
+- **Manejo de excepciones e interrupciones**: Las reglas con las que la máquina responde a eventos externos o fallas del sistema.
+
+### Microarquitectura
+Organización a bajo nivel de un procesador -> diseño físico y estructura del hardware que utiliza un procesador para ejecutar un ISA específico.
+Sus detalles internos permanecen ocultos al software.
+
+- **Diseño del cauce o segmentación (** **pipelining** **)**: El número y la profundidad de las etapas de ejecución.
+- **Técnicas de paralelismo a nivel de instrucción (ILP)**: Mecanismos como la ejecución fuera de orden (_out-of-order_), la especulación y el renombrado de registros.
+- **Predicción de saltos**: Las estructuras de hardware dedicadas a anticipar el flujo de control del programa.
+- **Jerarquía de memoria caché**: La cantidad de niveles, el tamaño, la velocidad y las políticas de reemplazo de las cachés.
+- **Organización del** **datapath** **y buses**: La disposición de las ALUs, multiplicadores y estaciones de reserva.
+
+> La diferencia fundamental entre la **ISA** (_Instruction Set Architecture_ o Arquitectura del Conjunto de Instrucciones) y la **microarquitectura** radica en que la ISA representa el **modelo abstracto** visible para el software, mientras que la microarquitectura es la **implementación física interna** en el hardware.
+> Varios procesadores pueden tener el mismo ISA pero distinta microarquitectura.
+
+| Característica     | ISA (Arquitectura)                                           | Microarquitectura                                          |
+| ------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- |
+| **Definición**     | Especificación abstracta o contrato software-hardware        | Organización física e implementación del hardware          |
+| **Visibilidad**    | Visible para programadores en ensamblador y compiladores     | Oculta al software y al usuario                            |
+| **Compatibilidad** | Se mantiene constante para garantizar compatibilidad binaria | Cambia dinámicamente entre generaciones y modelos de chips |
+| **Ejemplos**       | x86, MIPS, ARM, RISC-V                                       | Intel NetBurst (Pentium 4), AMD Barcelona, Intel Nehalem   |
+## Escalado de la tecnología
+Refiere a la reducción continua de las dimensiones físicas de los transistores y el incremento exponencial en la densidad de integración de componentes en un solo chip.
+
+**Espacio**
+Paso de computadoras hechas a base de tubos de vacío con una ocupación de 1 millón de metros cúbicos a computadoras basadas en tecnologías CMOS nanométricas.
+
+**Tiempo**
+El tiempo de propagación de un dato pasó de ser del orden de 100 segundos al orden de los nanosegundos.
+
+**Energía**
+La energía de conmutación pasó de ser del orden de los 100 Joules a $1.10^{-14}$ Joules
+
+> El desempeño / rendimiento / performance de una computadora se mide en flops que son la cantidad de operaciones de punto flotante que se realizan por segundo.
 ## Generaciones del desarrollo de computadoras
 
 ### Primera generación (1950)
@@ -41,67 +86,64 @@ La arquitectura de Von Neumann es una familia de arquitecturas de computadoras q
 ### IPC
 
 Instrucciones por ciclo → métrica que representa el número promedio de instrucciones que un procesador es capaz de ejecutar en un único ciclo de reloj (se busca que sea mayor).
-
-### ISA
-
-Instruction Set Architecture describe la sintaxis y la semántica de la interfaz de una computadora: tipo y tamaño de operandos, estado del registro visible del programador, modelo de memoria, manejo de interrupciones y excepciones, instrucciones disponibles, etc.
-
-### Performance
-
-Se mide en flops, que es la cantidad de operaciones de punto flotante que se realizan por segundo. 
-
 ## Ley de Moore
 
-Moore (1965) anticipó que la complejidad de los circuitos integrados se duplicaría cada año, acompañada de una reducción proporcional de sus costos. En 1975 ajustó su estimación, señalando que el número de transistores integrados en un chip de silicio se duplicaría aproximadamente **cada dos años** (frecuentemente citado también como un periodo de entre 18 y 24 meses). Esto permitió anticipar el diseño de los procesadores, disminuyendo sus costos y aumentando su rendimiento.
+Moore (1965) anticipó que la complejidad de los circuitos integrados se duplicaría cada año, acompañada de una reducción proporcional de sus costos. En 1975 ajustó su estimación, señalando que **el número de transistores integrados en un chip de silicio se duplicaría aproximadamente cada dos años** (frecuentemente citado también como un periodo de entre 18 y 24 meses). Esto permitió:
+- **Reducción de costos y mayor integración** -> proliferación de circuitos VLSI en dispositivos cotidianos
+- **Impacto en el rendimiento y la microarquitectura** -> incremento en la densidad de integración proporcionó recursos adicionales como memorias caché en chips y hardware especializado.
 
 ![image.png](images/image%201.png)
 
-Los retos de la ley son:
+Los retos de la regla son:
+- **Disipación térmica** -> aumento del consumo energético y densidad de potencia del chip con el aumento de la densidad de transistores y de la frecuencia del clock -> no debe alcanzar el límite práctico disipable por aire en chips de silicio (~100W x $cm^2$)
+- **Fugas de corriente** -> límite en la reducción de la tensión (potencia estática) del transistor al miniaturizarse -> corriente de fuga significativa en la inactividad del transistor, del 40% del consumo energético
+- **Soft errors y retardos cableados** -> en nodos de juntura pequeños aumentan los soft errors por partículas radiactivas y retardos de señal en interconexiones -> dominan sobre la velocidad de conmutación.
 
-- Frecuencia vs corriente de fuga → el leakage aumenta de forma cúbica con la frecuencia → aumento de manera cúbica de la disipación
-- Soft errors →  Este error se debe a que partículas ionizadas impactan contra la juntura de los
-transistores; por ejemplo, si una partícula con cierta carga impacta una celda de memoria, esta puede generar un cambio de estado (por ejemplo, puede que haya un 0 donde antes había un 1).
-    
-Al disminuir el tamaño de la juntura por los avances tecnológicos, la carga eléctrica de la juntura y su tamaño en comparación con la partícula ionizada se vuelven críticamente significativos. Por esta razón, a medida que aumenta la densidad de transistores en un chip, la cantidad relativa de *soft errors* se incrementa de manera exponencial.
-    
-- El aumento de la densidad de transistores se frenó a partir del 2005 cuando aparecieron los multicores.
-- Wire delay → retrasos para alcanzar un porcentaje del procesador en un ciclo, debidos a interconexiones internas en celdas de una FPGA.
+Debido a estos factores, la mejora anual de rendimiento cayó de un 52% a un 12% entre 2011 y 2015 y se redujo a un 3.5% anual tras el 2015.
 
+#### Soft error
+Es un tipo de falla en el que una señal o dato almacenado en el circuito resulta incorrecto sin que exista un defecto o daño físico en el hardware. Se manifiesta, por ejemplo, cuando una celda de memoria sufre una inversión involuntaria de bit (_bit flip_), alterando un valor de 0 a 1 o viceversa.
+
+Este error se debe a que partículas ionizadas impactan contra la juntura de los transistores; por ejemplo, si una partícula con cierta carga impacta una celda de memoria, esta puede generar un cambio de estado. Estas partículas pueden provenir de rayos cósmicos (en integrados que se encuentran en el espacio exterior o en aviones a gran altura), radiación (debida a materiales radioactivos en el interior de los integrados, se da en integrados en reactores nucleares), neutrones térmicos, etc.
+
+> Al disminuir el tamaño de la juntura por los avances tecnológicos, la carga eléctrica de la juntura y su tamaño en comparación con la partícula ionizada se vuelven críticamente significativos. Por esta razón, a medida que aumenta la densidad de transistores en un chip, la cantidad relativa de *soft errors* se incrementa de manera exponencial.
+
+**Power wall** -> La potencia dinámica crece proporcionalmente con la frecuencia de reloj
+($P ∝ C · V^2 · f$ ). Aumentar la frecuencia implica un consumo energético y una disipación
+térmica insostenibles, como se evidenció en el Pentium 4.
+
+Al toparse con el muro de la potencia en procesadores mononúcleo, la industria migró hacia procesadores multinúcleo (_multicores_) para continuar aprovechando el paralelismo a nivel de hilos.
+
+>Una arquitectura debe ser diseñada para soportar el paso del tiempo. Los procesadores siguen funcionando hoy en día, es decir, han soportado el paso del tiempo mediante el cambio de su microarquitectura, pero no de su arquitectura.
 ## Consumo energético de procesadores
 
-El procesador ingresa energía para transformar información. Sin embargo, no es una máquina en
-el sentido tradicional, ya que la energía ingresada no realiza un trabajo útil en términos mecánicos,
-sino que se convierte en calor.
+El procesador convierte la energía en información -> el resultado indirecto es la disipación de esa energía en forma de calor -> importancia de la eficiencia energética.
 
 - A menor tiempo de operación (mayor frecuencia, lograda mediante la inserción de más transistores más pequeños en una misma área), mayor será la potencia y, por lo tanto, mayor será la temperatura.
-- A menor área del transistor, mayor será la densidad de potencia y mayor será la probabilidad
-de fundir el transistor. Para no superar el límite de densidad de potencia (100W por centímetro cuadrado) que terminaría fundiendo el transistor se utilizan métodos de refrigeración.
+- A menor área del transistor, mayor será la densidad de potencia y mayor será la probabilidad de fundir el transistor. Para no superar el límite de densidad de potencia (100W por centímetro cuadrado) que terminaría fundiendo el transistor se utilizan métodos de refrigeración.
+### Componentes de la potencia
 
-#### Componentes de la potencia
-
-- **Potencia de conmutacion (Dinámica)**
-
-Es la potencia capacitiva que se consume de manera activa cuando los transistores cambian de estado lógico
+**Potencia de conmutación (Dinámica)**
+Es la potencia capacitiva que se consume de manera activa cuando los transistores cambian de estado lógico.
 
 $P_{conmutacion} = C \cdot V^2 \cdot f$
 
 donde *C* es la capacitancia, *V* el voltaje y *f* la frecuencia de reloj.
 
-- **Potencia de fuga (Estática)**
-
-Es la potencia que el procesador consume constantemente "sin hacer nada", es decir, de manera pasiva incluso cuando no está conmutando. Se debe a que los transistores actuales no se pueden cerrar por completo y sufren fugas de corriente eléctrica
+**Potencia de fuga (Estática)**
+Es la potencia que el procesador consume constantemente "sin hacer nada", es decir, de manera pasiva incluso cuando no está conmutando. Se debe a que los transistores actuales no se pueden cerrar por completo y sufren fugas de corriente eléctrica.
 
 $P_{fuga} = I_{corte} \cdot V_{corte} + I_{saturacion} \cdot V_{saturacion}$
 
-En los procesadores modernos de servidores, esta fuga llega a representar aproximadamente el 40% del consumo total
+En los procesadores modernos de servidores, esta fuga llega a representar aproximadamente el 40% del consumo total.
 
-- **Potencia de cortocircuito**
-
+**Potencia de cortocircuito**
 Se produce momentáneamente cuando dos transistores complementarios que están en oposición conmutan. Durante el brevísimo instante de transición (uno pasa de corte a saturación y el otro viceversa), se genera un camino directo de baja resistencia a tierra (un cortocircuito).
+![](images/Pasted%20image%2020261107201635.png)
 
 La potencia dinámica de un circuito es:
 
-$*P_{dinamica}=N⋅V^2⋅C⋅f⋅A*$
+$P_{dinamica}=N⋅V^2⋅C⋅f⋅A$
 
 Donde:
 
@@ -113,7 +155,7 @@ Donde:
 
 → Manteniendo constantes los demás componentes, la potencia es directamente proporcional a la frecuencia. Esto aminora el rendimiento del procesador al procesar menos instrucciones por segundo.
 
-→ Dado que el voltaje se encuentra al cuadrado en la fórmula de la potencia ($*V^2*$), cualquier incremento en la frecuencia que obligue a aumentar el voltaje de forma lineal provoca que **la potencia disipada por el dispositivo aumente de manera cúbica con la frecuencia (**$*P∝f^3*$**)**
+→ Dado que el voltaje se encuentra al cuadrado en la fórmula de la potencia ($V^2$), cualquier incremento en la frecuencia que obligue a aumentar el voltaje de forma lineal provoca que **la potencia disipada por el dispositivo aumente de manera cúbica con la frecuencia (**$P∝f^3$**)**
 
 Para mejorar el rendimiento teniendo en cuenta la máxima potencia que un dispositivo debe disipar se agregan cores simples y complejos.
 
@@ -126,7 +168,7 @@ Para mejorar el rendimiento teniendo en cuenta la máxima potencia que un dispos
 - **Power Gating →** desconecta de la fuente de alimentación sectores que no están en uso.
 - **Ajustes dinámicos de voltaje y frecuencia** → mejorar la compensación potencia/rendimiento
 
-### Cores simples vs complejos
+#### Cores simples vs complejos
 
 **Cores simples →** ejecutan instrucciones en el orden en que se reciben, sin realizar reordenamiento de instrucciones, ejecución especulativa ni predicción de saltos. Consumo minimalista, menor número de transistores. Eficientes en entornos de alto paralelismo a nivel de datos.
 
@@ -139,15 +181,15 @@ como para complejos, aunque también lo hace la potencia. Sin embargo, los núcl
 
 → En diseños con buen paralelismo y utilizando muchos núcleos, es preferible que sean simples ya que los complejos consumen mucha más energía.
 
-### ¿Cómo bajar el consumo?
+#### ¿Cómo bajar el consumo?
 
-$*P_{dinamica}=N⋅V^2⋅C⋅f⋅A*$
+$P_{dinamica}=N⋅V^2⋅C⋅f⋅A$
 
 → Reducir la frecuencia →  reduce la cantidad de instrucciones x segundo → menor rendimiento
 
 → Reducir la V de alimentación → disminuye la frecuencia de operación y menos tolerante a ruido
 
-→Reducir cantidad de transistores → disminuye el rendimiento del sistema
+→ Reducir cantidad de transistores → disminuye el rendimiento del sistema
 
 → Reducir la capacitancia → menor duración de almacenamiento en la RAM → mayor refresco
 
@@ -161,30 +203,34 @@ atravesar una mayor cantidad de dispositivos para cubrir una misma distancia en 
 ## Rendimiento
 
 Se enfoca en la velocidad a la que se realiza una tarea determinada. 
-
 Dependiendo del punto de vista del evaluador, el rendimiento se define de dos maneras principales:
 
 - **Tiempo de respuesta (o Latencia):** Es el tiempo transcurrido entre el inicio y la finalización de una tarea individual. Es la métrica que más le interesa al usuario individual. Incluye los accesos a disco, accesos a memoria, operaciones de entrada/salida (E/S) y la sobrecarga del sistema operativo.
+
+> **Fan-out of 4 (FO4)** -> métrica de temporización estandarizada en el diseño microelectrónico que representa el retardo de propagación de una compuerta lógica básica (típicamente un inversor) cuya salida está conectada a cuatro compuertas lógicas idénticas a ella.
+> Mide el tiempo necesario para activar dicha carga y se usa como unidad normalizada para cuantificar la latencia de una etapa de lógica combinacional. 
+
 - **Productividad (o Throughput / Ancho de banda):** Es la cantidad total de trabajo o tareas completadas por unidad de tiempo. Es la métrica crítica para los administradores de centros de datos o servidores.
 
 **Tiempo de ejecución:** intervalo de tiempo transcurrido desde que un usuario ejecuta un programa hasta que recibe la respuesta del sistema.
 
-$Rendimiento = \frac{1}{Tiempo\ de\  ejecucion}$
+$Rendimiento = \frac{1}{Tiempo\ de\ ejecución}$
 
-**Performance:** indica cuantas veces un computador es más rápido que otro de referencia.
+**Performance:** indica cuántas veces un computador es más rápido que otro de referencia.
 
 $$
-Performance = \frac{Rendimiento_A}{ Rendimiento_B} = \frac{Tiempo\ de\ ejecucion_A}{Tiempo\ de\ ejecucion_B}
+Performance = \frac{Rendimiento_A}{ Rendimiento_B} = \frac{Tiempo\ de\ ejecución_B}{Tiempo\ de\ ejecución_A}
 $$
 En general, la performance se mide en términos de throughput y depende de 3 factores principales:
-- La frecuencia del reloj -> aumenta hasta cierto punto -> deja de ser fundamental actualmente
-- Cantidad total de instrucciones a ejecutar -> depende del programa
-- **CPI** (Cycle per Instruction) -> depende de la microarquitectura 
+- La frecuencia del reloj -> depende de la tecnología de fabricación y de la microarquitectura -> aumenta hasta cierto punto -> deja de ser fundamental actualmente
+- Cantidad total de instrucciones a ejecutar -> depende del algoritmo, el lenguaje de programación, la eficiencia del compilador y del ISA
+- **CPI** (Cycles Per Instruction) -> depende de la microarquitectura y del ISA
 ### Tiempo de CPU y CPI
 
 **Tiempo de CPU →** tiempo que tarda el procesador en ejecutar un programa
+$$Tiempo\ de\ CPU\ = Ciclos\ de\  clock\ para\ un\ programa\ * Periodo\ de\ clock$$
 
-$Tiempo\ de\ CPU = \frac{Ciclos\ de\ clock\ para\ un\ programa}{Frecuencia\ de\ clock}$
+$$Tiempo\ de\ CPU = \frac{Ciclos\ de\ clock\ para\ un\ programa}{Frecuencia\ de\ clock}$$
 
 $$
 Tiempo\ de\ CPU = \frac{Recuento\ de\ instrucciones * CPI}{Frecuencia\ de\ reloj}
@@ -195,23 +241,25 @@ $$
 $$
 CPI = \frac{Ciclos\ de\ clock\ para\ un\ programa}{Cantidad\ de\ instrucciones}
 $$
-
-Cada uno de estos tres factores depende de diferentes componentes del sistema:
-
-1. **Cantidad de instrucciones (Instruction Count - IC):** Es el número de instrucciones que realmente se ejecutan en un programa (conteo dinámico). Depende directamente del **algoritmo**, del **lenguaje de programación** y de la eficiencia del **compilador**, así como de la **arquitectura del conjunto de instrucciones (ISA)**.
-2. **CPI (Ciclos por instrucción):** Es el promedio de ciclos de reloj que requiere una instrucción para completarse. Depende de la **ISA** y de la **organización del hardware** (microarquitectura), como la segmentación o la jerarquía de memoria.
-3. **Tiempo de ciclo de reloj (o Frecuencia de reloj):** Es la duración de un pulso de reloj (ej. 0.25 ns para un reloj de 4 GHz). Depende de la **tecnología de fabricación de semiconductores** y de la **organización física del hardware**.
-
+Definiendo el tiempo de CPU con el valor del CPI:
+$$Tiempo\ del\ CPU\ = Cantidad\ de\ instrucciones\ * CPI\ * Periodo\ del\ clock$$
 ### Ley de Amdahl
 
-La **Ley de Amdahl** es una regla que establece que la mejora máxima de rendimiento alcanzable al optimizar una sola parte de una computadora está estrictamente limitada por la fracción de tiempo que el sistema utiliza realmente dicha mejora. El speed up se calcula:
+Es una regla que establece que la mejora máxima de rendimiento alcanzable al optimizar una sola parte de una computadora está estrictamente limitada por la fracción de tiempo que el sistema utiliza realmente dicha mejora. 
+
+La mejora en el rendimiento global alcanzada al optimizar un componente está estrictamente limitada por la **fracción de tiempo** durante la cual se utiliza dicho componente mejorado.
+
+El speed up se calcula:
 
 $$
 Speed\ up = \frac{1}{(1-F_m)+\frac{F_m}{A_m}}
 $$
 
-$F_m$ es la fracción de tiempo que se puede utilizar la mejora y $A_m$ es la aceleración de esa mejora en específico
+$F_m$ es la fracción de tiempo que se puede utilizar la mejora y $A_m$ es la aceleración de esa mejora en específico.
 
+Incluso si un subsistema se vuelve infinitamente rápido ($A_m \to \infty$), el tiempo que requiere la parte no mejorada no se puede reducir. Por lo tanto, la aceleración global máxima que se puede alcanzar está acotada por el recíproco de la fracción no mejorada:
+
+$$A_{\text{máxima}} = \frac{1}{1 - F_m}$$
 #### Métricas para medir el rendimiento
 
 - **MIPS (Millones de Instrucciones Por Segundo):** Definido como el número de instrucciones ejecutadas dividido por el tiempo de ejecución multiplicado por $10^6$. El peligro de los MIPS es que **pueden variar de forma inversa al rendimiento real**. Un compilador optimizador puede reducir significativamente el recuento de instrucciones totales eliminando operaciones rápidas; esto acelera el programa, pero como las instrucciones restantes son más complejas, el CPI promedio sube, provocando que la tasa de MIPS disminuya en el programa que corre más rápido. Además, los MIPS impiden comparar máquinas con diferentes ISAs.
@@ -368,7 +416,7 @@ Se utiliza cuando una operación involucra exclusivamente registros. Se conforma
 - **`rs1` (5 bits):** primer registro fuente
 - **`funct3` (3 bits):** campo de código de operación adicional.
 - **`rd` (5 bits):** registro destino donde se guarda el resultado.
-- **`opcode` (7 bits):** específica la operación básica y el formato.
+- **`opcode` (7 bits):** especifica la operación básica y el formato.
 
 #### I-Type
 
@@ -383,26 +431,26 @@ Se utiliza cuando el segundo operando es una constante inmediata o para instrucc
 
 Exclusivo para instrucciones que guardan datos en memoria
 
-- **`immediate`** se divide en dos secciones dentro de la instrucción: **`immediate[11:5]`** (7 bits) e **`immediate[4:0]` .** Se hace esto para que los campos de los registros fuente (`rs1` y `rs2`) permanezcan exactamente en las posiciones que en las instrucciones tipo R.
+- **`immediate`** se divide en dos secciones dentro de la instrucción: **`immediate[11:5]`** (7 bits) e **`immediate[4:0]` .** Se hace esto para que los campos de los registros fuente (`rs1` y `rs2`) permanezcan exactamente en las mismas posiciones que en las instrucciones tipo R.
 
 ![imagen.png](images/imagen%202.png)
 
-`opcode` → primer campo a decodificar para saber que operación es
+`opcode` → primer campo a decodificar para saber qué operación es
 
 ### Ejemplo de traducción (C a máquina)
 
 ```c
 A[30] = h + A[30] + 1
 // Asumiendo que el registro x10 contiene
-// la direccion base de la tabla A y x21 almacena la variable h
+// la dirección base de la tabla A y x21 almacena la variable h
 ```
 
 ```nasm
-lw  x9, 120(x10)    # Carga el valor de A[6] en el registro x9.
+lw  x9, 120(x10)    # Carga el valor de A[30] en el registro x9.
                     # (30 palabras * 4 bytes = offset 120 bytes)
 add x9, x21, x9     # Suma el valor cargado (x9) con la variable h (x21).
 addi x9, x9, 1      # Suma la constante inmediata 1 al resultado anterior.
-sw  x9, 120(x10)    # Guarda el valor final de x9 de vuelta en la memoria en A[6].
+sw  x9, 120(x10)    # Guarda el valor final de x9 de vuelta en la memoria en A[30].
 ```
 
 Si miramos los valores decimales de los campos de estas instrucciones en el hardware:
@@ -516,9 +564,9 @@ Todas las señales deben propagarse desde el elemento de estado 1, a través de 
     
     ![imagen.png](images/imagen%207.png)
     
-    3 inputs indicadores → Dos de ellas especifican los registros de origen que se van a leer (**`RA`** y **`RB`** o *Read registers*), y la tercera específica el registro de destino donde se guardará el resultado (**`RW`** o *Write register*)
+    3 inputs indicadores → Dos de ellas especifican los registros de origen que se van a leer (**`RA`** y **`RB`** o *Read registers*), y la tercera especifica el registro de destino donde se guardará el resultado (**`RW`** o *Write register*)
     
-    2 outputs de datos → Permiten leer y extraer simultáneamente los valores de los dos registros de origen (`busA` y /`busB` o *Read data*) para enviarlos directamente a la ALU sin perder ciclos adicionales.
+    2 outputs de datos → Permiten leer y extraer simultáneamente los valores de los dos registros de origen (`busA` y `busB` o *Read data*) para enviarlos directamente a la ALU sin perder ciclos adicionales.
     
     Las entradas de los identificadores de registro son de cinco
     bits para especificar uno de los 32 ($32 = 2^5$) registros, mientras que los buses de la entrada y las dos salidas de datos son de 32 bits.
@@ -592,7 +640,7 @@ Esta tabla muestra los valores de las señales de control para las instrucciones
 
 → La instrucción más lenta (típicamente la de carga) determina el ciclo del clock → las instrucciones más cortas desaprovechan una enorme cantidad de tiempo esperando a que termine el ciclo.
 
-→ Dado que todo debe resolverse en un ciclo, ningún recurso de hardware (ALU, memoria), puede usarse más de una vez por instrucción → separa la memoria en dos (instrucciones y datos), duplicar sumadores para el PC → mayor area.
+→ Dado que todo debe resolverse en un ciclo, ningún recurso de hardware (ALU, memoria), puede usarse más de una vez por instrucción → separa la memoria en dos (instrucciones y datos), duplicar sumadores para el PC → mayor área.
 
 ## Multiciclo
 
@@ -616,10 +664,10 @@ Registros intermedios de almacenamiento cuya carga está sincronizada con el clo
 - Monociclo tiene un CPI = 1 mientras que el multiciclo tiene un CPI promedio entre 3 y 5 → depende de las instrucciones.
 - El rendimiento global de la máquina multiciclo es superior y mucho más eficiente frente a la inclusión de instrucciones complejas (como la división o multiplicaciones en punto flotante) que arruinarían por completo el período del reloj de una máquina monociclo.
 
-El Fan-out of Four (F04) es un concepto utilizado en diseño microelectrónico que se refiere a
+El Fan-out of Four (FO4) es un concepto utilizado en diseño microelectrónico que se refiere a
 la condición en la que una puerta lógica, típicamente un inversor, tiene su salida conectada a cuatro puertas lógicas idénticas a ella (o a una carga capacitiva equivalente).
 
-Retardo F04: Es el retardo de propagación de una compuerta lógica con una carga que es el
+Retardo FO4: Es el retardo de propagación de una compuerta lógica con una carga que es el
 cuádruple de la suya propia. Se utiliza como una medida del retardo de una etapa en el pipeline y es independiente de la tecnología.
 
 ### Etapas de ejecución
@@ -690,7 +738,8 @@ A partir de cierta cantidad de etapas, el rendimiento comienza a decrecer debido
 Para implementarlo:
 
 - todos los ciclos deben durar lo mismo
-- todas las instrucciones deben pasar por la mismas etapas → si no terminarían fuera de orden
+- todas las instrucciones deben pasar por las mismas etapas → si no terminarían fuera de orden
+
 
 #### Consideraciones
 
@@ -718,6 +767,14 @@ se encuentren. Ejemplo: Write_Reg_ID, Write_Reg_EX, Write_Reg_MEM, Write_Reg_WB.
 
 Realizar el control significa activar las nueve líneas de control a estos valores en cada etapa para cada instrucción. La manera más simple de hacerlo es extendiendo los registros de segmentación para incluir la información de control. Ya que las líneas de control empiezan en la etapa EX, se puede crear la información de control durante la descodificación de la instrucción. Las señales de control se usan en la etapa de segmentación adecuada mientras la instrucción avanza por el pipeline.
 
+### Límite del pipelining
+
+Aunque incrementar el número de etapas ($q$) reduce el tiempo por ciclo de reloj, **la profundidad de la segmentación no se puede aumentar de forma indefinida**. Existe un límite práctico a partir del cual profundizar el cauce provoca que el rendimiento real comience a decrecer debido a las siguientes restricciones:
+
+1. **Sobrecarga de almacenamiento (_Latch Overhead_) y desvío de reloj (_Clock Skew_)**: Cada etapa de la segmentación requiere registros o _latches_ para almacenar los datos intermedios. La transferencia de información a través de estos cerrojos introduce un tiempo fijo de sobrecarga ($\tau$), compuesto por el tiempo de establecimiento (_setup time_) y la incertidumbre en la distribución del reloj (_clock skew_). Conforme el tiempo de lógica combinacional por etapa disminuye, esta sobrecarga fija domina el periodo de reloj, fijando un límite físico insuperable al rendimiento útil (que jamás puede superar $1/\tau$).
+2. **Penalización por riesgos de control y excepciones**: Al profundizar la segmentación, la penalización por vaciado del cauce (_pipeline flush_) ante saltos mal predichos o excepciones aumenta drásticamente. Al tener más etapas ocupadas, un fallo obliga a descartar una cantidad mayor de instrucciones y ciclos de trabajo.
+3. **Desequilibrio entre etapas y dependencias de datos**: En la práctica es muy difícil dividir la ruta de datos en etapas de latencia perfectamente homogénea. Dado que la duración del ciclo de reloj se ajusta siempre a la etapa más lenta, el desequilibrio genera desperdicio de tiempo. Asimismo, las dependencias de datos (como el riesgo _Load-Use_) imponen paradas o inserción de burbujas en el cauce.
+4. **Límite de consumo energético y disipación térmica**: Incrementar el número de etapas e intentar operar a frecuencias más elevadas multiplica la cantidad de _latches_ conmutando y la carga capacitiva global. Esto dispara el consumo de potencia dinámica y estática (_Power Wall_). Los análisis de eficiencia energética (rendimiento por vatio) muestran que la profundidad óptima suele ubicarse en un rango de 10 a 20 etapas.
 ### Pipeline hazards
 
 Situaciones físicas en las que las instrucciones consecutivas en el pipeline no pueden ejecutarse en el siguiente ciclo de reloj
@@ -858,7 +915,7 @@ Si un salto es tomado (*taken*), las instrucciones que se buscaron secuencialmen
 
 ![imagen.png](images/imagen%2028.png)
 
-### Excepciones en RISC V
+### Excepciones en RISC-V
 
 **Excepción:**  cambio inesperado en el flujo normal de ejecución de las instrucciones, sin importar si la causa es interna o externa. Son síncronas (en sincronía con la ejecución de instrucciones).
 
@@ -971,7 +1028,7 @@ Ejemplo de for implementado en pipeline FP normal:
     - **Ventajas:** Expone un bloque más grande de instrucciones independientes y elimina la sobrecarga (*overhead*) de control del bucle, reduciendo saltos y decrementos repetitivos.
     - **Desventajas:** Incrementa el tamaño del código binario (pudiendo provocar fallos en la caché de instrucciones) y genera una gran **presión sobre los registros**.
     
-    ***Desenrollado de Bucles → mı́n(Paradas por riesgos de control)***
+    ***Desenrollado de Bucles → mín(Paradas por riesgos de control)***
     
     ![imagen.png](images/imagen%2034.png)
     
@@ -1262,7 +1319,7 @@ ROB → agrega a las etapas de Tomasulo un "commit" → buffer intermedio que re
 # Lanzamiento Múltiple y Multithreading
 La mejora de la performance llegó a un límite mediante ILP -> se debe recurrir a otras formas de paralelismo.
 * ILP -> ejecución en un único hilo -> CPI mínimo de 1
-* TLP, Arquitectura superescalares, Ejec. fuera de orden -> ejecución paralela -> permite CPI < 1
+* TLP, Arquitecturas superescalares, Ejec. fuera de orden -> ejecución paralela -> permite CPI < 1
 
 ## Lanzamiento múltiple de instrucciones
 Arquitecturas avanzadas para lanzar más instrucciones por ciclo
@@ -1272,11 +1329,11 @@ Estas arquitecturas requieren:
 -> Mantener coherencia entre las jerarquías de memoria
 ### **Procesadores superescalares**
 
-Microarquitecturas escalares que incorporan múltiples vías de emisión (múltiple issue) para sostener la ejecución paralela de instrucciones independientes. Duplican o multiplican parte de sus unidades funcionales para permitir emitir más de una instrucción por ciclo.
+Microarquitecturas escalares que incorporan múltiples vías de emisión (multiple issue) para sostener la ejecución paralela de instrucciones independientes. Duplican o multiplican parte de sus unidades funcionales para permitir emitir más de una instrucción por ciclo.
 Lanza de 1 a 8 instrucciones por ciclo. Existen dos tipos:
 -  **Con planificación estática** -> ejecuta instrucciones en orden. Se planifica en tiempo de compilación.
 -  **Con planificación dinámica** -> ejecuta instrucciones fuera de orden, aumentando el paralelismo en ejecución puede ser:
-	-  *Sin especulación* -> el hardware decide en tiempo de ejecución que instrucciones emitir pero sin especular que camino tomar en los saltos.
+	-  *Sin especulación* -> el hardware decide en tiempo de ejecución qué instrucciones emitir pero sin especular qué camino tomar en los saltos.
 	- *Con especulación* -> agrega técnicas de ejecución especulativa para aprovechar más paralelismo. Suele ser más teórico que real ya que eleva la complejidad del hardware.
 
 -> Grado del procesador -> indica la cantidad de instrucciones ejecutándose al mismo tiempo
@@ -1295,7 +1352,7 @@ Busca, decodifica y emite varias instrucciones por ciclo de reloj manteniendo el
 - El procesador incluye un detector de azares cuya única función es identificar dependencias de datos o conflictos de recursos y detener (_stall_) la emisión cuando se detecta un problema. Para mitigar los conflictos de Dependencia Verdadera (LDE), se debe asegurar una distancia adecuada entre las instrucciones, de manera que los datos necesarios estén disponibles antes de ser requeridos.
 - Al tener una planificación fija, no puede adaptarse a eventos impredecibles en tiempo de ejecución (como fallos en la memoria caché) y su rendimiento depende de que el código tenga una mezcla equilibrada de instrucciones independientes.
 ![](images/Pasted%20image%2020261006175758.png)
-En este loop desenrollado se realizan 5 LOADs consecutivos para la carga de datos a registros de pf; se ejecutan 5 operaciones ADDD en pf (usando un operando común) y 5 STOREs para escribir el resultado en memoria. Los LOADs son de tipo enteras, permitiendo que se mezclen en el mismo ciclo de operaciones ADDD sin generar conflictos. 
+En este loop desenrollado se realizan 5 LOADs consecutivos para la carga de datos a registros de pf; se ejecutan 5 operaciones ADDD en pf (usando un operando común) y 5 STOREs para escribir el resultado en memoria. Los LOADs son de tipo entero, permitiendo que se mezclen en el mismo ciclo de operaciones ADDD sin generar conflictos. 
 -> El loop queda estructurado de forma fija; el CPI efectivo resulta de aprox 2.4  y no se modifica el código original del programa.
 
 **Ventajas y limitaciones**
@@ -1307,7 +1364,7 @@ Agrupan múltiples instrucciones independientes en una sola palabra de instrucci
 
 ![](images/Pasted%20image%2020261006182216.png)
 
-Cada instrucción VLIW se compone de varios campos o _slots_ prefijados, donde cada campo específica el código de operación y los operandos dirigidos a una unidad funcional concreta (como ALUs enteras, unidades de punto flotante, unidades de carga/almacenamiento y control de saltos). Todas las operaciones contenidas dentro de una misma palabra VLIW se ejecutan simultáneamente en paralelo durante el mismo ciclo de reloj. Cuando el compilador no logra encontrar suficientes operaciones independientes para ocupar todos los campos de la palabra de instrucción, completa los _slots_ vacíos insertando operaciones nulas (`NOP`)
+Cada instrucción VLIW se compone de varios campos o _slots_ prefijados, donde cada campo especifica el código de operación y los operandos dirigidos a una unidad funcional concreta (como ALUs enteras, unidades de punto flotante, unidades de carga/almacenamiento y control de saltos). Todas las operaciones contenidas dentro de una misma palabra VLIW se ejecutan simultáneamente en paralelo durante el mismo ciclo de reloj. Cuando el compilador no logra encontrar suficientes operaciones independientes para ocupar todos los campos de la palabra de instrucción, completa los _slots_ vacíos insertando operaciones nulas (`NOP`)
 
 Cada instrucción en un procesador VLIW incluye una operación por ALU, lo cual genera instrucciones de muchos bits. El análisis de dependencias se realiza en tiempo de compilación para determinar cuántas operaciones se pueden incluir en un slot de instrucción sin crear problemas.
 
@@ -1340,7 +1397,7 @@ Permite ejecutar instrucciones en paralelo y fuera de orden para mejorar el rend
 
 Para mantener la corrección del programa mientras las instrucciones se ejecutan fuera de orden, la microarquitectura divide el flujo de procesamiento en tres etapas principales:
 - Frontend en orden (In-Order fetch and Issue): Las instrucciones se capturan de la memoria de instrucciones y se decodifican estrictamente en el orden del programa. Se efectúa el renombrado de registros para eliminar falsas dependencias de datos y se asignan las instrucciones a las Estaciones de Reserva y al Buffer de Reordenamiento.
-- Núcleo dinámico fuera de orden (Out-of-order Execution Core): Las instrucciones aguardan en las estaciones de reserva mientras monitorean el CDB a la espera de los valores faltantes. En cuanto los operandos de una instrucción están listos y la unidad funcional correspondiente esta disponible, la instrucción se lanza a ejecución, al margen de su posición original en el código.
+- Núcleo dinámico fuera de orden (Out-of-order Execution Core): Las instrucciones aguardan en las estaciones de reserva mientras monitorean el CDB a la espera de los valores faltantes. En cuanto los operandos de una instrucción están listos y la unidad funcional correspondiente está disponible, la instrucción se lanza a ejecución, al margen de su posición original en el código.
 - Backend en orden (In-Order Commit / Retire): Los resultados calculados no modifican inmediatamente ni los registros reales ni la memoria principal. La información se guarda de forma provisional en el ROB. Las instrucciones confirman o escriben sus resultados en el banco de registros real en el estricto orden del programa original, lo que garantiza excepciones precisas y permite deshacer los cambios si falla una predicción especulativa de salto.
 
 **Ventajas:**

@@ -102,35 +102,35 @@ Tildalo a medida que avances:
 
 Todo está en el proyecto _Arqui_. Las páginas del libro son las **impresas** (las del pie de página): la Parte 1 del PDF llega hasta la pág. ~405 y la Parte 2 sigue desde ahí; lo más rápido es buscar con Ctrl+F el título de la sección.
 
-|   |   |   |   |
-|---|---|---|---|
-|Tema|Apunte (págs.)|Libro P&H RISC-V (sección · pág.)|Diapositivas del proyecto|
-|U1 Arquitectura vs. microarquitectura, escalado, Ley de Moore|9–18|1.1–1.5 · 3–24|_1. Introduction_; _Moores law 2020 y mas_|
-|U1 Potencia estática/dinámica, power aware, DVFS|19–29|1.7 Power Wall · 40; 1.8 · 43|_1. Introduction_|
-|U1 Rendimiento, CPI, MIPS, benchmarks, Amdahl, Pollack|30–44|1.6 · 28; 1.9–1.10 · 46–49|_1. Introduction_|
-|ISA RISC-V (base para todo lo demás)|— (el apunte usa MIPS)|2.2–2.3 · 63–67; 2.5 formatos · 81; 2.7 saltos · 92; 2.10 · 113|_2 Instruction set_|
-|U2 Datapath monociclo/multiciclo y control|45–52|4.1–4.4 · 236–251|—|
-|U2 Pipeline y sus limitaciones|53–56|4.5 · 262; 4.6 · 276|—|
-|U2 Riesgos estructurales y de datos, forwarding|56–66|4.7 · 294|—|
-|U2 Riesgos de control, predicción simple|66–74|4.8 · 307|—|
-|U2 Excepciones|74–81|4.9 · 315|—|
-|U2 Operaciones multiciclo (FP), R4000|81–88|4.11 (pipelines reales) · 334|—|
-|U3 Dependencias, unrolling, software pipelining|89–101|4.10 · 321 (enfoque general)|—|
-|U3 Tomasulo|102–125|4.10 · 321 (breve)|—|
-|U3 Predicción de saltos (BTAC, 2 bits, 2 niveles)|125–147|4.8 · 307 (predicción dinámica)|—|
-|U3 Especulación, ROB, riesgos por memoria|148–159|4.10 · 321|—|
-|U4 Superescalar, VLIW, EPIC, dinámico + especulación|160–175|4.10 · 321; 4.11 · 334|_6. ILP_ (es el Tema 4)|
-|U4 Límites del ILP, TLP, multithreading, SMT|175–185|6.1–6.2 · 492–494; 6.4 · 506|_6. ILP_|
-|U5 Jerarquía, emplazamiento, reemplazo, escritura|187–195|5.1–5.3 · 366–375|_7. ArquitecturaMemoria_|
-|U5 Rendimiento y reducción de la tasa de fallos (3C)|195–203|5.4 · 390; 5.8 · 443; 5.15 blocking · 465|_7. ArquitecturaMemoria_|
-|U5 Penalización de fallo, multinivel, cachés virtuales/TLB|203–210|5.4 · 390; 5.7 memoria virtual · 419|_7. ArquitecturaMemoria_|
-|U5 Memoria principal: DRAM, SRAM, entrelazado|210–213|5.2 · 370|_7. ArquitecturaMemoria_ (DDR)|
-|U6 Coherencia, snoopy, MSI, MESI|215–229|5.10 · 454; 6.5 · 509|_8.Multiprocesadores_|
-|U6 Consistencia de memoria|229–232|5.10 · 454|_8.Multiprocesadores_|
-|U6 Directorios|232–236|5.10 · 454 (mención)|_8.Multiprocesadores_|
-|U6 Sincronización (LL/SC, spin locks)|237–242|2.11 · 121 (lr.w/sc.w en RISC-V)|_8.Multiprocesadores_|
-|Anexo SIMD, Flynn, vectoriales|243–248|6.3 · 499; 3.6–3.7 · 216–217|_4. Vector processors_|
-|Anexo GPU y CUDA|248–256|6.6 · 514|_4. Vector processors_|
+|                                                               |                        |                                                                 |                                            |
+| ------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------- | ------------------------------------------ |
+| Tema                                                          | Apunte (págs.)         | Libro P&H RISC-V (sección · pág.)                               | Diapositivas del proyecto                  |
+| U1 Arquitectura vs. microarquitectura, escalado, Ley de Moore | 9–18                   | 1.1–1.5 · 3–24                                                  | _1. Introduction_; _Moores law 2020 y mas_ |
+| U1 Potencia estática/dinámica, power aware, DVFS              | 19–29                  | 1.7 Power Wall · 40; 1.8 · 43                                   | _1. Introduction_                          |
+| U1 Rendimiento, CPI, MIPS, benchmarks, Amdahl, Pollack        | 30–44                  | 1.6 · 28; 1.9–1.10 · 46–49                                      | _1. Introduction_                          |
+| ISA RISC-V (base para todo lo demás)                          | — (el apunte usa MIPS) | 2.2–2.3 · 63–67; 2.5 formatos · 81; 2.7 saltos · 92; 2.10 · 113 | _2 Instruction set_                        |
+| U2 Datapath monociclo/multiciclo y control                    | 45–52                  | 4.1–4.4 · 236–251                                               | —                                          |
+| U2 Pipeline y sus limitaciones                                | 53–56                  | 4.5 · 262; 4.6 · 276                                            | —                                          |
+| U2 Riesgos estructurales y de datos, forwarding               | 56–66                  | 4.7 · 294                                                       | —                                          |
+| U2 Riesgos de control, predicción simple                      | 66–74                  | 4.8 · 307                                                       | —                                          |
+| U2 Excepciones                                                | 74–81                  | 4.9 · 315                                                       | —                                          |
+| U2 Operaciones multiciclo (FP), R4000                         | 81–88                  | 4.11 (pipelines reales) · 334                                   | —                                          |
+| U3 Dependencias, unrolling, software pipelining               | 89–101                 | 4.10 · 321 (enfoque general)                                    | —                                          |
+| U3 Tomasulo                                                   | 102–125                | 4.10 · 321 (breve)                                              | —                                          |
+| U3 Predicción de saltos (BTAC, 2 bits, 2 niveles)             | 125–147                | 4.8 · 307 (predicción dinámica)                                 | —                                          |
+| U3 Especulación, ROB, riesgos por memoria                     | 148–159                | 4.10 · 321                                                      | —                                          |
+| U4 Superescalar, VLIW, EPIC, dinámico + especulación          | 160–175                | 4.10 · 321; 4.11 · 334                                          | _6. ILP_ (es el Tema 4)                    |
+| U4 Límites del ILP, TLP, multithreading, SMT                  | 175–185                | 6.1–6.2 · 492–494; 6.4 · 506                                    | _6. ILP_                                   |
+| U5 Jerarquía, emplazamiento, reemplazo, escritura             | 187–195                | 5.1–5.3 · 366–375                                               | _7. ArquitecturaMemoria_                   |
+| U5 Rendimiento y reducción de la tasa de fallos (3C)          | 195–203                | 5.4 · 390; 5.8 · 443; 5.15 blocking · 465                       | _7. ArquitecturaMemoria_                   |
+| U5 Penalización de fallo, multinivel, cachés virtuales/TLB    | 203–210                | 5.4 · 390; 5.7 memoria virtual · 419                            | _7. ArquitecturaMemoria_                   |
+| U5 Memoria principal: DRAM, SRAM, entrelazado                 | 210–213                | 5.2 · 370                                                       | _7. ArquitecturaMemoria_ (DDR)             |
+| U6 Coherencia, snoopy, MSI, MESI                              | 215–229                | 5.10 · 454; 6.5 · 509                                           | _8.Multiprocesadores_                      |
+| U6 Consistencia de memoria                                    | 229–232                | 5.10 · 454                                                      | _8.Multiprocesadores_                      |
+| U6 Directorios                                                | 232–236                | 5.10 · 454 (mención)                                            | _8.Multiprocesadores_                      |
+| U6 Sincronización (LL/SC, spin locks)                         | 237–242                | 2.11 · 121 (lr.w/sc.w en RISC-V)                                | _8.Multiprocesadores_                      |
+| Anexo SIMD, Flynn, vectoriales                                | 243–248                | 6.3 · 499; 3.6–3.7 · 216–217                                    | _4. Vector processors_                     |
+| Anexo GPU y CUDA                                              | 248–256                | 6.6 · 514                                                       | _4. Vector processors_                     |
 
 Notas:
 
