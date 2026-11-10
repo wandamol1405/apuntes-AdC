@@ -1,5 +1,12 @@
 {
   "useMarkdownLinks": true,
   "newLinkFormat": "relative",
-  "attachmentFolderPath": "images"
+  "attachmentFolderPath": "images",
+  "settingsPopoutWindow": true,
+  "showLineNumber": false,
+  "rightToLeft": false,
+  "tabSize": 4,
+  "vimMode": false,
+  "smartIndentList": true,
+  "readableLineLength": false
 }
